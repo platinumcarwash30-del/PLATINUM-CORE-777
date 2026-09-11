@@ -13,8 +13,8 @@ const translations = {
     ipLabel: 'IP STATUS', legalNote: 'Original concept & authorship: Marko Ćuća · Trademark application submitted (ZIS, Serbia).', statementOne: 'ONE CORE.', statementTwo: 'EVERY BUSINESS.', statementThree: 'TOTAL CONTROL.',
     storyKicker: 'TRUE STORY', storyTitle: 'A true story.<br /><span>Real progress.</span>', storyIntro: 'It began with no money, real problems, a small child and nights without sleep. Under that pressure, an idea was born — and people have already started to believe in it and support what comes next. Today, I am looking for support from people who recognize themselves in this story — people who understand the struggle, the persistence and the belief it takes to build something real.',
     filmKicker: 'THE FILM', filmTitle: 'From problems<br /><span>to solutions.</span>', filmDescription: 'The true story of how a real business became the first signal of PLATINUM CORE 777.', filmFallback: 'Your browser does not support the local true story video.', filmLabel: 'PLATINUM CORE 777 / TRUE STORY',
-    supportKicker: 'THE NEXT CHAPTER', supportTitle: 'Build the future<br /><span>with us.</span>', supportDescription: 'PLATINUM CORE 777 is in development. We are opening the next chapter to people who believe in real ideas, real businesses and a brighter tomorrow.', supportVision: 'Support the vision', contactMarko: 'Contact Marko', principle: 'The principle', quote: '“A dream.<br />A journey.<br /><strong>A reality.</strong>”', supportNote: 'Started in Belgrade.<br />Built for the world.',
-    supportAria: 'Ways to support the project', supportOptionsTitle: 'WAYS TO TAKE PART IN THE NEXT CHAPTER', sponsor: 'SPONSORSTVO', sponsorDescription: 'Support the project via Buy Me a Coffee.', donation: 'DONACIJA', donationDescription: 'Help the next chapter move forward.', kofi: 'KO-FI', kofiDescription: 'Support the vision directly.', partnership: 'PARTNERSTVO', partnershipDescription: 'Build the future together.', contact: 'CONTACT', footerTagline: 'From Belgrade to the World.', footerRole: 'Author & CEO — PLATINUM CORE 777'
+    supportKicker: 'THE NEXT CHAPTER', supportTitle: 'Build the future<br /><span>with us.</span>', supportDescription: 'PLATINUM CORE 777 is in development. We are opening the next chapter to people who believe in real ideas, real businesses and a brighter tomorrow.', supportVision: 'Support via WhyDonate', contactMarko: 'Contact Marko', principle: 'The principle', quote: '“A dream.<br />A journey.<br /><strong>A reality.</strong>”', supportNote: 'Started in Belgrade.<br />Built for the world.',
+    supportAria: 'Ways to support the project', supportOptionsTitle: 'WAYS TO TAKE PART IN THE NEXT CHAPTER', donationWhyDonate: 'DONACIJA — WHYDONATE', donationWhyDonateDescription: 'Donate via WhyDonate.', donationCoffee: 'DONACIJA — BUY ME A COFFEE', donationCoffeeDescription: 'Donate via Buy Me a Coffee.', donationKofi: 'DONACIJA — KO-FI', donationKofiDescription: 'Donate via Ko-fi.', sponsor: 'SPONSORSTVO', sponsorDescription: 'For sponsorship: markoplatinum@icloud.com · +381 63 120 0116', partnership: 'PARTNERSHIP', partnershipDescription: 'For partnership: markoplatinum@icloud.com · +381 63 120 0116', contact: 'CONTACT', footerTagline: 'From Belgrade to the World.', footerRole: 'Author & CEO — PLATINUM CORE 777'
   },
   sr: {
     documentTitle: 'PLATINUM CORE 777 — Od Beograda do sveta',
@@ -30,8 +30,8 @@ const translations = {
     ipLabel: 'STATUS INTELEKTUALNE SVOJINE', legalNote: 'Originalni koncept i autorstvo: Marko Ćuća · Prijava žiga podneta (ZIS, Srbija).', statementOne: 'JEDNO JEZGRO.', statementTwo: 'SVAKI BIZNIS.', statementThree: 'POTPUNA KONTROLA.',
     storyKicker: 'ISTINITA PRIČA', storyTitle: 'Istinita priča.<br /><span>Stvaran napredak.</span>', storyIntro: 'Počelo je bez novca, sa stvarnim problemima, malim detetom i noćima bez sna. Pod tim pritiskom rodila se ideja — a ljudi su već počeli da veruju u nju i da podržavaju ono što dolazi. Danas tražim podršku ljudi koji se prepoznaju u ovoj priči — ljudi koji razumeju borbu, istrajnost i veru potrebnu da se izgradi nešto stvarno.',
     filmKicker: 'FILM', filmTitle: 'Od problema<br /><span>do rešenja.</span>', filmDescription: 'Istinita priča o tome kako je stvarni biznis postao prvi signal PLATINUM CORE 777.', filmFallback: 'Vaš pregledač ne podržava lokalni video istinite priče.', filmLabel: 'PLATINUM CORE 777 / ISTINITA PRIČA',
-    supportKicker: 'SLEDEĆE POGLAVLJE', supportTitle: 'Gradimo budućnost<br /><span>zajedno.</span>', supportDescription: 'PLATINUM CORE 777 je u razvoju. Otvaramo sledeće poglavlje ljudima koji veruju u stvarne ideje, stvarne biznise i svetlije sutra.', supportVision: 'Podrži viziju', contactMarko: 'Kontaktiraj Marka', principle: 'Princip', quote: '„San.<br />Putovanje.<br /><strong>Stvarnost.</strong>“', supportNote: 'Počelo u Beogradu.<br />Stvoreno za svet.',
-    supportAria: 'Načini podrške projektu', supportOptionsTitle: 'NAČINI DA BUDEŠ DEO SLEDEĆEG POGLAVLJA', sponsor: 'SPONSORSTVO', sponsorDescription: 'Podrži projekat preko Buy Me a Coffee.', donation: 'DONACIJA', donationDescription: 'Pomozi da se sledeće poglavlje pokrene.', kofi: 'KO-FI', kofiDescription: 'Podrži viziju direktno.', partnership: 'PARTNERSTVO', partnershipDescription: 'Gradimo budućnost zajedno.', contact: 'KONTAKT', footerTagline: 'Od Beograda do sveta.', footerRole: 'Autor i CEO — PLATINUM CORE 777'
+    supportKicker: 'SLEDEĆE POGLAVLJE', supportTitle: 'Gradimo budućnost<br /><span>zajedno.</span>', supportDescription: 'PLATINUM CORE 777 je u razvoju. Otvaramo sledeće poglavlje ljudima koji veruju u stvarne ideje, stvarne biznise i svetlije sutra.', supportVision: 'Podrži preko WhyDonate', contactMarko: 'Kontaktiraj Marka', principle: 'Princip', quote: '„San.<br />Putovanje.<br /><strong>Stvarnost.</strong>“', supportNote: 'Počelo u Beogradu.<br />Stvoreno za svet.',
+    supportAria: 'Načini podrške projektu', supportOptionsTitle: 'NAČINI DA BUDEŠ DEO SLEDEĆEG POGLAVLJA', donationWhyDonate: 'DONACIJA — WHYDONATE', donationWhyDonateDescription: 'Doniraj preko platforme WhyDonate.', donationCoffee: 'DONACIJA — BUY ME A COFFEE', donationCoffeeDescription: 'Doniraj preko Buy Me a Coffee.', donationKofi: 'DONACIJA — KO-FI', donationKofiDescription: 'Doniraj preko Ko-fi.', sponsor: 'SPONSORSTVO', sponsorDescription: 'Za sponzorstvo: markoplatinum@icloud.com · +381 63 120 0116', partnership: 'PARTNERSTVO', partnershipDescription: 'Za partnerstvo: markoplatinum@icloud.com · +381 63 120 0116', contact: 'KONTAKT', footerTagline: 'Od Beograda do sveta.', footerRole: 'Autor i CEO — PLATINUM CORE 777'
   }
 };
 
@@ -129,5 +129,28 @@ if (menuToggle && siteNav) {
     });
   });
 }
+
+function getAnchorOffset() {
+  const header = document.querySelector('.site-header');
+  return (header ? header.getBoundingClientRect().height : 0) + 12;
+}
+
+function scrollToHash(hash) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+  const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - getAnchorOffset());
+  window.scrollTo({ top, behavior: 'smooth' });
+  window.history.replaceState(null, '', hash);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const hash = link.getAttribute('href');
+    if (!hash || hash === '#') return;
+    if (!document.querySelector(hash)) return;
+    event.preventDefault();
+    scrollToHash(hash);
+  });
+});
 
 applyTranslations(currentLanguage);
