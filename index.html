@@ -105,7 +105,7 @@
           <h2 data-i18n-html="supportTitle">Build the future<br /><span>with us.</span></h2>
           <p data-i18n="supportDescription">PLATINUM CORE 777 is in development. We are opening the next chapter to people who believe in real ideas, real businesses and a brighter tomorrow.</p>
           <div class="support__actions">
-            <a class="button button--primary" href="https://whydonate.com/fundraising/platinum-core-777" target="_blank" rel="noopener noreferrer"><span data-i18n="supportVision">Support via WhyDonate</span> <span>↗</span></a>
+            <button class="button button--primary" id="foundation-support-trigger" type="button"><span data-i18n="supportVision">Support via Foundation</span> <span>↗</span></button>
             <a class="button button--ghost" href="mailto:markoplatinum@icloud.com?subject=PLATINUM%20CORE%20777%20-%20Contact" data-i18n="contactMarko">Contact Marko</a>
           </div>
         </div>
@@ -121,22 +121,22 @@
         <div class="support-options__grid">
           <a class="support-option support-option--donation" href="https://whydonate.com/fundraising/platinum-core-777" target="_blank" rel="noopener noreferrer">
             <span class="support-option__index">01</span>
-            <span><strong data-i18n="donationWhyDonate">DONACIJA — WHYDONATE</strong><small data-i18n="donationWhyDonateDescription">Donate via WhyDonate.</small></span>
+            <span><strong data-i18n="donationWhyDonate">DONATION — WHYDONATE</strong><small data-i18n="donationWhyDonateDescription">Donate via WhyDonate.</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
           <a class="support-option support-option--donation" href="https://buymeacoffee.com/platinumcore777" target="_blank" rel="noopener noreferrer">
             <span class="support-option__index">02</span>
-            <span><strong data-i18n="donationCoffee">DONACIJA — BUY ME A COFFEE</strong><small data-i18n="donationCoffeeDescription">Donate via Buy Me a Coffee.</small></span>
+            <span><strong data-i18n="donationCoffee">DONATION — BUY ME A COFFEE</strong><small data-i18n="donationCoffeeDescription">Donate via Buy Me a Coffee.</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
           <a class="support-option support-option--donation" href="https://ko-fi.com/platinumcore777" target="_blank" rel="noopener noreferrer">
             <span class="support-option__index">03</span>
-            <span><strong data-i18n="donationKofi">DONACIJA — KO-FI</strong><small data-i18n="donationKofiDescription">Donate via Ko-fi.</small></span>
+            <span><strong data-i18n="donationKofi">DONATION — KO-FI</strong><small data-i18n="donationKofiDescription">Donate via Ko-fi.</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
           <a class="support-option support-option--contact" href="mailto:markoplatinum@icloud.com?subject=PLATINUM%20CORE%20777%20-%20Sponsorship">
             <span class="support-option__index">04</span>
-            <span><strong data-i18n="sponsor">SPONSORSTVO</strong><small data-i18n="sponsorDescription">For sponsorship: markoplatinum@icloud.com · +381 63 120 0116</small></span>
+            <span><strong data-i18n="sponsor">SPONSORSHIP</strong><small data-i18n="sponsorDescription">For sponsorship: markoplatinum@icloud.com · +381 63 120 0116</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
           <a class="support-option support-option--contact" href="mailto:markoplatinum@icloud.com?subject=PLATINUM%20CORE%20777%20-%20Partnership">
@@ -146,6 +146,21 @@
           </a>
         </div>
       </section>
+
+      <dialog id="foundation-contact-modal" class="foundation-modal" aria-labelledby="foundation-contact-title">
+        <div class="foundation-modal__panel">
+          <button class="foundation-modal__close" type="button" data-foundation-close aria-label="Close" data-i18n-attr="aria-label:closeLabel">×</button>
+          <div class="section-kicker"><span>FOUNDATION</span><span class="section-kicker__rule"></span><span data-i18n="foundationContactKicker">DIRECT CONTACT</span></div>
+          <h2 id="foundation-contact-title" data-i18n-html="foundationContactTitle">Support the foundation.<br /><span>Contact Marko directly.</span></h2>
+          <p data-i18n="foundationContactIntro">For foundation support, sponsorship or partnership, contact Marko directly.</p>
+          <div class="foundation-contact__links">
+            <a id="foundation-email" href="mailto:markoplatinum@icloud.com?subject=PLATINUM%20CORE%20777%20-%20Foundation%20Support"><span class="foundation-contact__label" data-i18n="foundationEmailLabel">EMAIL</span><span>markoplatinum@icloud.com</span></a>
+            <a id="foundation-whatsapp" href="https://wa.me/381631200116?text=Hello%20Marko%2C%20I%20would%20like%20to%20discuss%20foundation%20support%20for%20PLATINUM%20CORE%20777." target="_blank" rel="noopener noreferrer"><span class="foundation-contact__label">WHATSAPP</span><span>+381 63 120 0116</span></a>
+            <a id="foundation-phone" href="tel:+381631200116"><span class="foundation-contact__label" data-i18n="foundationPhoneLabel">PHONE</span><span>+381 63 120 0116</span></a>
+          </div>
+          <p class="foundation-modal__note" data-i18n="foundationContactNote">Tell me whether you are interested in sponsorship, partnership, investment or direct support.</p>
+        </div>
+      </dialog>
     </main>
 
     <footer class="site-footer section-shell">
