@@ -17,16 +17,21 @@
       <a class="brand" href="#hero" aria-label="PLATINUM CORE 777 home">
         <img src="assets/logo-platinum-core-777.png" alt="PLATINUM CORE 777" />
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-attr="aria-label:menuLabel">
         <span></span><span></span>
-        <span class="sr-only">Open navigation</span>
+        <span class="sr-only" data-i18n="menuLabel">Open navigation</span>
       </button>
-      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
-        <a href="#vision">The vision</a>
-        <a href="#story">The story</a>
-        <a href="#story-video">Watch</a>
-        <a href="#support">Support</a>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation" data-i18n-attr="aria-label:navLabel">
+        <a href="#vision" data-i18n="navVision">The vision</a>
+        <a href="#story" data-i18n="navStory">True story</a>
+        <a href="#story-video" data-i18n="navWatch">Watch</a>
+        <a href="#support" data-i18n="navSupport">Support</a>
       </nav>
+      <div id="language-switch" class="language-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:languageLabel">
+        <button class="language-button is-active" type="button" data-language="en" aria-pressed="true">EN</button>
+        <span aria-hidden="true">/</span>
+        <button class="language-button" type="button" data-language="sr" aria-pressed="false">SR</button>
+      </div>
     </header>
 
     <main>
@@ -35,97 +40,103 @@
           <img src="assets/story/01.png" alt="" />
         </div>
         <div class="hero__content">
-          <p class="eyebrow"><span class="eyebrow__line"></span>PLATINUM CORE 777 / BELGRADE</p>
-          <p class="status-pill"><span class="status-dot"></span> CURRENT STATUS — IN DEVELOPMENT</p>
-          <h1>From Belgrade<br /><span>to the World.</span></h1>
-          <p class="hero__intro">Every big journey starts in reality. One real business, one relentless idea, and a brighter way to build what comes next.</p>
+          <p class="eyebrow"><span class="eyebrow__line"></span><span data-i18n="eyebrow">PLATINUM CORE 777 / BELGRADE</span></p>
+          <p class="status-pill"><span class="status-dot"></span><span data-i18n="status">CURRENT STATUS — IN DEVELOPMENT</span></p>
+          <h1><span class="hero-line-primary" data-i18n="heroLine1">From Belgrade</span><br /><span data-i18n="heroLine2">to the World.</span></h1>
+          <p class="hero__intro" data-i18n="heroIntro">Every big journey starts in reality. One real business, one relentless idea, and a brighter way to build what comes next.</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#story">Explore the story <span>↗</span></a>
-            <a class="button button--ghost" href="#vision">Discover the vision</a>
+            <a class="button button--primary" href="#story"><span data-i18n="exploreStory">Explore the true story</span> <span>↗</span></a>
+            <a class="button button--ghost" href="#vision" data-i18n="discoverVision">Discover the vision</a>
           </div>
-          <p class="signature">Author &amp; Founder — <strong>Marko Ćuća</strong></p>
+          <p class="signature"><span data-i18n="signatureLabel">Author &amp; Founder —</span> <strong>Marko Ćuća</strong></p>
         </div>
         <div class="hero__footer">
-          <span>01 / 30 — THE BEGINNING</span>
-          <span>One Core. Every Business. Total Control.</span>
+          <span data-i18n="heroBeginning">01 / 30 — THE BEGINNING</span>
+          <span data-i18n="tagline">One Core. Every Business. Total Control.</span>
         </div>
       </section>
 
       <section id="vision" class="vision section-shell section-pad">
-        <div class="section-kicker"><span>01</span><span class="section-kicker__rule"></span><span>THE VISION</span></div>
+        <div class="section-kicker"><span>01</span><span class="section-kicker__rule"></span><span data-i18n="visionKicker">THE VISION</span></div>
         <div class="vision__grid">
           <div>
-            <h2>A real business became the first chapter of something <em>bigger.</em></h2>
+            <h2 data-i18n-html="visionTitle">A real business became the first chapter of something <em>bigger.</em></h2>
           </div>
           <div class="vision__copy">
-            <p>PLATINUM CORE 777 is an original business operating-system concept born from the pressure, discipline and ambition of a real company in Belgrade.</p>
-            <p>Platinum Car Wash is the beginning of the story — the first business, the first test, and the proof that a bigger vision can start with real work.</p>
-            <p class="legal-note"><span>IP STATUS</span> Original concept &amp; authorship: Marko Ćuća · Trademark application submitted (ZIS, Serbia).</p>
+            <p data-i18n="visionBody1">PLATINUM CORE 777 is an original business operating-system concept born from the pressure, discipline and ambition of a real company in Belgrade.</p>
+            <p data-i18n="visionBody2">Platinum Car Wash is the beginning of the story — the first business, the first test, and the proof that a bigger vision can start with real work.</p>
+            <p class="modular-core-copy"><span class="legal-note__label" data-i18n="modularCoreTitle">THE MODULAR CORE</span><span data-i18n="modularCoreBody">At its core, PLATINUM CORE 777 is a modular program: a connected ecosystem of applications designed to work together, improve global business operations and help build stronger communities by connecting trusted businesses and people around the world. This modular core is the central idea and invention behind the project, covered by submitted intellectual-property filings, including a patent application.</span></p>
+            <p class="legal-note"><span data-i18n="ipLabel">IP STATUS</span> <span data-i18n="legalNote">Original concept &amp; authorship: Marko Ćuća · Trademark application submitted (ZIS, Serbia).</span></p>
             <div class="quote-mark" aria-hidden="true">“</div>
           </div>
         </div>
         <div class="vision__statement">
-          <span>ONE CORE.</span><span>EVERY BUSINESS.</span><strong>TOTAL CONTROL.</strong>
+          <span data-i18n="statementOne">ONE CORE.</span><span data-i18n="statementTwo">EVERY BUSINESS.</span><strong data-i18n="statementThree">TOTAL CONTROL.</strong>
         </div>
       </section>
 
       <section id="story" class="story section-shell section-pad">
         <div class="section-heading">
-          <div class="section-kicker"><span>02</span><span class="section-kicker__rule"></span><span>THE STORY</span></div>
-          <h2>Real work.<br /><span>Real progress.</span></h2>
-          <p>From a small garage to a global ambition. The story is told through the people, pressure and progress behind the first chapter.</p>
+          <div class="section-kicker"><span>02</span><span class="section-kicker__rule"></span><span data-i18n="storyKicker">TRUE STORY</span></div>
+          <h2 data-i18n-html="storyTitle">A true story.<br /><span>Real progress.</span></h2>
+          <p data-i18n="storyIntro">It began with no money, real problems, a small child and nights without sleep. Under that pressure, an idea was born — and people have already started to believe in it and support what comes next. Today, I am looking for support from people who recognize themselves in this story — people who understand the struggle, the persistence and the belief it takes to build something real.</p>
         </div>
         <div id="story-grid" class="story-grid" aria-live="polite"></div>
       </section>
 
       <section id="story-video" class="video-section section-shell section-pad">
-        <div class="section-kicker"><span>03</span><span class="section-kicker__rule"></span><span>THE FILM</span></div>
+        <div class="section-kicker"><span>03</span><span class="section-kicker__rule"></span><span data-i18n="filmKicker">THE FILM</span></div>
         <div class="video-heading">
-          <h2>From problems<br /><span>to solutions.</span></h2>
-          <p>The original story of how a real business became the first signal of PLATINUM CORE 777.</p>
+          <h2 data-i18n-html="filmTitle">From problems<br /><span>to solutions.</span></h2>
+          <p data-i18n="filmDescription">The true story of how a real business became the first signal of PLATINUM CORE 777.</p>
         </div>
         <div class="video-frame">
           <video controls preload="metadata" poster="assets/story/01.png">
             <source src="assets/story-video.mp4" type="video/mp4" />
-            Your browser does not support the local story video.
+            <span data-i18n="filmFallback">Your browser does not support the local true story video.</span>
           </video>
-          <span class="video-frame__label">PLATINUM CORE 777 / ORIGINAL STORY</span>
+          <span class="video-frame__label" data-i18n="filmLabel">PLATINUM CORE 777 / TRUE STORY</span>
         </div>
       </section>
 
       <section id="support" class="support section-shell section-pad">
         <div class="support__panel">
-          <div class="section-kicker"><span>04</span><span class="section-kicker__rule"></span><span>THE NEXT CHAPTER</span></div>
-          <h2>Build the future<br /><span>with us.</span></h2>
-          <p>PLATINUM CORE 777 is in development. We are opening the next chapter to people who believe in real ideas, real businesses and a brighter tomorrow.</p>
+          <div class="section-kicker"><span>04</span><span class="section-kicker__rule"></span><span data-i18n="supportKicker">THE NEXT CHAPTER</span></div>
+          <h2 data-i18n-html="supportTitle">Build the future<br /><span>with us.</span></h2>
+          <p data-i18n="supportDescription">PLATINUM CORE 777 is in development. We are opening the next chapter to people who believe in real ideas, real businesses and a brighter tomorrow.</p>
           <div class="support__actions">
-            <a class="button button--primary" href="#support">Support the vision <span>↗</span></a>
-            <a class="button button--ghost" href="#support">Investor interest</a>
+            <a class="button button--primary" href="https://whydonate.com/fundraising/platinum-core-777" target="_blank" rel="noopener noreferrer"><span data-i18n="supportVision">Support the vision</span> <span>↗</span></a>
+            <a class="button button--ghost" href="mailto:markoplatinum@icloud.com?subject=PLATINUM%20CORE%20777%20-%20Contact" data-i18n="contactMarko">Contact Marko</a>
           </div>
         </div>
         <div class="support__aside">
-          <p class="support__aside-label">The principle</p>
-          <p class="support__aside-quote">“A dream.<br />A journey.<br /><strong>A reality.</strong>”</p>
-          <p class="support__aside-note">Started in Belgrade.<br />Built for the world.</p>
+          <p class="support__aside-label" data-i18n="principle">The principle</p>
+          <p class="support__aside-quote" data-i18n-html="quote">“A dream.<br />A journey.<br /><strong>A reality.</strong>”</p>
+          <p class="support__aside-note" data-i18n-html="supportNote">Started in Belgrade.<br />Built for the world.</p>
         </div>
       </section>
 
-      <section class="support-options section-shell" aria-label="Ways to support the project">
-        <p class="support-options__title">WAYS TO TAKE PART IN THE NEXT CHAPTER</p>
+      <section class="support-options section-shell" aria-label="Ways to support the project" data-i18n-attr="aria-label:supportAria">
+        <p class="support-options__title" data-i18n="supportOptionsTitle">WAYS TO TAKE PART IN THE NEXT CHAPTER</p>
         <div class="support-options__grid">
-          <a class="support-option" href="#support">
+          <a class="support-option" href="https://buymeacoffee.com/platinumcore777" target="_blank" rel="noopener noreferrer">
             <span class="support-option__index">01</span>
-            <span><strong>SPONSORSTVO</strong><small>Support the project visibly.</small></span>
+            <span><strong data-i18n="sponsor">SPONSORSTVO</strong><small data-i18n="sponsorDescription">Support the project via Buy Me a Coffee.</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
-          <a class="support-option" href="#support">
+          <a class="support-option" href="https://whydonate.com/fundraising/platinum-core-777" target="_blank" rel="noopener noreferrer">
             <span class="support-option__index">02</span>
-            <span><strong>DONACIJA</strong><small>Help the next chapter move forward.</small></span>
+            <span><strong data-i18n="donation">DONACIJA</strong><small data-i18n="donationDescription">Help the next chapter move forward.</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
-          <a class="support-option" href="#support">
+          <a class="support-option" href="https://ko-fi.com/platinumcore777" target="_blank" rel="noopener noreferrer">
             <span class="support-option__index">03</span>
-            <span><strong>PARTNERSTVO</strong><small>Build the future together.</small></span>
+            <span><strong data-i18n="kofi">KO-FI</strong><small data-i18n="kofiDescription">Support the vision directly.</small></span>
+            <span class="support-option__arrow">↗</span>
+          </a>
+          <a class="support-option" href="mailto:markoplatinum@icloud.com?subject=PLATINUM%20CORE%20777%20-%20Partnership">
+            <span class="support-option__index">04</span>
+            <span><strong data-i18n="partnership">PARTNERSTVO</strong><small data-i18n="partnershipDescription">Build the future together.</small></span>
             <span class="support-option__arrow">↗</span>
           </a>
         </div>
@@ -136,9 +147,14 @@
       <img src="assets/logo-platinum-core-777.png" alt="PLATINUM CORE 777" />
       <div>
         <p>PLATINUM CORE 777</p>
-        <p class="muted">From Belgrade to the World.</p>
+        <p class="muted" data-i18n="footerTagline">From Belgrade to the World.</p>
       </div>
-      <p class="footer-copyright">© <span id="year"></span> Marko Ćuća</p>
+      <div class="footer-contact">
+        <span class="footer-contact__label" data-i18n="contact">CONTACT</span>
+        <a href="mailto:markoplatinum@icloud.com">markoplatinum@icloud.com</a>
+        <a href="tel:+381631200116">+381 63 120 0116</a>
+      </div>
+      <p class="footer-copyright" data-i18n="footerRole">Author &amp; CEO &#8212; PLATINUM CORE 777</p>
     </footer>
   </body>
 </html>
