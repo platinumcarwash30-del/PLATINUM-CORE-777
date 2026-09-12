@@ -144,6 +144,19 @@ h2 em { color: var(--gold); font-style: normal; }
 .support__aside-note { margin: 0; color: var(--muted); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
 .support-options { padding-bottom: clamp(5rem, 10vw, 10rem); }
 .support-options__title { margin: 0 0 1rem; color: var(--muted); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; }
+.support-menu { margin-bottom: .8rem; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+.support-menu__summary { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.1rem; cursor: pointer; list-style: none; }
+.support-menu__summary::-webkit-details-marker { display: none; }
+.support-menu__summary:hover, .support-menu__summary:focus-visible { background: rgba(8,201,255,.08); }
+.support-menu__eyebrow { color: var(--muted); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; }
+.support-menu__title { color: var(--text); font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; }
+.support-menu__arrow { color: var(--gold); font-size: 1.5rem; transition: transform .2s ease; }
+.support-menu[open] .support-menu__arrow { transform: rotate(45deg); }
+.support-menu__panel { padding: 0 1.1rem 1.1rem; border-top: 1px solid var(--line); }
+.support-menu__intro { margin: 1rem 0; color: var(--muted); font-size: .82rem; }
+.support-options__grid--donations { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.support-options__grid--contacts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: .7rem; }
+
 .support-options__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .7rem; }
 .support-option { display: flex; align-items: center; gap: 1rem; min-height: 100px; padding: 1.1rem; border: 1px solid var(--line); background: rgba(255,255,255,.025); transition: border-color .25s ease, transform .25s var(--ease), background .25s ease; }
 .support-option--contact { border-color: rgba(228,182,91,.34); background: rgba(228,182,91,.045); }
@@ -207,6 +220,7 @@ h2 em { color: var(--gold); font-style: normal; }
   .story-card:nth-child(3n + 2) { transform: none; }
   .story-card__title { font-size: 1.1rem; }
   .support-options__grid { grid-template-columns: 1fr; }
+  .support-options__grid--donations, .support-options__grid--contacts { grid-template-columns: 1fr; }
   .foundation-contact__links { grid-template-columns: 1fr; }
   .support__panel, .support__aside { padding: 2rem 1.4rem; }
   .site-footer { grid-template-columns: 1fr; justify-items: stretch; gap: 1.25rem; }
