@@ -237,3 +237,43 @@ h2 em { color: var(--gold); font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* Prominent support entry point */
+.hero-support-callout {
+  display: grid;
+  gap: .35rem;
+  width: min(100%, 600px);
+  margin-top: 2rem;
+  padding: 1.05rem 1.2rem 1.1rem;
+  border: 1px solid rgba(8, 201, 255, .55);
+  background: linear-gradient(110deg, rgba(8, 201, 255, .16), rgba(5, 6, 9, .7) 70%);
+  box-shadow: 0 0 28px rgba(8, 201, 255, .11);
+  transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease;
+}
+.hero-support-callout:hover, .hero-support-callout:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--cyan);
+  box-shadow: 0 0 34px rgba(8, 201, 255, .23);
+}
+.hero-support-callout__signal {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--gold);
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.hero-support-callout__signal .status-dot { width: 5px; height: 5px; }
+.hero-support-callout strong {
+  color: var(--text);
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  letter-spacing: .12em;
+}
+.hero-support-callout__action {
+  color: var(--cyan);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
