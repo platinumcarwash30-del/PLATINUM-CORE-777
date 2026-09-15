@@ -38,7 +38,7 @@
 <div id="support" class="section-title">Choose a support option</div>
 <div class="buttons"><a class="button primary" href="https://whydonate.com/fundraising/platinum-core-777" target="_blank" rel="noopener">WhyDonate</a><a class="button" href="https://buymeacoffee.com/platinumcore777" target="_blank" rel="noopener">Buy Me a Coffee</a><a class="button" href="https://ko-fi.com/platinumcore777" target="_blank" rel="noopener">Ko-fi</a></div>
 <div class="section-title">Supporters</div>
-<section class="supporters"><div class="supporter">Your name here<small>Early supporter</small></div><div class="supporter">Your company here<small>Technology partner</small></div><div class="supporter">Your name here<small>Project supporter</small></div></section>
+<section class="supporters" id="supportersList"><div class="supporter">Loading approved supporters...</div></section>
 <section id="become" class="form">
 <h2>Become a supporter</h2>
 <p class="intro">Send your details for review. Your name or company will be displayed publicly only with your permission and approval.</p>
@@ -58,6 +58,32 @@
 <p id="supportFormStatus" class="note" role="status" aria-live="polite"></p>
 <p class="note">Public recognition does not imply sponsorship, endorsement or official partnership unless separately agreed in writing.</p>
 </section>
+<script>
+const supportersList = document.getElementById("supportersList");
+fetch("supporters.json?v=1")
+  .then(function(response) { return response.json(); })
+  .then(function(items) {
+    supportersList.innerHTML = "";
+    if (!Array.isArray(items) || items.length === 0) {
+      supportersList.innerHTML = '<div class="supporter">No public supporters yet.</div>';
+      return;
+    }
+    items.forEach(function(item) {
+      const card = document.createElement("div");
+      card.className = "supporter";
+      const title = document.createElement("div");
+      title.textContent = item.company || item.name || "Supporter";
+      const type = document.createElement("small");
+      type.textContent = item.supportType || "Project supporter";
+      card.appendChild(title);
+      card.appendChild(type);
+      supportersList.appendChild(card);
+    });
+  })
+  .catch(function() {
+    supportersList.innerHTML = '<div class="supporter">Supporters list is temporarily unavailable.</div>';
+  });
+</script>
 <div class="footer">INDEPENDENTLY CREATED · FROM BELGRADE TO THE WORLD · PLATINUM CORE 777</div>
 <script>
 const supportForm = document.getElementById("supportForm");
