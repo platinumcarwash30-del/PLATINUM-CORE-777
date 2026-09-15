@@ -91,7 +91,7 @@ fetch("supporters.json?v=1")
       const card = document.createElement("div");
       card.className = "supporter";
       const title = document.createElement("div");
-      title.textContent = item.company || item.name || "Supporter";
+      title.textContent = item.company || item.name || "Anonymous";
       const type = document.createElement("small");
       type.textContent = item.supportType || "Project supporter";
       card.appendChild(title);
