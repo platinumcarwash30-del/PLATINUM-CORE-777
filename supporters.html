@@ -65,7 +65,17 @@ const supportFormStatus = document.getElementById("supportFormStatus");
 supportForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const button = supportForm.querySelector("button[type=\"submit\"]");
-  const data = Object.fromEntries(new FormData(supportForm).entries());
+  const formData = Object.fromEntries(new FormData(supportForm).entries());
+  const data = {
+    name: formData.name || "",
+    company: formData.company || "",
+    country: formData.country || "",
+    website: formData.website || "",
+    supportType: formData.support_type || "",
+    message: formData.message || "",
+    email: formData.email || "",
+    permission: formData.permission || ""
+  };
   button.disabled = true;
   button.textContent = "Sending...";
   supportFormStatus.textContent = "Sending your request securely...";
