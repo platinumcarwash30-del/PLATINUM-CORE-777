@@ -42,20 +42,50 @@
 <section id="become" class="form">
 <h2>Become a supporter</h2>
 <p class="intro">Send your details for review. Your name or company will be displayed publicly only with your permission and approval.</p>
-<form action="mailto:markoplatinum@icloud.com" method="post" enctype="text/plain">
+<form id="supportForm">
 <div class="fields">
-<label>Name or company<input name="name" required placeholder="Your name or company"></label>
+<label>Name<input name="name" required placeholder="Your name"></label>
+<label>Company<input name="company" placeholder="Company"></label>
 <label>Country<input name="country" placeholder="Country"></label>
+<label>Email<input type="email" name="email" required placeholder="you@example.com"></label>
 <label>Website<input name="website" placeholder="https://"></label>
 <label>Support type<select name="support_type"><option>Financial support</option><option>Technical support</option><option>Promotion</option><option>Sponsorship or partnership</option></select></label>
 <label class="full">Message<textarea name="message" placeholder="Tell us how you would like to support the project"></textarea></label>
 </div>
-<label class="check"><input type="checkbox" name="public_permission" required> I give permission for my name or company to appear on the public Supporters page after approval.</label>
+<label class="check"><input type="checkbox" name="permission" value="yes" required> I give permission for my name or company to appear on the public Supporters page after approval.</label>
 <div class="buttons"><button class="button primary" type="submit">Send support request</button></div>
 </form>
+<p id="supportFormStatus" class="note" role="status" aria-live="polite"></p>
 <p class="note">Public recognition does not imply sponsorship, endorsement or official partnership unless separately agreed in writing.</p>
 </section>
 <div class="footer">INDEPENDENTLY CREATED · FROM BELGRADE TO THE WORLD · PLATINUM CORE 777</div>
+<script>
+const supportForm = document.getElementById("supportForm");
+const supportFormStatus = document.getElementById("supportFormStatus");
+supportForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = supportForm.querySelector("button[type=\"submit\"]");
+  const data = Object.fromEntries(new FormData(supportForm).entries());
+  button.disabled = true;
+  button.textContent = "Sending...";
+  supportFormStatus.textContent = "Sending your request securely...";
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbzX9t0X9vaQ1QTrJI8zIrtvE5Pi6Q1llSt-13O-WLVzswF2QmPS65fkvjYJqBnGPKdh/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify(data)
+    });
+    supportForm.reset();
+    supportFormStatus.textContent = "Thank you. Your request was sent for review.";
+  } catch (error) {
+    supportFormStatus.textContent = "The request could not be sent. Please try again.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Send support request";
+  }
+});
+</script>
 </main>
 </body>
 </html>
