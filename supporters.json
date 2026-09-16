@@ -1,7 +1,20 @@
 [
   {
+    "id": "platinum-car-wash",
+    "name": "Marko Ćuća",
+    "company": "Platinum Car Wash",
+    "category": "financial",
+    "supportType": "Financial support",
+    "approved": true,
+    "priority": 1
+  },
+  {
+    "id": "diamond-sailing-service-yacht-tour",
     "name": "dragan",
     "company": "Diamond Sailing Service Yacht tour",
-    "supportType": "Financial support"
+    "category": "financial",
+    "supportType": "Financial support",
+    "approved": true,
+    "priority": 2
   }
 ]
