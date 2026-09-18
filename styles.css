@@ -350,3 +350,7 @@ h2 em { color: var(--gold); font-style: normal; }
   letter-spacing: .12em;
   text-transform: uppercase;
 }
+
+
+/* Keep decorative elements from creating sideways scroll on narrow screens. */
+body { overflow-x: hidden; }
