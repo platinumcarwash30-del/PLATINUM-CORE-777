@@ -91,15 +91,15 @@ function renderStorySlide() {
   }
   const chapter = storySlideOrder[storySlideIndex];
   const title = chapter.title[currentLanguage];
-  storySlideshow.innerHTML = \`
+  storySlideshow.innerHTML = `
     <article class="story-card story-card--slide">
-      <img src="\${chapter.image}" alt="\${title}" loading="eager" />
+      <img src="${chapter.image}" alt="${title}" loading="eager" />
       <div class="story-card__label">
-        <span class="story-card__number">\${chapter.number}</span>
-        <h3 class="story-card__title">\${title}</h3>
+        <span class="story-card__number">${chapter.number}</span>
+        <h3 class="story-card__title">${title}</h3>
       </div>
     </article>
-  \`;
+  `;
   storySlideIndex += 1;
 }
 
