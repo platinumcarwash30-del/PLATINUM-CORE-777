@@ -61,10 +61,7 @@ const storyChapters = [
   { number: 'CORE / 03', title: { en: 'A business that works. A life that matters.', sr: 'Biznis koji radi. Život koji ima smisla.' }, image: 'assets/story/21.png' }
 ];
 
-const storySlideshow = document.querySelector('#story-slideshow');
-let storySlideOrder = [];
-let storySlideIndex = 0;
-let storySlideTimer = null;
+
 const year = document.querySelector('#year');
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('#site-nav');
@@ -78,37 +75,6 @@ try {
   const storedLanguage = window.localStorage.getItem('pc777-language');
   if (storedLanguage === 'en' || storedLanguage === 'sr') currentLanguage = storedLanguage;
 } catch { currentLanguage = 'en'; }
-
-function shuffleStorySlides() {
-  return storyChapters.slice(1).sort(() => Math.random() - 0.5);
-}
-
-function renderStorySlide() {
-  if (!storySlideshow) return;
-  if (!storySlideOrder.length || storySlideIndex >= storySlideOrder.length) {
-    storySlideOrder = shuffleStorySlides();
-    storySlideIndex = 0;
-  }
-  const chapter = storySlideOrder[storySlideIndex];
-  const title = chapter.title[currentLanguage];
-  storySlideshow.innerHTML = `
-    <article class="story-card story-card--slide">
-      <img src="${chapter.image}" alt="${title}" loading="eager" />
-      <div class="story-card__label">
-        <span class="story-card__number">${chapter.number}</span>
-        <h3 class="story-card__title">${title}</h3>
-      </div>
-    </article>
-  `;
-  storySlideIndex += 1;
-}
-
-function startStorySlideshow() {
-  if (!storySlideshow || storySlideTimer) return;
-  renderStorySlide();
-  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-  storySlideTimer = window.setInterval(renderStorySlide, 1000);
-}
 
 function applyTranslations(language) {
   currentLanguage = language === 'sr' ? 'sr' : 'en';
@@ -134,7 +100,6 @@ function applyTranslations(language) {
     button.classList.toggle('is-active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-  if (storySlideshow && storySlideTimer) renderStorySlide();
 }
 
 function setLanguage(language) {
@@ -202,4 +167,3 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 applyTranslations(currentLanguage);
-startStorySlideshow();
