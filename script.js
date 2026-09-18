@@ -11,7 +11,7 @@ const translations = {
     visionBody2: 'Platinum Car Wash is the beginning of the story — the first business, the first test, and the proof that a bigger vision can start with real work.',
     modularCoreTitle: 'THE MODULAR CORE', coreReviewTitle: 'CORE REVIEW', coreReviewBody: 'PLATINUM CORE 777 is designed to connect people, clients and companies through controlled access, clear roles and verifiable business processes. CORE REVIEW brings that human connection into the core.', coreReviewLink: 'Read the full Core Review story ↗', modularCoreBody: 'At its core, PLATINUM CORE 777 is a modular program: a connected ecosystem of applications designed to work together, improve global business operations and help build stronger communities by connecting trusted businesses and people around the world. This modular core is the central idea and invention behind the project, covered by submitted intellectual-property filings, including a patent application.',
     ipLabel: 'IP STATUS', legalNote: 'Original concept & authorship: Marko Ćuća · Trademark application submitted (ZIS, Serbia).', statementOne: 'ONE CORE.', statementTwo: 'EVERY BUSINESS.', statementThree: 'TOTAL CONTROL.',
-    storyKicker: 'TRUE STORY', storyTitle: 'A true story.<br /><span>Real progress.</span>', storyIntro: 'It began with no money, real problems, a small child and nights without sleep. Under that pressure, an idea was born — and people have already started to believe in it and support what comes next. Today, I am looking for support from people who recognize themselves in this story — people who understand the struggle, the persistence and the belief it takes to build something real.',
+    storyKicker: 'TRUE STORY', storyTitle: 'A true story.<br /><span>Real progress.</span>', storyLeadLabel: 'THE BEGINNING', storyLeadTitle: 'The true story of a man who rose from the very bottom and moved forward with a new vision.', storySlideshowLabel: 'Story images', storyIntro: 'It began with no money, real problems, a small child and nights without sleep. Under that pressure, an idea was born — and people have already started to believe in it and support what comes next. Today, I am looking for support from people who recognize themselves in this story — people who understand the struggle, the persistence and the belief it takes to build something real.',
     filmKicker: 'THE FILM', filmTitle: 'From problems<br /><span>to solutions.</span>', filmDescription: 'The true story of how a real business became the first signal of PLATINUM CORE 777.', filmFallback: 'Your browser does not support the local true story video.', filmLabel: 'PLATINUM CORE 777 / TRUE STORY',
     supportKicker: 'THE NEXT CHAPTER', supportTitle: 'Build the future<br /><span>with us.</span>', supportDescription: 'PLATINUM CORE 777 is in development. We are opening the next chapter to people who believe in real ideas, real businesses and a brighter tomorrow.', supportVision: 'Support via Foundation', contactMarko: 'Contact Marko', principle: 'The principle', quote: '“A dream.<br />A journey.<br /><strong>A reality.</strong>”', supportNote: 'Started in Belgrade.<br />Built for the world.', closeLabel: 'Close', foundationContactKicker: 'DIRECT CONTACT', foundationContactTitle: 'Support the foundation.<br /><span>Contact Marko directly.</span>', foundationContactIntro: 'For foundation support, sponsorship or partnership, contact Marko directly.', foundationEmailLabel: 'EMAIL', foundationPhoneLabel: 'PHONE', foundationContactNote: 'Tell me whether you are interested in sponsorship, partnership, investment or direct support.',
     heroSupportEyebrow: 'THE NEXT STEP', heroSupportTitle: 'HELP THE MODULAR CORE REACH COMPLETION', heroSupportAction: 'Support the development ↗',
@@ -29,7 +29,7 @@ const translations = {
     visionBody2: 'Platinum Car Wash je početak priče — prvi biznis, prvi test i dokaz da velika vizija može da počne stvarnim radom.',
     modularCoreTitle: 'MODULARNO JEZGRO', coreReviewTitle: 'CORE REVIEW', coreReviewBody: 'PLATINUM CORE 777 je zamisljen da povezuje ljude, klijente i firme kroz kontrolisan pristup, jasne uloge i proverljive poslovne procese. CORE REVIEW unosi tu ljudsku vezu u samo jezgro.', coreReviewLink: 'Procitaj celu pricu o Core Review-u ↗', modularCoreBody: 'U svojoj osnovi, PLATINUM CORE 777 je modularni program: povezani ekosistem aplikacija koje rade zajedno, unapređuju globalno poslovanje i pomažu izgradnji snažnijih zajednica povezivanjem pouzdanih firmi i ljudi širom sveta. Ovo modularno jezgro je centralna ideja i izum projekta, obuhvaćen podnetim prijavama za zaštitu intelektualne svojine, uključujući prijavu patenta.',
     ipLabel: 'STATUS INTELEKTUALNE SVOJINE', legalNote: 'Originalni koncept i autorstvo: Marko Ćuća · Prijava žiga podneta (ZIS, Srbija).', statementOne: 'JEDNO JEZGRO.', statementTwo: 'SVAKI BIZNIS.', statementThree: 'POTPUNA KONTROLA.',
-    storyKicker: 'ISTINITA PRIČA', storyTitle: 'Istinita priča.<br /><span>Stvaran napredak.</span>', storyIntro: 'Počelo je bez novca, sa stvarnim problemima, malim detetom i noćima bez sna. Pod tim pritiskom rodila se ideja — a ljudi su već počeli da veruju u nju i da podržavaju ono što dolazi. Danas tražim podršku ljudi koji se prepoznaju u ovoj priči — ljudi koji razumeju borbu, istrajnost i veru potrebnu da se izgradi nešto stvarno.',
+    storyKicker: 'ISTINITA PRIČA', storyTitle: 'Istinita priča.<br /><span>Stvaran napredak.</span>', storyLeadLabel: 'POČETAK', storyLeadTitle: 'Istinita priča o čoveku koji se podigao sa samog dna i krenuo napred sa novom vizijom.', storySlideshowLabel: 'Slideshow slika iz priče', storyIntro: 'Počelo je bez novca, sa stvarnim problemima, malim detetom i noćima bez sna. Pod tim pritiskom rodila se ideja — a ljudi su već počeli da veruju u nju i da podržavaju ono što dolazi. Danas tražim podršku ljudi koji se prepoznaju u ovoj priči — ljudi koji razumeju borbu, istrajnost i veru potrebnu da se izgradi nešto stvarno.',
     filmKicker: 'FILM', filmTitle: 'Od problema<br /><span>do rešenja.</span>', filmDescription: 'Istinita priča o tome kako je stvarni biznis postao prvi signal PLATINUM CORE 777.', filmFallback: 'Vaš pregledač ne podržava lokalni video istinite priče.', filmLabel: 'PLATINUM CORE 777 / ISTINITA PRIČA',
     supportKicker: 'SLEDEĆE POGLAVLJE', supportTitle: 'Gradimo budućnost<br /><span>zajedno.</span>', supportDescription: 'PLATINUM CORE 777 je u razvoju. Otvaramo sledeće poglavlje ljudima koji veruju u stvarne ideje, stvarne biznise i svetlije sutra.', supportVision: 'Podrška preko fondacije', contactMarko: 'Kontaktiraj Marka', principle: 'Princip', quote: '„San.<br />Putovanje.<br /><strong>Stvarnost.</strong>“', supportNote: 'Počelo u Beogradu.<br />Stvoreno za svet.', closeLabel: 'Zatvori', foundationContactKicker: 'DIREKTAN KONTAKT', foundationContactTitle: 'Podrži fondaciju.<br /><span>Kontaktiraj Marka direktno.</span>', foundationContactIntro: 'Za podršku fondaciji, sponzorstvo ili partnerstvo, kontaktiraj Marka direktno.', foundationEmailLabel: 'EMAIL', foundationPhoneLabel: 'TELEFON', foundationContactNote: 'Napiši da li te zanimaju sponzorstvo, partnerstvo, investicija ili direktna podrška.',
     heroSupportEyebrow: 'SLEDEĆI KORAK', heroSupportTitle: 'POMOZITE DA MODULARNI SOFTVER STIGNE DO KRAJA', heroSupportAction: 'Podrži razvoj ↗',
@@ -61,7 +61,10 @@ const storyChapters = [
   { number: 'CORE / 03', title: { en: 'A business that works. A life that matters.', sr: 'Biznis koji radi. Život koji ima smisla.' }, image: 'assets/story/21.png' }
 ];
 
-const storyGrid = document.querySelector('#story-grid');
+const storySlideshow = document.querySelector('#story-slideshow');
+let storySlideOrder = [];
+let storySlideIndex = 0;
+let storySlideTimer = null;
 const year = document.querySelector('#year');
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('#site-nav');
@@ -76,12 +79,35 @@ try {
   if (storedLanguage === 'en' || storedLanguage === 'sr') currentLanguage = storedLanguage;
 } catch { currentLanguage = 'en'; }
 
-function renderStory() {
-  if (!storyGrid) return;
-  storyGrid.innerHTML = storyChapters.map((chapter) => {
-    const title = chapter.title[currentLanguage];
-    return `<article class="story-card"><img src="${chapter.image}" alt="${title}" loading="lazy" /><div class="story-card__label"><span class="story-card__number">${chapter.number}</span><h3 class="story-card__title">${title}</h3></div></article>`;
-  }).join('');
+function shuffleStorySlides() {
+  return storyChapters.slice(1).sort(() => Math.random() - 0.5);
+}
+
+function renderStorySlide() {
+  if (!storySlideshow) return;
+  if (!storySlideOrder.length || storySlideIndex >= storySlideOrder.length) {
+    storySlideOrder = shuffleStorySlides();
+    storySlideIndex = 0;
+  }
+  const chapter = storySlideOrder[storySlideIndex];
+  const title = chapter.title[currentLanguage];
+  storySlideshow.innerHTML = \`
+    <article class="story-card story-card--slide">
+      <img src="\${chapter.image}" alt="\${title}" loading="eager" />
+      <div class="story-card__label">
+        <span class="story-card__number">\${chapter.number}</span>
+        <h3 class="story-card__title">\${title}</h3>
+      </div>
+    </article>
+  \`;
+  storySlideIndex += 1;
+}
+
+function startStorySlideshow() {
+  if (!storySlideshow || storySlideTimer) return;
+  renderStorySlide();
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+  storySlideTimer = window.setInterval(renderStorySlide, 1000);
 }
 
 function applyTranslations(language) {
@@ -108,7 +134,7 @@ function applyTranslations(language) {
     button.classList.toggle('is-active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-  renderStory();
+  if (storySlideshow && storySlideTimer) renderStorySlide();
 }
 
 function setLanguage(language) {
@@ -176,3 +202,4 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 applyTranslations(currentLanguage);
+startStorySlideshow();
