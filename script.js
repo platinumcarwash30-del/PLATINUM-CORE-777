@@ -2,7 +2,7 @@ const translations = {
   en: {
     documentTitle: 'PLATINUM CORE 777 — From Belgrade to the World',
     documentDescription: 'PLATINUM CORE 777 — One Core. Every Business. Total Control. From Belgrade to the World.',
-    menuLabel: 'Open navigation', languageLabel: 'Language', navLabel: 'Main navigation', navVision: 'The vision', navStory: 'True story', navWatch: 'Watch', navJournal: 'Journal', navSupport: 'Support',
+    menuLabel: 'Open navigation', languageLabel: 'Language', navLabel: 'Main navigation', navVision: 'The vision', navStory: 'True story', navWatch: 'Watch', navJournal: 'Journal', navBusiness: 'For businesses', navCoreReview: 'Core Review', navSupport: 'Support',
     eyebrow: 'PLATINUM CORE 777 / BELGRADE', status: 'CURRENT STATUS — IN DEVELOPMENT', heroLine1: 'From Belgrade', heroLine2: 'to the World.',
     heroIntro: 'Every big journey starts in reality. One real business, one relentless idea, and a brighter way to build what comes next.',
     exploreStory: 'Explore the true story', discoverVision: 'Discover the vision', signatureLabel: 'Author, Founder & CEO of', heroBeginning: '01 / 30 — THE BEGINNING', tagline: 'One Core. Every Business. Total Control.',
@@ -20,7 +20,7 @@ const translations = {
   sr: {
     documentTitle: 'PLATINUM CORE 777 — Od Beograda do sveta',
     documentDescription: 'PLATINUM CORE 777 — Jedno jezgro. Svaki biznis. Potpuna kontrola. Od Beograda do sveta.',
-    menuLabel: 'Otvori navigaciju', languageLabel: 'Jezik', navLabel: 'Glavna navigacija', navVision: 'Vizija', navStory: 'Istinita priča', navWatch: 'Video', navJournal: 'Journal', navSupport: 'Podrška',
+    menuLabel: 'Otvori navigaciju', languageLabel: 'Jezik', navLabel: 'Glavna navigacija', navVision: 'Vizija', navStory: 'Istinita priča', navWatch: 'Video', navJournal: 'Journal', navBusiness: 'Za firme', navCoreReview: 'Core Review', navSupport: 'Podrška',
     eyebrow: 'PLATINUM CORE 777 / BEOGRAD', status: 'TRENUTNI STATUS — U RAZVOJU', heroLine1: 'Od Beograda', heroLine2: 'do sveta.',
     heroIntro: 'Svako veliko putovanje počinje u stvarnosti. Jedan pravi biznis, jedna uporna ideja i svetliji način da gradimo ono što dolazi.',
     exploreStory: 'Istraži istinitu priču', discoverVision: 'Otkrij viziju', signatureLabel: 'Author, Founder & CEO of', heroBeginning: '01 / 30 — POČETAK', tagline: 'Jedno jezgro. Svaki biznis. Potpuna kontrola.',

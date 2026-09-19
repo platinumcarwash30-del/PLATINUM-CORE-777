@@ -354,3 +354,24 @@ h2 em { color: var(--gold); font-style: normal; }
 
 /* Keep decorative elements from creating sideways scroll on narrow screens. */
 body { overflow-x: hidden; }
+
+/* Search-friendly editorial pages */
+.seo-page { min-height: 100vh; background: var(--bg); color: var(--text); }
+.seo-page__header { position: relative; }
+.seo-page__nav { display: flex; gap: 1.2rem; align-items: center; }
+.seo-page__main { width: min(1120px, calc(100% - 3rem)); margin: 0 auto; padding: 9rem 0 6rem; }
+.seo-page__main h1 { max-width: 900px; margin: 1.4rem 0 1.6rem; font-size: clamp(2.7rem, 7vw, 6.5rem); line-height: .98; }
+.seo-page__lead { max-width: 760px; color: var(--muted); font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.65; }
+.seo-page__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 4rem; border: 1px solid var(--line); background: var(--line); }
+.seo-page__grid section { min-height: 250px; padding: 2rem; background: var(--bg); }
+.seo-page__grid h2 { margin: 0 0 1rem; font-size: 1.35rem; }
+.seo-page__grid p { color: var(--muted); line-height: 1.75; }
+.seo-page__grid .button { display: inline-block; margin-top: .6rem; }
+.seo-page .site-footer { margin-top: 0; }
+@media (max-width: 760px) {
+  .seo-page__header { padding-inline: 1rem; }
+  .seo-page__nav { display: none; }
+  .seo-page__main { width: min(100% - 2rem, 700px); padding: 7rem 0 4rem; }
+  .seo-page__grid { grid-template-columns: 1fr; }
+  .seo-page__grid section { min-height: auto; padding: 1.5rem; }
+}
