@@ -14,6 +14,8 @@ describe("loadConfig", () => {
 
     expect(config.notificationTo).toBe("platinum303030@gmail.com");
     expect(config.runIntervalMinutes).toBe(120);
+    expect(config.searchConsoleProperty).toBe("sc-domain:platinumcore777.com");
+    expect(config.googleServiceAccountJson).toBeUndefined();
   });
 
   it("rejects an interval shorter than two hours", () => {
