@@ -43,13 +43,17 @@ This repository includes a native GitHub Actions runner, so the service can run 
 - The workflow is configured with `DRY_RUN=true`; it never publishes until that value is deliberately changed after inspection.
 - Run summaries and errors are visible in GitHub Actions logs. SMTP notification remains optional until its secrets are configured.
 - The workflow keeps the separate SQLite registry between runs so the same page/platform item is not republished.
-- Automatic scheduled runs become active only after this workflow is merged into the repository's default branch; while it stays on `feat/social-autopilot`, use manual dispatch for testing and keep `main` unchanged.
+- Automatic scheduled runs are active from the repository's default `main` branch; use manual dispatch for immediate testing.
+
+The separate `.github/workflows/search-console-monitor.yml` workflow checks Google Search Console once per hour. It reads real Search Analytics data for the project's Core Review and PLATINUM CORE 777 queries; it does not type artificial searches or click results. Until `SOCIAL_AUTOPILOT_GOOGLE_SERVICE_ACCOUNT_JSON` is configured, the monitor exits cleanly without making a request. Once configured, it emails the report when SMTP secrets are available and otherwise prints it in the workflow log.
 
 Add these repository secrets under **Settings → Secrets and variables → Actions** before expecting email or real platform access:
 
 `SOCIAL_AUTOPILOT_SESSION_SECRET`, `SOCIAL_AUTOPILOT_PASSWORD_HASH`, `SOCIAL_AUTOPILOT_SMTP_HOST`, `SOCIAL_AUTOPILOT_SMTP_USER`, `SOCIAL_AUTOPILOT_SMTP_PASSWORD`, `SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ID`, `SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ACCESS_TOKEN`, `SOCIAL_AUTOPILOT_LINKEDIN_ORGANIZATION_ID`, `SOCIAL_AUTOPILOT_LINKEDIN_ACCESS_TOKEN`, and optionally `SOCIAL_AUTOPILOT_OPENAI_API_KEY`, `SOCIAL_AUTOPILOT_OPENAI_MODEL`, `SOCIAL_AUTOPILOT_WHYDONATE_URL`, and `SOCIAL_AUTOPILOT_BUYMEACOFFEE_URL`.
 
-Never put tokens, passwords, card details, or `.env` contents in GitHub files, issues, screenshots, or chat. The `main` branch remains unchanged while this feature is tested on `feat/social-autopilot`.
+For the Search Console monitor, add `SOCIAL_AUTOPILOT_GOOGLE_SERVICE_ACCOUNT_JSON` as a GitHub Actions secret after granting that service account read access to the verified `sc-domain:platinumcore777.com` property in Google Search Console.
+
+Never put tokens, passwords, card details, or `.env` contents in GitHub files, issues, screenshots, or chat.
 
 ## Required online-server secrets
 
