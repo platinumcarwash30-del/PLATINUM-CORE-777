@@ -1,0 +1,90 @@
+import { z } from "zod";
+
+export interface AppConfig {
+  nodeEnv: "development" | "test" | "production";
+  port: number;
+  databasePath: string;
+  siteSitemapUrl: string;
+  runIntervalMinutes: number;
+  runOnStart: boolean;
+  adminUsername: string;
+  adminPasswordHash?: string;
+  adminSessionSecret: string;
+  notificationTo: string;
+  smtpHost?: string;
+  smtpPort: number;
+  smtpSecure: boolean;
+  smtpUser?: string;
+  smtpPassword?: string;
+  smtpFrom: string;
+  openAiApiKey?: string;
+  openAiModel?: string;
+  facebookPageId?: string;
+  facebookPageAccessToken?: string;
+  linkedinOrganizationId?: string;
+  linkedinAccessToken?: string;
+  whyDonateUrl?: string;
+  buyMeACoffeeUrl?: string;
+}
+
+const envSchema = z.object({
+  NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+  PORT: z.coerce.number().int().positive().default(3000),
+  DATABASE_PATH: z.string().min(1).default("./autopilot.sqlite"),
+  SITE_SITEMAP_URL: z.string().url().default("https://platinumcore777.com/sitemap.xml"),
+  RUN_INTERVAL_MINUTES: z.coerce.number().int().default(120),
+  RUN_ON_START: z.enum(["true", "false"]).default("false"),
+  ADMIN_USERNAME: z.string().min(1).default("marko"),
+  ADMIN_PASSWORD_HASH: z.string().min(1).optional(),
+  ADMIN_SESSION_SECRET: z.string().min(32),
+  NOTIFICATION_TO: z.string().email(),
+  SMTP_HOST: z.string().min(1).optional(),
+  SMTP_PORT: z.coerce.number().int().positive().default(587),
+  SMTP_SECURE: z.enum(["true", "false"]).default("false"),
+  SMTP_USER: z.string().min(1).optional(),
+  SMTP_PASSWORD: z.string().min(1).optional(),
+  SMTP_FROM: z.string().min(1).default("PLATINUM CORE 777 <contact@platinumcore777.com>"),
+  OPENAI_API_KEY: z.string().min(1).optional(),
+  OPENAI_MODEL: z.string().min(1).optional(),
+  FACEBOOK_PAGE_ID: z.string().min(1).optional(),
+  FACEBOOK_PAGE_ACCESS_TOKEN: z.string().min(1).optional(),
+  LINKEDIN_ORGANIZATION_ID: z.string().min(1).optional(),
+  LINKEDIN_ACCESS_TOKEN: z.string().min(1).optional(),
+  WHYDONATE_URL: z.string().url().optional(),
+  BUYMEACOFFEE_URL: z.string().url().optional(),
+});
+
+export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
+  const rawInterval = env.RUN_INTERVAL_MINUTES;
+  if (rawInterval !== undefined && Number(rawInterval) < 120) {
+    throw new Error("RUN_INTERVAL_MINUTES must be at least 120");
+  }
+
+  const parsed = envSchema.parse(env);
+  return {
+    nodeEnv: parsed.NODE_ENV,
+    port: parsed.PORT,
+    databasePath: parsed.DATABASE_PATH,
+    siteSitemapUrl: parsed.SITE_SITEMAP_URL,
+    runIntervalMinutes: parsed.RUN_INTERVAL_MINUTES,
+    runOnStart: parsed.RUN_ON_START === "true",
+    adminUsername: parsed.ADMIN_USERNAME,
+    adminPasswordHash: parsed.ADMIN_PASSWORD_HASH,
+    adminSessionSecret: parsed.ADMIN_SESSION_SECRET,
+    notificationTo: parsed.NOTIFICATION_TO,
+    smtpHost: parsed.SMTP_HOST,
+    smtpPort: parsed.SMTP_PORT,
+    smtpSecure: parsed.SMTP_SECURE === "true",
+    smtpUser: parsed.SMTP_USER,
+    smtpPassword: parsed.SMTP_PASSWORD,
+    smtpFrom: parsed.SMTP_FROM,
+    openAiApiKey: parsed.OPENAI_API_KEY,
+    openAiModel: parsed.OPENAI_MODEL,
+    facebookPageId: parsed.FACEBOOK_PAGE_ID,
+    facebookPageAccessToken: parsed.FACEBOOK_PAGE_ACCESS_TOKEN,
+    linkedinOrganizationId: parsed.LINKEDIN_ORGANIZATION_ID,
+    linkedinAccessToken: parsed.LINKEDIN_ACCESS_TOKEN,
+    whyDonateUrl: parsed.WHYDONATE_URL,
+    buyMeACoffeeUrl: parsed.BUYMEACOFFEE_URL,
+  };
+}

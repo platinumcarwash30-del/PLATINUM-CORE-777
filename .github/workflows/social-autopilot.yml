@@ -1,0 +1,70 @@
+name: PLATINUM CORE 777 Social Autopilot
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: social-autopilot-state
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  run-once:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: social-autopilot
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: social-autopilot/package-lock.json
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: social-autopilot/autopilot.sqlite
+          key: social-autopilot-state-${{ github.run_id }}
+          restore-keys: |
+            social-autopilot-state-
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run run:once
+        env:
+          NODE_ENV: production
+          DATABASE_PATH: ./autopilot.sqlite
+          SITE_SITEMAP_URL: https://platinumcore777.com/sitemap.xml
+          RUN_INTERVAL_MINUTES: "120"
+          RUN_ON_START: "false"
+          ADMIN_USERNAME: marko
+          ADMIN_SESSION_SECRET: ${{ secrets.SOCIAL_AUTOPILOT_SESSION_SECRET }}
+          ADMIN_PASSWORD_HASH: ${{ secrets.SOCIAL_AUTOPILOT_PASSWORD_HASH }}
+          NOTIFICATION_TO: platinum303030@gmail.com
+          SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
+          SMTP_PORT: "587"
+          SMTP_SECURE: "false"
+          SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}
+          SMTP_FROM: "PLATINUM CORE 777 <contact@platinumcore777.com>"
+          FACEBOOK_PAGE_ID: ${{ secrets.SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ID }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ACCESS_TOKEN }}
+          LINKEDIN_ORGANIZATION_ID: ${{ secrets.SOCIAL_AUTOPILOT_LINKEDIN_ORGANIZATION_ID }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.SOCIAL_AUTOPILOT_LINKEDIN_ACCESS_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.SOCIAL_AUTOPILOT_OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.SOCIAL_AUTOPILOT_OPENAI_MODEL }}
+          WHYDONATE_URL: ${{ secrets.SOCIAL_AUTOPILOT_WHYDONATE_URL }}
+          BUYMEACOFFEE_URL: ${{ secrets.SOCIAL_AUTOPILOT_BUYMEACOFFEE_URL }}
+          DRY_RUN: "true"
+
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: social-autopilot/autopilot.sqlite
+          key: social-autopilot-state-${{ github.run_id }}
