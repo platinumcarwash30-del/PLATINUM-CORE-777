@@ -29,6 +29,15 @@ export async function createWorkerRuntime(env: NodeJS.ProcessEnv): Promise<Worke
       : undefined,
   ].filter((adapter): adapter is FacebookPageAdapter | LinkedInPageAdapter => Boolean(adapter));
 
+  if (!dryRun) {
+    if (adapters.length !== 2) {
+      throw new Error("Live publishing requires both Facebook Page and LinkedIn organization credentials");
+    }
+    if (!config.smtpHost || !config.smtpUser || !config.smtpPassword) {
+      throw new Error("Live publishing requires SMTP_HOST, SMTP_USER, and SMTP_PASSWORD for run notifications");
+    }
+  }
+
   let running = false;
   const executeRun = async (): Promise<RunSummary> => {
     if (running) throw new Error("A run is already in progress");
