@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: platinum-core-777-social-autopilot
+    runtime: docker
+    dockerfilePath: ./social-autopilot/Dockerfile
+    dockerContext: ./social-autopilot
+    plan: starter
+    healthCheckPath: /health
+    disk:
+      name: autopilot-data
+      mountPath: /var/lib/social-autopilot
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /var/lib/social-autopilot/autopilot.sqlite
+      - key: SITE_SITEMAP_URL
+        value: https://platinumcore777.com/sitemap.xml
+      - key: RUN_INTERVAL_MINUTES
+        value: "120"
+      - key: NOTIFICATION_TO
+        value: platinum303030@gmail.com
+      - key: RUN_ON_START
+        value: "false"
+      - key: DRY_RUN
+        value: "false"
+      - key: WHYDONATE_URL
+        value: ""
+      - key: BUYMEACOFFEE_URL
+        value: ""
+      - key: PORT
+        value: "3000"
