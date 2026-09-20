@@ -24,6 +24,8 @@ body {
   overflow-x: hidden;
 }
 
+html { background: var(--ink); }
+
 body::before {
   content: "";
   position: fixed;
@@ -362,7 +364,7 @@ h2 em { color: var(--gold); font-style: normal; }
 body { overflow-x: hidden; }
 
 /* Search-friendly editorial pages */
-.seo-page { min-height: 100vh; background: var(--bg); color: var(--text); }
+.seo-page { min-height: 100vh; background: var(--ink); color: var(--text); }
 .seo-page__header { position: relative; }
 .seo-page__nav { display: flex; gap: 1.2rem; align-items: center; }
 .seo-page__language { margin-left: 1rem; }
@@ -370,14 +372,14 @@ body { overflow-x: hidden; }
 .seo-page__main h1 { max-width: 900px; margin: 1.4rem 0 1.6rem; font-size: clamp(2.7rem, 7vw, 6.5rem); line-height: .98; }
 .seo-page__lead { max-width: 760px; color: var(--muted); font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.65; }
 .seo-page__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 4rem; border: 1px solid var(--line); background: var(--line); }
-.seo-page__grid section { min-height: 250px; padding: 2rem; background: var(--bg); }
+.seo-page__grid section { min-height: 250px; padding: 2rem; background: var(--panel); }
 .seo-page__grid h2 { margin: 0 0 1rem; font-size: 1.35rem; }
 .seo-page__grid p { color: var(--muted); line-height: 1.75; }
 .seo-page__grid ul { margin: 0 0 1rem; padding-left: 1.25rem; color: var(--muted); line-height: 1.75; }
 .seo-page__grid li + li { margin-top: .35rem; }
 .seo-page__grid .button { display: inline-block; margin-top: .6rem; }
 .legal-page__content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 4rem; border: 1px solid var(--line); background: var(--line); }
-.legal-page__content section { min-height: 250px; padding: 2rem; background: var(--bg); }
+.legal-page__content section { min-height: 250px; padding: 2rem; background: var(--panel); }
 .legal-page__content h2 { margin: 0 0 1rem; font-size: 1.35rem; }
 .legal-page__content p { color: var(--muted); line-height: 1.75; }
 .legal-page__content p + p { margin-top: 1rem; }
