@@ -295,6 +295,11 @@ h2 em { color: var(--gold); font-style: normal; }
 .foundation-contact__links a > span:last-child { overflow-wrap: anywhere; font-size: .76rem; }
 .foundation-modal__note { margin-top: 1rem; font-size: .74rem; }
 
+.sponsorship-contact__emails { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin: 1.4rem 0 .4rem; }
+.sponsorship-contact__emails p { margin: 0; padding: .9rem; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+.sponsorship-contact__emails a { color: var(--text); overflow-wrap: anywhere; }
+.sponsorship-contact__emails a:hover, .sponsorship-contact__emails a:focus-visible { color: var(--cyan); }
+
 .site-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 1.5rem; padding-block: 2rem 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
 .site-footer p { margin: 0; }
 .footer-brand { display: flex; align-items: center; gap: 1rem; min-width: 0; }
@@ -340,6 +345,7 @@ h2 em { color: var(--gold); font-style: normal; }
   .support-options__grid { grid-template-columns: 1fr; }
   .support-options__grid--donations, .support-options__grid--contacts { grid-template-columns: 1fr; }
   .foundation-contact__links { grid-template-columns: 1fr; }
+  .sponsorship-contact__emails { grid-template-columns: 1fr; }
   .support__panel, .support__aside { padding: 2rem 1.4rem; }
   .site-footer { grid-template-columns: 1fr; justify-items: stretch; gap: 1.25rem; }
   .footer-brand, .footer-founder, .footer-contact, .footer-copyright { width: 100%; margin-left: 0 !important; }
