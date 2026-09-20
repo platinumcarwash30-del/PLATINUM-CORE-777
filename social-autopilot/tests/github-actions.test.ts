@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import { createDatabase } from "../src/db";
 
 const workflowPath = join(process.cwd(), "..", ".github", "workflows", "social-autopilot.yml");
+const searchConsoleWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "search-console-monitor.yml");
 
 describe("native GitHub Actions runner", () => {
   it("keeps the two-hour dry-run and SQLite cache contract", () => {
@@ -51,5 +52,15 @@ describe("native GitHub Actions runner", () => {
     } finally {
       rmSync(directory, { recursive: true, force: true });
     }
+  });
+
+  it("keeps Search Console monitoring hourly and read-only", () => {
+    const workflow = readFileSync(searchConsoleWorkflowPath, "utf8");
+
+    expect(workflow).toContain('cron: "0 * * * *"');
+    expect(workflow).toContain("workflow_dispatch:");
+    expect(workflow).toContain("GOOGLE_SERVICE_ACCOUNT_JSON");
+    expect(workflow).toContain("npm run search-console:once");
+    expect(workflow).not.toContain("google.com/search?q=");
   });
 });
