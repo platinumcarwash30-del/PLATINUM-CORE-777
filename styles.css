@@ -210,6 +210,15 @@ h2 em { color: var(--gold); font-style: normal; }
 .video-frame video { display: block; width: 100%; max-height: 760px; object-fit: contain; background: #000; }
 .video-frame__label { position: absolute; bottom: .8rem; left: 1rem; color: rgba(255,255,255,.7); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; pointer-events: none; }
 
+.information { border-top: 1px solid var(--line); }
+.information__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; margin-top: 2rem; }
+.information-card { display: flex; min-height: 220px; flex-direction: column; padding: 1.2rem; border: 1px solid var(--line); background: var(--panel); color: var(--text); transition: transform .25s var(--ease), border-color .25s ease, background .25s ease; }
+.information-card:hover, .information-card:focus-visible { transform: translateY(-4px); border-color: var(--cyan); background: rgba(8,201,255,.08); }
+.information-card__number { color: var(--cyan); font-size: .65rem; letter-spacing: .18em; }
+.information-card__title { margin: .9rem 0 .65rem; font-size: 1.02rem; line-height: 1.08; letter-spacing: -.02em; text-transform: uppercase; }
+.information-card__body { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.55; }
+.information-card__arrow { margin-top: auto; padding-top: 1rem; color: var(--gold); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+
 .support { display: grid; grid-template-columns: 1.25fr .75fr; gap: 1rem; }
 .support__panel, .support__aside { padding: clamp(2rem, 5vw, 5rem); border: 1px solid var(--line); }
 .support__panel { background: linear-gradient(135deg, rgba(8,201,255,.12), rgba(8,201,255,.02) 50%, rgba(228,182,91,.08)); }
@@ -300,6 +309,7 @@ h2 em { color: var(--gold); font-style: normal; }
   .vision__statement-message p { font-size: clamp(1.45rem, 7vw, 2.15rem); }
   .story-card__title { font-size: 1.1rem; }
   .story-intro-card .story-card__label { max-width: 100%; }
+  .information__grid { grid-template-columns: 1fr; }
   .support-options__grid { grid-template-columns: 1fr; }
   .support-options__grid--donations, .support-options__grid--contacts { grid-template-columns: 1fr; }
   .foundation-contact__links { grid-template-columns: 1fr; }
@@ -312,6 +322,7 @@ h2 em { color: var(--gold); font-style: normal; }
 }
 
 @media (min-width: 761px) and (max-width: 1100px) {
+  .information__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .support-options__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
