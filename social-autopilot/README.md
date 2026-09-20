@@ -29,7 +29,7 @@ npm run build
 For a safe first run, configure `NOTIFICATION_TO`, `ADMIN_SESSION_SECRET`, and `ADMIN_PASSWORD_HASH`, leave `DRY_RUN=true`, then run:
 
 ```bash
-npm run dev -- --dry-run
+DRY_RUN=true npm run dev
 ```
 
 Dry-run reads the sitemap and creates registry records but returns `skipped` for both platforms; it never calls Facebook or LinkedIn.
@@ -43,6 +43,7 @@ This repository includes a native GitHub Actions runner, so the service can run 
 - The workflow is configured with `DRY_RUN=true`; it never publishes until that value is deliberately changed after inspection.
 - Run summaries and errors are visible in GitHub Actions logs. SMTP notification remains optional until its secrets are configured.
 - The workflow keeps the separate SQLite registry between runs so the same page/platform item is not republished.
+- Automatic scheduled runs become active only after this workflow is merged into the repository's default branch; while it stays on `feat/social-autopilot`, use manual dispatch for testing and keep `main` unchanged.
 
 Add these repository secrets under **Settings → Secrets and variables → Actions** before expecting email or real platform access:
 
