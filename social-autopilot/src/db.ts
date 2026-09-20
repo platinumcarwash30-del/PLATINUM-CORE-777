@@ -179,7 +179,7 @@ export async function createDatabase(databasePath: string): Promise<DatabaseStor
         SELECT DISTINCT c.id, c.page_url AS pageUrl, c.content_hash AS contentHash
         FROM campaigns c
         JOIN platform_publications p ON p.campaign_id = c.id
-        WHERE p.status IN ('pending', 'failed') AND p.attempts < 3
+        WHERE p.status IN ('pending', 'failed', 'skipped') AND p.attempts < 3
         ORDER BY c.created_at ASC
       `);
     },
@@ -203,7 +203,7 @@ export async function createDatabase(databasePath: string): Promise<DatabaseStor
     claimPlatformPublish(campaignId, platform) {
       database.run(
         `UPDATE platform_publications SET status='publishing', attempts=attempts+1, locked_at=$lockedAt
-         WHERE campaign_id=$campaignId AND platform=$platform AND status IN ('pending', 'failed') AND attempts < 3`,
+         WHERE campaign_id=$campaignId AND platform=$platform AND status IN ('pending', 'failed', 'skipped') AND attempts < 3`,
         { $lockedAt: nowIso(), $campaignId: campaignId, $platform: platform },
       );
       const claimed = database.getRowsModified() === 1;
@@ -213,7 +213,9 @@ export async function createDatabase(databasePath: string): Promise<DatabaseStor
 
     recordPublishResult(campaignId, result) {
       database.run(
-        `UPDATE platform_publications SET status=$status, external_url=$externalUrl, error_code=$errorCode,
+        `UPDATE platform_publications SET status=$status,
+         attempts=CASE WHEN $status='skipped' THEN 0 ELSE attempts END,
+         external_url=$externalUrl, error_code=$errorCode,
          error_message=$errorMessage, published_at=$publishedAt, locked_at=NULL
          WHERE campaign_id=$campaignId AND platform=$platform`,
         {
