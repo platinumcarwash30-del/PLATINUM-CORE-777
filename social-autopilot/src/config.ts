@@ -28,6 +28,8 @@ export interface AppConfig {
   linkedinAccessToken?: string;
   whyDonateUrl?: string;
   buyMeACoffeeUrl?: string;
+  searchConsoleProperty: string;
+  googleServiceAccountJson?: string;
 }
 
 const envSchema = z.object({
@@ -55,6 +57,8 @@ const envSchema = z.object({
   LINKEDIN_ACCESS_TOKEN: optionalString(),
   WHYDONATE_URL: optionalUrl(),
   BUYMEACOFFEE_URL: optionalUrl(),
+  SEARCH_CONSOLE_PROPERTY: z.string().min(1).default("sc-domain:platinumcore777.com"),
+  GOOGLE_SERVICE_ACCOUNT_JSON: optionalString(),
 });
 
 export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
@@ -89,5 +93,7 @@ export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
     linkedinAccessToken: parsed.LINKEDIN_ACCESS_TOKEN,
     whyDonateUrl: parsed.WHYDONATE_URL,
     buyMeACoffeeUrl: parsed.BUYMEACOFFEE_URL,
+    searchConsoleProperty: parsed.SEARCH_CONSOLE_PROPERTY,
+    googleServiceAccountJson: parsed.GOOGLE_SERVICE_ACCOUNT_JSON,
   };
 }
