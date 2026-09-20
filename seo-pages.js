@@ -134,3 +134,59 @@ document.querySelectorAll('[data-seo-language]').forEach((button) => {
 });
 
 applySeoLanguage(currentLanguage);
+
+(() => {
+  const initSeoMobileNavigation = () => {
+    document.querySelectorAll('.seo-page__header').forEach((header, index) => {
+      const nav = header.querySelector('.seo-page__nav');
+
+      if (!nav || header.querySelector('.menu-toggle')) return;
+
+      const navId = nav.id || `seo-mobile-nav-${index + 1}`;
+      nav.id = navId;
+
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'menu-toggle';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-controls', navId);
+      toggle.setAttribute('aria-label', 'Open navigation');
+      toggle.innerHTML = `
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      `;
+
+      header.insertBefore(toggle, nav);
+
+      const closeMenu = () => {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation');
+      };
+
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute(
+          'aria-label',
+          isOpen ? 'Close navigation' : 'Open navigation'
+        );
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 760) closeMenu();
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSeoMobileNavigation);
+  } else {
+    initSeoMobileNavigation();
+  }
+})();
