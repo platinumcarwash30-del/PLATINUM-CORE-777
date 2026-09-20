@@ -1,0 +1,45 @@
+name: PLATINUM CORE 777 Search Console Monitor
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: social-autopilot-search-console
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: social-autopilot
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: social-autopilot/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run search-console:once
+        env:
+          NODE_ENV: production
+          ADMIN_USERNAME: marko
+          ADMIN_SESSION_SECRET: ${{ secrets.SOCIAL_AUTOPILOT_SESSION_SECRET }}
+          NOTIFICATION_TO: platinum303030@gmail.com
+          SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
+          SMTP_PORT: "587"
+          SMTP_SECURE: "false"
+          SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}
+          SMTP_FROM: "PLATINUM CORE 777 <contact@platinumcore777.com>"
+          SEARCH_CONSOLE_PROPERTY: sc-domain:platinumcore777.com
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.SOCIAL_AUTOPILOT_GOOGLE_SERVICE_ACCOUNT_JSON }}
