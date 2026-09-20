@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+const optionalString = () => z.preprocess((value) => value === "" ? undefined : value, z.string().min(1).optional());
+const optionalUrl = () => z.preprocess((value) => value === "" ? undefined : value, z.string().url().optional());
+
 export interface AppConfig {
   nodeEnv: "development" | "test" | "production";
   port: number;
@@ -35,23 +38,23 @@ const envSchema = z.object({
   RUN_INTERVAL_MINUTES: z.coerce.number().int().default(120),
   RUN_ON_START: z.enum(["true", "false"]).default("false"),
   ADMIN_USERNAME: z.string().min(1).default("marko"),
-  ADMIN_PASSWORD_HASH: z.string().min(1).optional(),
+  ADMIN_PASSWORD_HASH: optionalString(),
   ADMIN_SESSION_SECRET: z.string().min(32),
   NOTIFICATION_TO: z.string().email(),
-  SMTP_HOST: z.string().min(1).optional(),
+  SMTP_HOST: optionalString(),
   SMTP_PORT: z.coerce.number().int().positive().default(587),
   SMTP_SECURE: z.enum(["true", "false"]).default("false"),
-  SMTP_USER: z.string().min(1).optional(),
-  SMTP_PASSWORD: z.string().min(1).optional(),
+  SMTP_USER: optionalString(),
+  SMTP_PASSWORD: optionalString(),
   SMTP_FROM: z.string().min(1).default("PLATINUM CORE 777 <contact@platinumcore777.com>"),
-  OPENAI_API_KEY: z.string().min(1).optional(),
-  OPENAI_MODEL: z.string().min(1).optional(),
-  FACEBOOK_PAGE_ID: z.string().min(1).optional(),
-  FACEBOOK_PAGE_ACCESS_TOKEN: z.string().min(1).optional(),
-  LINKEDIN_ORGANIZATION_ID: z.string().min(1).optional(),
-  LINKEDIN_ACCESS_TOKEN: z.string().min(1).optional(),
-  WHYDONATE_URL: z.string().url().optional(),
-  BUYMEACOFFEE_URL: z.string().url().optional(),
+  OPENAI_API_KEY: optionalString(),
+  OPENAI_MODEL: optionalString(),
+  FACEBOOK_PAGE_ID: optionalString(),
+  FACEBOOK_PAGE_ACCESS_TOKEN: optionalString(),
+  LINKEDIN_ORGANIZATION_ID: optionalString(),
+  LINKEDIN_ACCESS_TOKEN: optionalString(),
+  WHYDONATE_URL: optionalUrl(),
+  BUYMEACOFFEE_URL: optionalUrl(),
 });
 
 export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
