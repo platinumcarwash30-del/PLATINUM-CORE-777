@@ -34,6 +34,22 @@ npm run dev -- --dry-run
 
 Dry-run reads the sitemap and creates registry records but returns `skipped` for both platforms; it never calls Facebook or LinkedIn.
 
+## No-cost GitHub Actions mode
+
+This repository includes a native GitHub Actions runner, so the service can run without Render or a payment card:
+
+- `.github/workflows/social-autopilot.yml` runs one cycle every two hours.
+- `workflow_dispatch` lets you start a test run manually from the **Actions** tab.
+- The workflow is configured with `DRY_RUN=true`; it never publishes until that value is deliberately changed after inspection.
+- Run summaries and errors are visible in GitHub Actions logs. SMTP notification remains optional until its secrets are configured.
+- The workflow keeps the separate SQLite registry between runs so the same page/platform item is not republished.
+
+Add these repository secrets under **Settings → Secrets and variables → Actions** before expecting email or real platform access:
+
+`SOCIAL_AUTOPILOT_SESSION_SECRET`, `SOCIAL_AUTOPILOT_PASSWORD_HASH`, `SOCIAL_AUTOPILOT_SMTP_HOST`, `SOCIAL_AUTOPILOT_SMTP_USER`, `SOCIAL_AUTOPILOT_SMTP_PASSWORD`, `SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ID`, `SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ACCESS_TOKEN`, `SOCIAL_AUTOPILOT_LINKEDIN_ORGANIZATION_ID`, `SOCIAL_AUTOPILOT_LINKEDIN_ACCESS_TOKEN`, and optionally `SOCIAL_AUTOPILOT_OPENAI_API_KEY`, `SOCIAL_AUTOPILOT_OPENAI_MODEL`, `SOCIAL_AUTOPILOT_WHYDONATE_URL`, and `SOCIAL_AUTOPILOT_BUYMEACOFFEE_URL`.
+
+Never put tokens, passwords, card details, or `.env` contents in GitHub files, issues, screenshots, or chat. The `main` branch remains unchanged while this feature is tested on `feat/social-autopilot`.
+
 ## Required online-server secrets
 
 Set these in the host's secret manager, never in Git:
