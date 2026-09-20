@@ -1,9 +1,11 @@
 import nodemailer from "nodemailer";
 import type { AppConfig } from "./config";
+import { formatSearchConsoleReport, type SearchConsoleReport } from "./search-console";
 import type { RunSummary } from "./types";
 
 export interface NotificationService {
   sendRunSummary(summary: RunSummary): Promise<void>;
+  sendSearchConsoleReport(report: SearchConsoleReport): Promise<void>;
 }
 
 function renderSummary(summary: RunSummary): string {
@@ -39,20 +41,33 @@ function renderSummary(summary: RunSummary): string {
 }
 
 export function createNotificationService(config: Pick<AppConfig, "smtpHost" | "smtpPort" | "smtpSecure" | "smtpUser" | "smtpPassword" | "smtpFrom" | "notificationTo">): NotificationService {
+  const createTransporter = () => {
+    if (!config.smtpHost) throw new Error("SMTP_HOST is not configured");
+    return nodemailer.createTransport({
+      host: config.smtpHost,
+      port: config.smtpPort,
+      secure: config.smtpSecure,
+      auth: config.smtpUser && config.smtpPassword ? { user: config.smtpUser, pass: config.smtpPassword } : undefined,
+    });
+  };
+
   return {
     async sendRunSummary(summary) {
-      if (!config.smtpHost) throw new Error("SMTP_HOST is not configured");
-      const transporter = nodemailer.createTransport({
-        host: config.smtpHost,
-        port: config.smtpPort,
-        secure: config.smtpSecure,
-        auth: config.smtpUser && config.smtpPassword ? { user: config.smtpUser, pass: config.smtpPassword } : undefined,
-      });
+      const transporter = createTransporter();
       await transporter.sendMail({
         from: config.smtpFrom,
         to: config.notificationTo,
         subject: `[PLATINUM CORE 777] Autopilot ${summary.status} — ${summary.executionId}`,
         text: renderSummary(summary),
+      });
+    },
+    async sendSearchConsoleReport(report) {
+      const transporter = createTransporter();
+      await transporter.sendMail({
+        from: config.smtpFrom,
+        to: config.notificationTo,
+        subject: `[PLATINUM CORE 777] Search Console ${report.startDate} to ${report.endDate}`,
+        text: formatSearchConsoleReport(report),
       });
     },
   };
