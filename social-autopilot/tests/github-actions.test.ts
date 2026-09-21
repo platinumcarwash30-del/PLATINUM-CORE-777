@@ -6,6 +6,7 @@ import { createDatabase } from "../src/db";
 
 const workflowPath = join(process.cwd(), "..", ".github", "workflows", "social-autopilot.yml");
 const searchConsoleWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "search-console-monitor.yml");
+const identityMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "identity-monitor.yml");
 
 describe("native GitHub Actions runner", () => {
   it("keeps the two-hour dry-run and SQLite cache contract", () => {
@@ -60,7 +61,22 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain('cron: "0 * * * *"');
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("GOOGLE_SERVICE_ACCOUNT_JSON");
+    expect(workflow).toContain("SEARCH_CONSOLE_PROPERTY: sc-domain:platinumcore777.com");
     expect(workflow).toContain("npm run search-console:once");
+    expect(workflow).not.toContain("ADMIN_SESSION_SECRET");
     expect(workflow).not.toContain("google.com/search?q=");
+  });
+
+  it("keeps public identity monitoring separate and non-posting", () => {
+    const workflow = readFileSync(identityMonitorWorkflowPath, "utf8");
+
+    expect(workflow).toContain('cron: "30 7 * * *"');
+    expect(workflow).toContain("workflow_dispatch:");
+    expect(workflow).toContain("BRAVE_SEARCH_API_KEY");
+    expect(workflow).not.toContain("GOOGLE_WEB_SEARCH");
+    expect(workflow).toContain("identity-monitor-state.json");
+    expect(workflow).toContain("npm run identity-monitor:once");
+    expect(workflow).not.toContain("facebook.com/groups");
+    expect(workflow).not.toContain("instagram.com/p/");
   });
 });

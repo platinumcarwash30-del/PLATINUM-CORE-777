@@ -47,9 +47,15 @@ This repository includes a native GitHub Actions runner, so the service can run 
 
 The separate `.github/workflows/search-console-monitor.yml` workflow checks Google Search Console once per hour. It reads real Search Analytics data for the project's Core Review and PLATINUM CORE 777 queries; it does not type artificial searches or click results. Until `SOCIAL_AUTOPILOT_GOOGLE_SERVICE_ACCOUNT_JSON` is configured, the monitor exits cleanly without making a request. Once configured, it emails the report when SMTP secrets are available and otherwise prints it in the workflow log.
 
+The separate `.github/workflows/identity-monitor.yml` workflow checks public, indexable web results once per day for the approved project identities: `Marko Ćuća`, `Marko Cuca`, `Cuca` with project context, `PLATINUM CORE 777`, `CORE REVIEW`, `Platinum Car Wash`, `Platinum Luxury Spa`, `markoplatinum@icloud.com`, and `contact@platinumcore777.com`. It also searches public Facebook and Instagram results through the configured web-search API; it does not log in, join groups, post, comment, like, follow, or message anyone.
+
+The identity monitor sends only new external results in a digest to `platinum303030@gmail.com`; the same URL is suppressed for seven days. Official source URLs are excluded through `OFFICIAL_SOURCE_URLS`. It prepares a Google legal-report link and evidence in the email, but never submits automatic reports or labels a result as a confirmed impersonation without human review.
+
 Add these repository secrets under **Settings → Secrets and variables → Actions** before expecting email or real platform access:
 
 `SOCIAL_AUTOPILOT_SESSION_SECRET`, `SOCIAL_AUTOPILOT_PASSWORD_HASH`, `SOCIAL_AUTOPILOT_SMTP_HOST`, `SOCIAL_AUTOPILOT_SMTP_USER`, `SOCIAL_AUTOPILOT_SMTP_PASSWORD`, `SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ID`, `SOCIAL_AUTOPILOT_FACEBOOK_PAGE_ACCESS_TOKEN`, `SOCIAL_AUTOPILOT_LINKEDIN_ORGANIZATION_ID`, `SOCIAL_AUTOPILOT_LINKEDIN_ACCESS_TOKEN`, and optionally `SOCIAL_AUTOPILOT_OPENAI_API_KEY`, `SOCIAL_AUTOPILOT_OPENAI_MODEL`, `SOCIAL_AUTOPILOT_WHYDONATE_URL`, and `SOCIAL_AUTOPILOT_BUYMEACOFFEE_URL`.
+
+For the public identity monitor, add `SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY`. Keep the official owned-site and repository URLs in `OFFICIAL_SOURCE_URLS`; add exact official Facebook and Instagram profile URLs there once they are confirmed. This credential is used only for read-only public search through Brave Search API.
 
 For the Search Console monitor, add `SOCIAL_AUTOPILOT_GOOGLE_SERVICE_ACCOUNT_JSON` as a GitHub Actions secret after granting that service account read access to the verified `sc-domain:platinumcore777.com` property in Google Search Console.
 

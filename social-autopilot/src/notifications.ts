@@ -1,11 +1,13 @@
 import nodemailer from "nodemailer";
 import type { AppConfig } from "./config";
+import { formatIdentityMonitorDigest, type IdentitySearchResult } from "./identity-monitor";
 import { formatSearchConsoleReport, type SearchConsoleReport } from "./search-console";
 import type { RunSummary } from "./types";
 
 export interface NotificationService {
   sendRunSummary(summary: RunSummary): Promise<void>;
   sendSearchConsoleReport(report: SearchConsoleReport): Promise<void>;
+  sendIdentityMonitorDigest(findings: readonly IdentitySearchResult[], officialSourceUrls: readonly string[], checkedAt: Date): Promise<void>;
 }
 
 function renderSummary(summary: RunSummary): string {
@@ -68,6 +70,15 @@ export function createNotificationService(config: Pick<AppConfig, "smtpHost" | "
         to: config.notificationTo,
         subject: `[PLATINUM CORE 777] Search Console ${report.startDate} to ${report.endDate}`,
         text: formatSearchConsoleReport(report),
+      });
+    },
+    async sendIdentityMonitorDigest(findings, officialSourceUrls, checkedAt) {
+      const transporter = createTransporter();
+      await transporter.sendMail({
+        from: config.smtpFrom,
+        to: config.notificationTo,
+        subject: `[PLATINUM CORE 777] Identity monitor — ${findings.length} new result${findings.length === 1 ? "" : "s"}`,
+        text: formatIdentityMonitorDigest(findings, officialSourceUrls, checkedAt),
       });
     },
   };
