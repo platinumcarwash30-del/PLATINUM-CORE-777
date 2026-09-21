@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadConfig, loadSerbiaClientFinderConfig } from "../src/config";
+import { loadConfig, loadSerbiaClientFinderConfig, loadWikipediaDraftConfig } from "../src/config";
 
 describe("loadConfig", () => {
   it("requires the notification recipient and two-hour interval", () => {
@@ -41,5 +41,20 @@ describe("loadConfig", () => {
     })).toThrow();
 
     expect(() => loadSerbiaClientFinderConfig({})).toThrow();
+  });
+
+  it("loads the Wikipedia draft paths and official site defaults", () => {
+    const config = loadWikipediaDraftConfig({});
+    expect(config.siteUrl).toBe("https://platinumcore777.com/");
+    expect(config.sitemapUrl).toBe("https://platinumcore777.com/sitemap.xml");
+    expect(config.statePath).toBe("./wikipedia-draft-state.json");
+    expect(config.draftPath).toBe("../docs/wikipedia/PLATINUM-CORE-777-draft.md");
+    expect(config.sourcesPath).toBe("../docs/wikipedia/PLATINUM-CORE-777-sources.md");
+  });
+
+  it("rejects a configured Wikipedia draft URL outside the official site", () => {
+    expect(() => loadWikipediaDraftConfig({
+      WIKIPEDIA_DRAFT_SITE_URL: "https://example.com/",
+    })).toThrow();
   });
 });

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isAllowedWikipediaSourceUrl } from "./wikipedia-draft-monitor";
 
 const optionalString = () => z.preprocess((value) => value === "" ? undefined : value, z.string().min(1).optional());
 const optionalUrl = () => z.preprocess((value) => value === "" ? undefined : value, z.string().url().optional());
@@ -71,6 +72,14 @@ export interface SerbiaClientFinderConfig {
   maxLeads: number;
 }
 
+export interface WikipediaDraftConfig {
+  siteUrl: string;
+  sitemapUrl: string;
+  statePath: string;
+  draftPath: string;
+  sourcesPath: string;
+}
+
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().default(3000),
@@ -139,6 +148,14 @@ const serbiaClientFinderEnvSchema = z.object({
   BRAVE_SEARCH_API_KEY: optionalString(),
   SERBIA_CLIENT_FINDER_STATE_PATH: z.string().min(1).default("./serbia-client-finder-state.json"),
   SERBIA_CLIENT_FINDER_MAX_LEADS: z.coerce.number().int().positive().default(10),
+});
+
+const wikipediaDraftEnvSchema = z.object({
+  WIKIPEDIA_DRAFT_SITE_URL: z.string().url().default("https://platinumcore777.com/"),
+  WIKIPEDIA_DRAFT_SITEMAP_URL: z.string().url().default("https://platinumcore777.com/sitemap.xml"),
+  WIKIPEDIA_DRAFT_STATE_PATH: z.string().min(1).default("./wikipedia-draft-state.json"),
+  WIKIPEDIA_DRAFT_PATH: z.string().min(1).default("../docs/wikipedia/PLATINUM-CORE-777-draft.md"),
+  WIKIPEDIA_DRAFT_SOURCES_PATH: z.string().min(1).default("../docs/wikipedia/PLATINUM-CORE-777-sources.md"),
 });
 
 export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
@@ -225,5 +242,22 @@ export function loadSerbiaClientFinderConfig(env: NodeJS.ProcessEnv): SerbiaClie
     braveSearchApiKey: parsed.BRAVE_SEARCH_API_KEY,
     statePath: parsed.SERBIA_CLIENT_FINDER_STATE_PATH,
     maxLeads: parsed.SERBIA_CLIENT_FINDER_MAX_LEADS,
+  };
+}
+
+export function loadWikipediaDraftConfig(env: NodeJS.ProcessEnv): WikipediaDraftConfig {
+  const parsed = wikipediaDraftEnvSchema.parse(env);
+  if (!isAllowedWikipediaSourceUrl(parsed.WIKIPEDIA_DRAFT_SITE_URL)) {
+    throw new Error("WIKIPEDIA_DRAFT_SITE_URL must be an HTTPS URL on platinumcore777.com");
+  }
+  if (!isAllowedWikipediaSourceUrl(parsed.WIKIPEDIA_DRAFT_SITEMAP_URL)) {
+    throw new Error("WIKIPEDIA_DRAFT_SITEMAP_URL must be an HTTPS URL on platinumcore777.com");
+  }
+  return {
+    siteUrl: parsed.WIKIPEDIA_DRAFT_SITE_URL,
+    sitemapUrl: parsed.WIKIPEDIA_DRAFT_SITEMAP_URL,
+    statePath: parsed.WIKIPEDIA_DRAFT_STATE_PATH,
+    draftPath: parsed.WIKIPEDIA_DRAFT_PATH,
+    sourcesPath: parsed.WIKIPEDIA_DRAFT_SOURCES_PATH,
   };
 }

@@ -8,6 +8,7 @@ const workflowPath = join(process.cwd(), "..", ".github", "workflows", "social-a
 const searchConsoleWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "search-console-monitor.yml");
 const identityMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "identity-monitor.yml");
 const serbiaClientFinderWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "serbia-client-finder.yml");
+const wikipediaDraftWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "wikipedia-draft-monitor.yml");
 
 describe("native GitHub Actions runner", () => {
   it("keeps the two-hour dry-run and SQLite cache contract", () => {
@@ -96,5 +97,28 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain("./serbia-client-finder-state.json");
     expect(workflow).toContain("key: serbia-client-finder-${{ github.run_id }}");
     expect(workflow).not.toContain("key: identity-monitor-");
+  });
+
+  it("configures a read-only site Wikipedia pending-draft workflow", () => {
+    const workflow = readFileSync(wikipediaDraftWorkflowPath, "utf8");
+
+    expect(workflow).toContain('name: PLATINUM CORE 777 Wikipedia Draft Monitor');
+    expect(workflow).toContain('cron: "0 8 * * *"');
+    expect(workflow).toContain("workflow_dispatch:");
+    expect(workflow).toContain("group: social-autopilot-wikipedia-draft");
+    expect(workflow).toContain("contents: read");
+    expect(workflow).not.toContain("contents: write");
+    expect(workflow).toContain("npm run wikipedia-draft:once");
+    expect(workflow).toContain("actions/cache/restore@v4");
+    expect(workflow).toContain("actions/cache/save@v4");
+    expect(workflow).toContain("actions/upload-artifact@v4");
+    expect(workflow).toContain("docs/wikipedia/PLATINUM-CORE-777-draft.md");
+    expect(workflow).toContain("docs/wikipedia/PLATINUM-CORE-777-sources.md");
+    expect(workflow).not.toContain("git add");
+    expect(workflow).not.toContain("git push");
+    expect(workflow).not.toContain("git commit");
+    expect(workflow).not.toContain("wikipedia.org/api");
+    expect(workflow).not.toContain("action=publish");
+    expect(workflow).not.toContain("mainspace");
   });
 });
