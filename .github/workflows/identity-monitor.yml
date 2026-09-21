@@ -48,7 +48,7 @@ jobs:
           SMTP_SECURE: "false"
           SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}
-          SMTP_FROM: "PLATINUM CORE 777 <contact@platinumcore777.com>"
+          SMTP_FROM: "PLATINUM CORE 777 <platinumcarwash30@gmail.com>"
           BRAVE_SEARCH_API_KEY: ${{ secrets.SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY }}
           OFFICIAL_SOURCE_URLS: "https://platinumcore777.com/,https://github.com/platinumcarwash30-del/PLATINUM-CORE-777"
           IDENTITY_MONITOR_STATE_PATH: "./identity-monitor-state.json"
