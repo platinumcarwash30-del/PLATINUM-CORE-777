@@ -267,8 +267,8 @@ h2 em { color: var(--gold); font-style: normal; }
 .support-menu[open] .support-menu__arrow { transform: rotate(45deg); }
 .support-menu__panel { padding: 0 1.1rem 1.1rem; border-top: 1px solid var(--line); }
 .support-menu__intro { margin: 1rem 0; color: var(--muted); font-size: .82rem; }
-.support-options__grid--donations { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.support-options__grid--contacts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: .7rem; }
+.support-options__grid.support-options__grid--donations { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.support-options__grid.support-options__grid--contacts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 0 .8rem; }
 
 .support-options__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .7rem; }
 .support-option { display: flex; align-items: center; gap: 1rem; min-height: 100px; padding: 1.1rem; border: 1px solid var(--line); background: rgba(255,255,255,.025); transition: border-color .25s ease, transform .25s var(--ease), background .25s ease; }
@@ -279,6 +279,11 @@ h2 em { color: var(--gold); font-style: normal; }
 .support-option strong { font-size: .9rem; letter-spacing: .1em; }
 .support-option small { margin-top: .35rem; color: var(--muted); font-size: .74rem; }
 .support-option__arrow { margin-left: auto; color: var(--gold); font-size: 1.3rem; }
+.support-options__grid--contacts .support-option { min-height: 148px; padding: 1.45rem; }
+.support-options__grid--contacts .support-option strong { font-size: 1.05rem; }
+.support-options__grid--donations .support-option { min-height: 74px; padding: .8rem; gap: .7rem; }
+.support-options__grid--donations .support-option strong { font-size: .76rem; }
+.support-options__grid--donations .support-option small { font-size: .68rem; }
 
 .foundation-modal { width: min(680px, calc(100% - 32px)); max-width: 680px; padding: 0; border: 1px solid rgba(8,201,255,.45); background: rgba(13,16,23,.98); color: var(--text); box-shadow: 0 30px 100px rgba(0,0,0,.7); }
 .foundation-modal::backdrop { background: rgba(5,6,9,.78); backdrop-filter: blur(6px); }
@@ -343,6 +348,8 @@ h2 em { color: var(--gold); font-style: normal; }
   .story-intro-card .story-card__label { max-width: 100%; }
   .information__grid { grid-template-columns: 1fr; }
   .support-options__grid { grid-template-columns: 1fr; }
+  .support-options__grid.support-options__grid--contacts,
+  .support-options__grid.support-options__grid--donations { grid-template-columns: 1fr; }
   .support-options__grid--donations, .support-options__grid--contacts { grid-template-columns: 1fr; }
   .foundation-contact__links { grid-template-columns: 1fr; }
   .sponsorship-contact__emails { grid-template-columns: 1fr; }
