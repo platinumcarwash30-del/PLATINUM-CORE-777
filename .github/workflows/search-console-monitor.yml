@@ -32,8 +32,6 @@ jobs:
       - run: npm run search-console:once
         env:
           NODE_ENV: production
-          ADMIN_USERNAME: marko
-          ADMIN_SESSION_SECRET: ${{ secrets.SOCIAL_AUTOPILOT_SESSION_SECRET }}
           NOTIFICATION_TO: platinum303030@gmail.com
           SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
           SMTP_PORT: "587"
