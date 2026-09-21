@@ -13,6 +13,7 @@
     "run:once": "node dist/src/run-once.js",
     "search-console:once": "node dist/src/search-console-runner.js",
     "identity-monitor:once": "node dist/src/identity-monitor-runner.js",
+    "serbia-client-finder:once": "node dist/src/serbia-client-finder-runner.js",
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadConfig } from "../src/config";
+import { loadConfig, loadSerbiaClientFinderConfig } from "../src/config";
 
 describe("loadConfig", () => {
   it("requires the notification recipient and two-hour interval", () => {
@@ -22,5 +22,24 @@ describe("loadConfig", () => {
     expect(() => loadConfig({ RUN_INTERVAL_MINUTES: "20" })).toThrow(
       "RUN_INTERVAL_MINUTES must be at least 120",
     );
+  });
+
+  it("loads the Serbia client finder defaults and requires a recipient", () => {
+    const config = loadSerbiaClientFinderConfig({
+      NOTIFICATION_TO: "platinum303030@gmail.com",
+    });
+
+    expect(config.notificationTo).toBe("platinum303030@gmail.com");
+    expect(config.statePath).toBe("./serbia-client-finder-state.json");
+    expect(config.maxLeads).toBe(10);
+  });
+
+  it("rejects an explicitly empty finder max-leads value", () => {
+    expect(() => loadSerbiaClientFinderConfig({
+      NOTIFICATION_TO: "platinum303030@gmail.com",
+      SERBIA_CLIENT_FINDER_MAX_LEADS: "",
+    })).toThrow();
+
+    expect(() => loadSerbiaClientFinderConfig({})).toThrow();
   });
 });

@@ -7,6 +7,7 @@ import { createDatabase } from "../src/db";
 const workflowPath = join(process.cwd(), "..", ".github", "workflows", "social-autopilot.yml");
 const searchConsoleWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "search-console-monitor.yml");
 const identityMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "identity-monitor.yml");
+const serbiaClientFinderWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "serbia-client-finder.yml");
 
 describe("native GitHub Actions runner", () => {
   it("keeps the two-hour dry-run and SQLite cache contract", () => {
@@ -78,5 +79,22 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain("npm run identity-monitor:once");
     expect(workflow).not.toContain("facebook.com/groups");
     expect(workflow).not.toContain("instagram.com/p/");
+  });
+
+  it("configures a separate daily Serbia client finder workflow", () => {
+    const workflow = readFileSync(serbiaClientFinderWorkflowPath, "utf8");
+
+    expect(workflow).toContain('cron: "0 7 * * *"');
+    expect(workflow).toContain("workflow_dispatch:");
+    expect(workflow).toContain("npm run serbia-client-finder:once");
+    expect(workflow).toContain("BRAVE_SEARCH_API_KEY: ${{ secrets.SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY }}");
+    expect(workflow).toContain("SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}");
+    expect(workflow).toContain("SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}");
+    expect(workflow).toContain("SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}");
+    expect(workflow).toContain("NOTIFICATION_TO: platinum303030@gmail.com");
+    expect(workflow).toContain("SERBIA_CLIENT_FINDER_STATE_PATH");
+    expect(workflow).toContain("./serbia-client-finder-state.json");
+    expect(workflow).toContain("key: serbia-client-finder-${{ github.run_id }}");
+    expect(workflow).not.toContain("key: identity-monitor-");
   });
 });
