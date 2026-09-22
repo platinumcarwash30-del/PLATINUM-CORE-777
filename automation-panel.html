@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#080b12" />
+    <link rel="icon" type="image/svg+xml" href="automation-panel-icon.svg" />
+    <link rel="manifest" href="automation-panel.webmanifest" />
     <meta name="description" content="PLATINUM CORE 777 centralni pregled automatizacija" />
     <title>PLATINUM CORE 777 — Centralni panel</title>
     <style>
@@ -48,6 +50,18 @@
       .button:hover { background: #f0d28a; }
       .button:disabled { opacity: .55; cursor: wait; }
       .button.secondary { color: var(--text); background: var(--surface-2); border-color: var(--border); }
+      body.locked > header, body.locked > main, body.locked > footer { display: none; }
+      .auth-gate { display: grid; place-items: center; min-height: 100vh; padding: 24px; }
+      .auth-card { width: min(440px, 100%); padding: 30px; background: linear-gradient(145deg, rgba(21, 30, 44, .98), rgba(16, 23, 34, .98)); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 24px 70px rgba(0, 0, 0, .35); }
+      .auth-card h1 { margin-bottom: 10px; font-size: 32px; }
+      .auth-card p { color: var(--muted); }
+      .auth-card form { display: grid; gap: 11px; }
+      .auth-card label { color: #dce4ef; font-size: 14px; font-weight: 700; }
+      .auth-card input { width: 100%; margin-top: 6px; padding: 12px 13px; color: var(--text); background: #0a0f18; border: 1px solid var(--border); border-radius: 9px; outline: none; }
+      .auth-card input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(227, 189, 104, .12); }
+      .auth-card .button { margin-top: 5px; }
+      .auth-error { min-height: 24px; margin: 15px 0 0; color: var(--red) !important; font-weight: 700; }
+      .auth-note { margin-bottom: 0; font-size: 12px; }
       main { padding: 22px 0 54px; }
       .notice { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px; padding: 14px 16px; color: #cbd5e4; background: rgba(21, 30, 44, .75); border: 1px solid var(--border); border-radius: 12px; }
       .notice strong { color: var(--text); }
@@ -90,7 +104,25 @@
       @media (max-width: 520px) { .shell { width: min(100% - 24px, 1400px); } header { padding-top: 22px; } .summary { grid-template-columns: 1fr 1fr; gap: 8px; } .summary-card { min-height: 88px; padding: 13px; } .summary-value { font-size: 26px; } .details { grid-template-columns: 1fr; } .bot-footer { align-items: flex-start; flex-direction: column; } }
     </style>
   </head>
-  <body>
+  <body class="locked">
+    <section id="auth-gate" class="auth-gate" aria-labelledby="auth-title">
+      <div class="auth-card">
+        <p class="eyebrow">PLATINUM CORE 777 / PRIVATE PANEL</p>
+        <h1 id="auth-title">Centralni panel</h1>
+        <p id="auth-description">Prvo pokretanje: unesi privatnu sifru dva puta.</p>
+        <form id="setup-form" hidden>
+          <label for="setup-password">Nova sifra<input id="setup-password" type="password" minlength="8" autocomplete="new-password" required /></label>
+          <label for="setup-confirm">Ponovi sifru<input id="setup-confirm" type="password" minlength="8" autocomplete="new-password" required /></label>
+          <button class="button" type="submit">Sacuvaj sifru</button>
+        </form>
+        <form id="login-form" hidden>
+          <label for="login-password">Sifra<input id="login-password" type="password" autocomplete="current-password" required /></label>
+          <button class="button" type="submit">Otvori panel</button>
+        </form>
+        <p id="auth-error" class="auth-error" role="alert"></p>
+        <p class="auth-note">Sifra se cuva samo u ovom browseru kao hash. Ne salje se na GitHub niti na server.</p>
+      </div>
+    </section>
     <header>
       <div class="shell header-row">
         <div>
@@ -101,6 +133,7 @@
         <div class="header-actions">
           <span class="live"><span class="dot"></span>Read-only LIVE</span>
           <button id="refresh" class="button" type="button">Osvezi</button>
+          <button id="logout" class="button secondary" type="button">Zakljucaj</button>
         </div>
       </div>
     </header>
@@ -277,8 +310,74 @@
         }
 
         $("refresh").addEventListener("click", load);
-        load();
-        window.setInterval(load, 60000);
+        let refreshTimer;
+        const startPanel = () => {
+          if (refreshTimer) return;
+          load();
+          refreshTimer = window.setInterval(load, 60000);
+        };
+        window.addEventListener("pc777-authenticated", startPanel);
+        if (window.pc777Unlocked) startPanel();
+      })();
+    </script>
+    <script>
+      (() => {
+        const passwordKey = "pc777-automation-panel-password-v1";
+        const sessionKey = "pc777-automation-panel-unlocked";
+        const gate = document.getElementById("auth-gate");
+        const setupForm = document.getElementById("setup-form");
+        const loginForm = document.getElementById("login-form");
+        const description = document.getElementById("auth-description");
+        const error = document.getElementById("auth-error");
+        const logout = document.getElementById("logout");
+
+        const hash = async (value) => {
+          const bytes = new TextEncoder().encode(value);
+          const digest = await crypto.subtle.digest("SHA-256", bytes);
+          return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+        };
+
+        function show(mode) {
+          const setup = mode === "setup";
+          setupForm.hidden = !setup;
+          loginForm.hidden = setup;
+          description.textContent = setup ? "Prvo pokretanje: unesi privatnu sifru dva puta." : "Unesi svoju privatnu sifru za otvaranje panela.";
+          error.textContent = "";
+          (setup ? setupForm : loginForm).querySelector("input").focus();
+        }
+
+        function unlock() {
+          window.pc777Unlocked = true;
+          sessionStorage.setItem(sessionKey, "1");
+          document.body.classList.remove("locked");
+          gate.hidden = true;
+          window.dispatchEvent(new Event("pc777-authenticated"));
+        }
+
+        setupForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const password = document.getElementById("setup-password").value;
+          const confirm = document.getElementById("setup-confirm").value;
+          if (password.length < 8) { error.textContent = "Sifra mora imati najmanje 8 karaktera."; return; }
+          if (password !== confirm) { error.textContent = "Sifre se ne poklapaju."; return; }
+          localStorage.setItem(passwordKey, await hash(password));
+          unlock();
+        });
+
+        loginForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const password = document.getElementById("login-password").value;
+          if (await hash(password) !== localStorage.getItem(passwordKey)) { error.textContent = "Pogresna sifra."; return; }
+          unlock();
+        });
+
+        logout.addEventListener("click", () => {
+          sessionStorage.removeItem(sessionKey);
+          window.location.reload();
+        });
+
+        window.pc777Unlocked = sessionStorage.getItem(sessionKey) === "1" && Boolean(localStorage.getItem(passwordKey));
+        if (window.pc777Unlocked) unlock(); else show(localStorage.getItem(passwordKey) ? "login" : "setup");
       })();
     </script>
   </body>
