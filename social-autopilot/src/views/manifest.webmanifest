@@ -1,0 +1,9 @@
+{
+  "name": "PLATINUM CORE 777 Analytics Monitor",
+  "short_name": "PC777 Analytics",
+  "start_url": "/analytics-monitor",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#111827",
+  "description": "Private Search Console and Google Analytics monitor for PLATINUM CORE 777."
+}

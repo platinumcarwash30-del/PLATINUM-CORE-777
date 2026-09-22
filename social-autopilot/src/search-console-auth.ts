@@ -6,17 +6,22 @@ export interface GoogleServiceAccount {
 }
 
 const TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
-const SEARCH_CONSOLE_SCOPE = "https://www.googleapis.com/auth/webmasters.readonly";
+export const SEARCH_CONSOLE_SCOPE = "https://www.googleapis.com/auth/webmasters.readonly";
+export const ANALYTICS_READONLY_SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
 
 function base64Url(value: string | Buffer): string {
   return Buffer.from(value).toString("base64url");
 }
 
-export function createServiceAccountAssertion(account: GoogleServiceAccount, issuedAtSeconds: number): string {
+export function createServiceAccountAssertion(
+  account: GoogleServiceAccount,
+  issuedAtSeconds: number,
+  scopes: readonly string[] = [SEARCH_CONSOLE_SCOPE],
+): string {
   const header = base64Url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
   const payload = base64Url(JSON.stringify({
     iss: account.client_email,
-    scope: SEARCH_CONSOLE_SCOPE,
+    scope: scopes.join(" "),
     aud: TOKEN_ENDPOINT,
     iat: issuedAtSeconds,
     exp: issuedAtSeconds + 3600,
@@ -34,8 +39,9 @@ export async function requestGoogleAccessToken(
   fetchImpl: FetchLike,
   account: GoogleServiceAccount,
   nowSeconds = Math.floor(Date.now() / 1000),
+  scopes: readonly string[] = [SEARCH_CONSOLE_SCOPE],
 ): Promise<string> {
-  const assertion = createServiceAccountAssertion(account, nowSeconds);
+  const assertion = createServiceAccountAssertion(account, nowSeconds, scopes);
   const response = await fetchImpl(TOKEN_ENDPOINT, {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
@@ -64,4 +70,3 @@ export function parseGoogleServiceAccountJson(value: string): GoogleServiceAccou
   if (!account.client_email || !account.private_key) throw new Error("Google service-account JSON is missing client_email or private_key");
   return { client_email: account.client_email, private_key: account.private_key };
 }
-

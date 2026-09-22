@@ -34,6 +34,16 @@ DRY_RUN=true npm run dev
 
 Dry-run reads the sitemap and creates registry records but returns `skipped` for both platforms; it never calls Facebook or LinkedIn.
 
+## Analytics monitor and private panel
+
+The separate analytics monitor reads Search Console and Google Analytics 4 through their read-only APIs. It does not type searches into Google or scrape result pages. Configure the local values from `.env.analytics-monitor.example`, including this Windows key path outside the repository:
+
+`E:\PLATINUM_CORE_777_WORK\secrets\pc777-search-monitor.json`
+
+After building, run one report with `npm run analytics-monitor:once`, or run the scheduled monitor with `npm run analytics-monitor:dev`. The schedule is 08:00, 15:00, and 21:00 in `Europe/Belgrade`. If SMTP is configured, the report is sent to `platinum303030@gmail.com`; otherwise it is printed locally.
+
+Start the normal local service with `npm run dev`, then open `http://localhost:3000/analytics-monitor` and sign in with the existing private dashboard credentials. In Chrome or Edge, use the browser menu and choose **Install app** to place the panel on the desktop/taskbar. This panel is separate from the main PC777 application.
+
 ## No-cost GitHub Actions mode
 
 This repository includes a native GitHub Actions runner, so the service can run without Render or a payment card:

@@ -6,6 +6,7 @@ import { createDatabase } from "../src/db";
 
 const workflowPath = join(process.cwd(), "..", ".github", "workflows", "social-autopilot.yml");
 const searchConsoleWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "search-console-monitor.yml");
+const analyticsMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "analytics-monitor.yml");
 const identityMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "identity-monitor.yml");
 const serbiaClientFinderWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "serbia-client-finder.yml");
 const wikipediaDraftWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "wikipedia-draft-monitor.yml");
@@ -66,6 +67,21 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain("SEARCH_CONSOLE_PROPERTY: sc-domain:platinumcore777.com");
     expect(workflow).toContain("npm run search-console:once");
     expect(workflow).not.toContain("ADMIN_SESSION_SECRET");
+    expect(workflow).not.toContain("google.com/search?q=");
+  });
+
+  it("runs the combined analytics monitor only at Belgrade report hours", () => {
+    const workflow = readFileSync(analyticsMonitorWorkflowPath, "utf8");
+
+    expect(workflow).toContain('cron: "0 * * * *"');
+    expect(workflow).toContain("workflow_dispatch:");
+    expect(workflow).toContain("TZ=Europe/Belgrade date +%H");
+    expect(workflow).toContain("08|15|21");
+    expect(workflow).toContain('if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then');
+    expect(workflow).toContain("npm run analytics-monitor:once");
+    expect(workflow).toContain("GOOGLE_ANALYTICS_PROPERTY_ID: \"554126635\"");
+    expect(workflow).toContain("GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.SOCIAL_AUTOPILOT_GOOGLE_SERVICE_ACCOUNT_JSON }}");
+    expect(workflow).toContain("NOTIFICATION_TO: platinum303030@gmail.com");
     expect(workflow).not.toContain("google.com/search?q=");
   });
 

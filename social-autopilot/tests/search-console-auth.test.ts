@@ -32,6 +32,21 @@ describe("Google Search Console authentication", () => {
     });
   });
 
+  it("supports the combined read-only Search Console and Analytics scopes", () => {
+    const { account } = serviceAccount();
+    const assertion = createServiceAccountAssertion(account, 1_700_000_000, [
+      "https://www.googleapis.com/auth/webmasters.readonly",
+      "https://www.googleapis.com/auth/analytics.readonly",
+    ]);
+    const [, encodedPayload] = assertion.split(".");
+    const payload = JSON.parse(Buffer.from(encodedPayload, "base64url").toString()) as { scope: string };
+
+    expect(payload.scope.split(" ")).toEqual([
+      "https://www.googleapis.com/auth/webmasters.readonly",
+      "https://www.googleapis.com/auth/analytics.readonly",
+    ]);
+  });
+
   it("exchanges the assertion for a bearer token", async () => {
     const { account } = serviceAccount();
     let body = "";

@@ -1,5 +1,12 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { loadConfig, loadSerbiaClientFinderConfig, loadWikipediaDraftConfig } from "../src/config";
+import {
+  loadAnalyticsMonitorConfig,
+  loadConfig,
+  loadSerbiaClientFinderConfig,
+  loadWikipediaDraftConfig,
+} from "../src/config";
 
 describe("loadConfig", () => {
   it("requires the notification recipient and two-hour interval", () => {
@@ -56,5 +63,36 @@ describe("loadConfig", () => {
     expect(() => loadWikipediaDraftConfig({
       WIKIPEDIA_DRAFT_SITE_URL: "https://example.com/",
     })).toThrow();
+  });
+
+  it("loads the analytics monitor defaults and a local key path", () => {
+    const config = loadAnalyticsMonitorConfig({
+      NOTIFICATION_TO: "platinum303030@gmail.com",
+    });
+
+    expect(config.notificationTo).toBe("platinum303030@gmail.com");
+    expect(config.searchConsoleProperty).toBe("sc-domain:platinumcore777.com");
+    expect(config.googleAnalyticsPropertyId).toBe("554126635");
+    expect(config.googleServiceAccountJsonPath).toBeUndefined();
+
+    const withPath = loadAnalyticsMonitorConfig({
+      NOTIFICATION_TO: "platinum303030@gmail.com",
+      GOOGLE_SERVICE_ACCOUNT_JSON_PATH: "E:\\PLATINUM_CORE_777_WORK\\secrets\\pc777-search-monitor.json",
+    });
+    expect(withPath.googleServiceAccountJsonPath).toBe(
+      "E:\\PLATINUM_CORE_777_WORK\\secrets\\pc777-search-monitor.json",
+    );
+  });
+
+  it("exposes standalone monitor launch commands without embedding credentials", () => {
+    const packageJson = JSON.parse(readFileSync(resolve(__dirname, "../package.json"), "utf8")) as {
+      scripts: Record<string, string>;
+    };
+    expect(packageJson.scripts["analytics-monitor:once"]).toBe("node dist/src/analytics-monitor-runner.js");
+    expect(packageJson.scripts["analytics-monitor:dev"]).toBe("node dist/src/analytics-monitor-runner.js --schedule");
+
+    const example = readFileSync(resolve(__dirname, "../.env.analytics-monitor.example"), "utf8");
+    expect(example).toContain("GOOGLE_SERVICE_ACCOUNT_JSON_PATH=E:\\PLATINUM_CORE_777_WORK\\secrets\\pc777-search-monitor.json");
+    expect(example).not.toContain("private_key");
   });
 });
