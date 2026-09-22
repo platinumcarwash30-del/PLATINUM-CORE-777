@@ -153,7 +153,7 @@
       </section>
 
       <div class="section-head">
-        <div><h2>Sta svaki sistem radi</h2><p>Detalji se osvezavaju na 60 sekundi.</p></div>
+        <div><h2>Sta svaki sistem radi</h2><p>Detalji se osvezavaju na 4 sata.</p></div>
         <span id="rate-limit" class="last-updated">GitHub API: —</span>
       </div>
       <section id="bots" class="bots" aria-live="polite">
@@ -237,7 +237,12 @@
         }
 
         function currentStep(jobs, run) {
-          if (!jobs?.length) return run?.status === "completed" ? "Job detalji nisu dostupni" : "Ceka job detalje...";
+          if (!jobs?.length) {
+            if (!run) return "Nema podataka";
+            if (run.status === "queued") return "Workflow ceka pokretanje";
+            if (run.status === "in_progress") return "Workflow trenutno radi";
+            return run.conclusion === "success" ? "Workflow zavrsen uspesno" : `Workflow zavrsen: ${run.conclusion || "bez zakljucka"}`;
+          }
           const active = jobs.find((job) => job.status === "in_progress" || job.status === "queued");
           const job = active || jobs[0];
           const steps = job.steps || [];
@@ -253,18 +258,7 @@
 
         async function loadWorkflow(workflow, allRuns, rateRemaining) {
           const run = allRuns.find((candidate) => candidate.path === `.github/workflows/${workflow.id}`);
-          let jobs = [];
-          let remaining = rateRemaining;
-          if (run) {
-            try {
-              const jobResult = await json(`${api}/actions/runs/${run.id}/jobs?per_page=20`);
-              jobs = jobResult.data.jobs || [];
-              remaining = jobResult.remaining ?? remaining;
-            } catch {
-              jobs = [];
-            }
-          }
-          return { workflow, run, jobs, remaining };
+          return { workflow, run, jobs: [], remaining: rateRemaining };
         }
 
         function card(result) {
@@ -304,8 +298,10 @@
             $("message").textContent = attention ? `Panel ucitan — ${attention} stavka zahteva proveru.` : "Panel ucitan — svi poslednji rezultati su pregledani.";
             $("updated").textContent = `Poslednja provera: ${new Date().toLocaleString("sr-Latn-RS", { dateStyle: "short", timeStyle: "medium" })}. Automatsko osvezenje je ukljuceno.`;
           } catch (error) {
-            $("message").textContent = "Panel trenutno ne moze da ucita GitHub stanje.";
-            $("updated").textContent = error instanceof Error ? error.message : "Pokusaj ponovo za trenutak.";
+            const message = error instanceof Error ? error.message : "Pokusaj ponovo za trenutak.";
+            $("message").textContent = message.includes("GitHub API 403") ? "GitHub API je privremeno ogranicen." : "Panel trenutno ne moze da ucita GitHub stanje.";
+            $("updated").textContent = message.includes("GitHub API 403") ? "Javni GitHub limit je dostignut. Panel ce pokusati ponovo za nekoliko minuta." : message;
+            $("rate-limit").textContent = message.includes("GitHub API 403") ? "GitHub API: limit privremeno dostignut" : "GitHub API: nedostupno";
           } finally {
             $("refresh").disabled = false;
           }
@@ -316,7 +312,7 @@
         const startPanel = () => {
           if (refreshTimer) return;
           load();
-          refreshTimer = window.setInterval(load, 60000);
+          refreshTimer = window.setInterval(load, 14400000);
         };
         window.addEventListener("pc777-authenticated", startPanel);
         if (window.pc777Unlocked) startPanel();
