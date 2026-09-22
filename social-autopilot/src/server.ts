@@ -60,7 +60,7 @@ function loadStoredPasswordHash(): string | undefined {
 function savePasswordHash(passwordHash: string): void {
   const path = passwordStorePath();
   mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, `${JSON.stringify({ version: 1, passwordHash }, null, 2)}\\n`, { encoding: "utf8", mode: 0o600 });
+  writeFileSync(path, `${JSON.stringify({ version: 1, passwordHash }, null, 2)}\n`, { encoding: "utf8", mode: 0o600 });
 }
 
 function renderRuns(runs: ReturnType<DatabaseStore["listRuns"]>): string {
