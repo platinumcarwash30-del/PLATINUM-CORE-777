@@ -46,6 +46,11 @@ export type SearchConsoleConfig = Pick<
   | "googleServiceAccountJson"
 >;
 
+export interface AnalyticsMonitorConfig extends SearchConsoleConfig {
+  googleAnalyticsPropertyId: string;
+  googleServiceAccountJsonPath?: string;
+}
+
 export interface IdentityMonitorConfig {
   notificationTo: string;
   smtpHost?: string;
@@ -119,6 +124,11 @@ const searchConsoleEnvSchema = z.object({
   SMTP_FROM: z.string().min(1).default("PLATINUM CORE 777 <contact@platinumcore777.com>"),
   SEARCH_CONSOLE_PROPERTY: z.string().min(1).default("sc-domain:platinumcore777.com"),
   GOOGLE_SERVICE_ACCOUNT_JSON: optionalString(),
+});
+
+const analyticsMonitorEnvSchema = searchConsoleEnvSchema.extend({
+  GOOGLE_ANALYTICS_PROPERTY_ID: z.string().min(1).default("554126635"),
+  GOOGLE_SERVICE_ACCOUNT_JSON_PATH: optionalString(),
 });
 
 const identityMonitorEnvSchema = z.object({
@@ -207,6 +217,23 @@ export function loadSearchConsoleConfig(env: NodeJS.ProcessEnv): SearchConsoleCo
     smtpFrom: parsed.SMTP_FROM,
     searchConsoleProperty: parsed.SEARCH_CONSOLE_PROPERTY,
     googleServiceAccountJson: parsed.GOOGLE_SERVICE_ACCOUNT_JSON,
+  };
+}
+
+export function loadAnalyticsMonitorConfig(env: NodeJS.ProcessEnv): AnalyticsMonitorConfig {
+  const parsed = analyticsMonitorEnvSchema.parse(env);
+  return {
+    notificationTo: parsed.NOTIFICATION_TO,
+    smtpHost: parsed.SMTP_HOST,
+    smtpPort: parsed.SMTP_PORT,
+    smtpSecure: parsed.SMTP_SECURE === "true",
+    smtpUser: parsed.SMTP_USER,
+    smtpPassword: parsed.SMTP_PASSWORD,
+    smtpFrom: parsed.SMTP_FROM,
+    searchConsoleProperty: parsed.SEARCH_CONSOLE_PROPERTY,
+    googleServiceAccountJson: parsed.GOOGLE_SERVICE_ACCOUNT_JSON,
+    googleAnalyticsPropertyId: parsed.GOOGLE_ANALYTICS_PROPERTY_ID,
+    googleServiceAccountJsonPath: parsed.GOOGLE_SERVICE_ACCOUNT_JSON_PATH,
   };
 }
 

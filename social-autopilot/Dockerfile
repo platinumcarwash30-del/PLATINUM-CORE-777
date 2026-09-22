@@ -4,9 +4,9 @@ COPY package*.json ./
 RUN npm ci --no-audit --no-fund
 COPY tsconfig.json ./
 COPY src ./src
+COPY scripts ./scripts
 COPY tests ./tests
 RUN npm run build
-RUN cp -R src/views dist/views
 
 FROM node:22-bookworm-slim
 WORKDIR /app
@@ -19,4 +19,4 @@ RUN useradd --create-home --uid 10001 autopilot \
   && chown -R autopilot:autopilot /app /var/lib/social-autopilot
 USER autopilot
 EXPOSE 3000
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/src/index.js"]

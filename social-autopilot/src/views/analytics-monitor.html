@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#111827">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="/analytics-monitor.css">
+    <title>PLATINUM CORE 777 Analytics Monitor</title>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PLATINUM CORE 777</p>
+          <h1>Analytics Monitor</h1>
+          <p class="subtitle">Search Console and Google Analytics in one private panel.</p>
+        </div>
+        <button id="refresh" class="button" type="button">Refresh data</button>
+      </header>
+
+      <section class="statusbar" aria-live="polite">
+        <span id="status">Loading...</span>
+        <span id="period"></span>
+        <span id="checked"></span>
+      </section>
+
+      <section class="cards" id="summary-cards"></section>
+
+      <section class="grid">
+        <article class="panel">
+          <div class="panel-heading"><h2>Search Console queries</h2><span id="search-status" class="badge">Waiting</span></div>
+          <div id="search-content" class="table-wrap">No data loaded.</div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><h2>Top pages</h2><span id="analytics-status" class="badge">Waiting</span></div>
+          <div id="pages-content" class="table-wrap">No data loaded.</div>
+        </article>
+      </section>
+    </main>
+    <script src="/analytics-monitor.js" defer></script>
+  </body>
+</html>

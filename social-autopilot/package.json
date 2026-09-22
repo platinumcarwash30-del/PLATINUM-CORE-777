@@ -8,10 +8,12 @@
   },
   "scripts": {
     "dev": "tsx src/index.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && node scripts/copy-views.mjs",
     "start": "node dist/src/index.js",
     "run:once": "node dist/src/run-once.js",
     "search-console:once": "node dist/src/search-console-runner.js",
+    "analytics-monitor:once": "node dist/src/analytics-monitor-runner.js",
+    "analytics-monitor:dev": "node dist/src/analytics-monitor-runner.js --schedule",
     "identity-monitor:once": "node dist/src/identity-monitor-runner.js",
     "serbia-client-finder:once": "node dist/src/serbia-client-finder-runner.js",
     "wikipedia-draft:once": "node dist/src/wikipedia-draft-monitor-runner.js",

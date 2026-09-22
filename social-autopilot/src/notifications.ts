@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import type { AppConfig } from "./config";
+import { formatAnalyticsMonitorReport, type AnalyticsMonitorReport } from "./analytics-monitor";
 import { formatIdentityMonitorDigest, type IdentitySearchResult } from "./identity-monitor";
 import { formatSearchConsoleReport, type SearchConsoleReport } from "./search-console";
 import { formatSerbiaClientFinderDigest, type ScoredSerbiaLead } from "./serbia-client-finder";
@@ -8,6 +9,7 @@ import type { RunSummary } from "./types";
 export interface NotificationService {
   sendRunSummary(summary: RunSummary): Promise<void>;
   sendSearchConsoleReport(report: SearchConsoleReport): Promise<void>;
+  sendAnalyticsMonitorReport(report: AnalyticsMonitorReport): Promise<void>;
   sendIdentityMonitorDigest(findings: readonly IdentitySearchResult[], officialSourceUrls: readonly string[], checkedAt: Date): Promise<void>;
   sendSerbiaClientFinderDigest(leads: readonly ScoredSerbiaLead[], checkedAt: Date): Promise<void>;
 }
@@ -72,6 +74,15 @@ export function createNotificationService(config: Pick<AppConfig, "smtpHost" | "
         to: config.notificationTo,
         subject: `[PLATINUM CORE 777] Search Console ${report.startDate} to ${report.endDate}`,
         text: formatSearchConsoleReport(report),
+      });
+    },
+    async sendAnalyticsMonitorReport(report) {
+      const transporter = createTransporter();
+      await transporter.sendMail({
+        from: config.smtpFrom,
+        to: config.notificationTo,
+        subject: `[PLATINUM CORE 777] Analytics monitor ${report.startDate} to ${report.endDate}`,
+        text: formatAnalyticsMonitorReport(report),
       });
     },
     async sendIdentityMonitorDigest(findings, officialSourceUrls, checkedAt) {
