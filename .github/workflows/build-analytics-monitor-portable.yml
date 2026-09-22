@@ -1,0 +1,75 @@
+name: Build portable Analytics Monitor
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "social-autopilot/**"
+      - "packaging/Start-Analytics-Monitor.cmd"
+      - ".github/workflows/build-analytics-monitor-portable.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-portable-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: social-autopilot
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: social-autopilot/package-lock.json
+
+      - name: Install dependencies on runner
+        run: npm ci --no-audit --no-fund
+
+      - name: Run tests
+        run: npm run test:run
+
+      - name: Build monitor
+        run: npm run build
+
+      - name: Assemble portable package
+        shell: pwsh
+        run: |
+          $workspace = $env:GITHUB_WORKSPACE
+          $source = Join-Path $workspace "social-autopilot"
+          $package = Join-Path $workspace "PLATINUM-CORE-777-Analytics-Monitor-Portable"
+          New-Item -ItemType Directory -Force -Path $package | Out-Null
+          Copy-Item -LiteralPath (Join-Path $source "dist") -Destination (Join-Path $package "dist") -Recurse -Force
+          Copy-Item -LiteralPath (Join-Path $source "node_modules") -Destination (Join-Path $package "node_modules") -Recurse -Force
+          Copy-Item -LiteralPath (Join-Path $source "package.json") -Destination (Join-Path $package "package.json") -Force
+          Copy-Item -LiteralPath (Join-Path $workspace "packaging\Start-Analytics-Monitor.cmd") -Destination (Join-Path $package "Start-Analytics-Monitor.cmd") -Force
+          Copy-Item -LiteralPath ((Get-Command node).Source) -Destination (Join-Path $package "node.exe") -Force
+          New-Item -ItemType Directory -Force -Path (Join-Path $package "data") | Out-Null
+          @"
+          PLATINUM CORE 777 - Analytics Monitor
+
+          1. Extract this whole folder to the E: drive (or another local folder).
+          2. Double-click Start-Analytics-Monitor.cmd.
+          3. The browser opens automatically.
+          4. On the first start, enter a private password twice.
+          5. On later starts, enter username marko and that password.
+
+          The password is stored locally as a hash in data\.pc777-admin.json.
+          npm is not required on your computer.
+          The Google service-account JSON stays outside this package.
+          "@ | Set-Content -LiteralPath (Join-Path $package "README-FIRST-START.txt") -Encoding utf8
+          Compress-Archive -Path (Join-Path $package "*") -DestinationPath (Join-Path $workspace "PLATINUM-CORE-777-Analytics-Monitor-Portable.zip") -Force
+
+      - name: Upload portable ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: platinum-core-777-analytics-monitor-portable
+          path: PLATINUM-CORE-777-Analytics-Monitor-Portable.zip
+          if-no-files-found: error
