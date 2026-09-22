@@ -8,6 +8,8 @@ export interface Session {
 
 export interface AuthManager {
   authenticate(username: string, password: string): boolean;
+  hasPassword(): boolean;
+  setPasswordHash(passwordHash: string): void;
   createSession(): Session;
   getSession(id: string): Session | undefined;
   destroySession(id: string): void;
@@ -31,9 +33,16 @@ function verifyPassword(password: string, encoded: string): boolean {
 export function createAuthManager(config: { adminUsername: string; adminPasswordHash?: string; sessionTtlMs?: number }): AuthManager {
   const sessions = new Map<string, Session>();
   const ttl = config.sessionTtlMs ?? 8 * 60 * 60 * 1000;
+  let adminPasswordHash = config.adminPasswordHash;
   return {
     authenticate(username, password) {
-      return username === config.adminUsername && Boolean(config.adminPasswordHash) && verifyPassword(password, config.adminPasswordHash!);
+      return username === config.adminUsername && Boolean(adminPasswordHash) && verifyPassword(password, adminPasswordHash!);
+    },
+    hasPassword() {
+      return Boolean(adminPasswordHash);
+    },
+    setPasswordHash(passwordHash) {
+      adminPasswordHash = passwordHash;
     },
     createSession() {
       const session = { id: randomUUID(), csrfToken: randomBytes(24).toString("hex"), expiresAt: Date.now() + ttl };
