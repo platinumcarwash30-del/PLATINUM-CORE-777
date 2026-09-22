@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080b12" />
+    <meta name="description" content="PLATINUM CORE 777 centralni pregled automatizacija" />
+    <title>PLATINUM CORE 777 — Centralni panel</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080b12;
+        --surface: #101722;
+        --surface-2: #151e2c;
+        --border: #273449;
+        --text: #f3f5f8;
+        --muted: #a8b3c4;
+        --gold: #e3bd68;
+        --green: #65d6a3;
+        --red: #ff8d99;
+        --blue: #83b8ff;
+        --orange: #ffbf68;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-width: 320px;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 8% 0%, rgba(227, 189, 104, .12), transparent 30rem),
+          var(--bg);
+        font: 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; }
+      button { font: inherit; }
+      .shell { width: min(1400px, calc(100% - 36px)); margin: 0 auto; }
+      header { padding: 32px 0 20px; border-bottom: 1px solid rgba(39, 52, 73, .75); }
+      .header-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+      .eyebrow { margin: 0 0 7px; color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { margin-bottom: 8px; font-size: clamp(28px, 4vw, 48px); line-height: 1.05; letter-spacing: -.035em; }
+      .lead { max-width: 720px; margin-bottom: 0; color: var(--muted); }
+      .header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+      .live { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; color: #a5edca; background: rgba(40, 114, 82, .28); border: 1px solid rgba(101, 214, 163, .35); border-radius: 999px; font-size: 13px; font-weight: 750; }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(101, 214, 163, .13); }
+      .button { padding: 10px 14px; color: #11141a; background: var(--gold); border: 1px solid #f0d28a; border-radius: 9px; font-weight: 800; cursor: pointer; }
+      .button:hover { background: #f0d28a; }
+      .button:disabled { opacity: .55; cursor: wait; }
+      .button.secondary { color: var(--text); background: var(--surface-2); border-color: var(--border); }
+      main { padding: 22px 0 54px; }
+      .notice { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px; padding: 14px 16px; color: #cbd5e4; background: rgba(21, 30, 44, .75); border: 1px solid var(--border); border-radius: 12px; }
+      .notice strong { color: var(--text); }
+      .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+      .summary-card, .bot-card { background: linear-gradient(145deg, rgba(21, 30, 44, .96), rgba(16, 23, 34, .96)); border: 1px solid var(--border); box-shadow: 0 14px 34px rgba(0, 0, 0, .18); }
+      .summary-card { min-height: 102px; padding: 17px; border-radius: 12px; }
+      .summary-label { color: var(--muted); font-size: 13px; }
+      .summary-value { margin-top: 5px; color: var(--gold); font-size: 31px; font-weight: 850; line-height: 1; }
+      .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin: 28px 0 13px; }
+      .section-head h2 { margin-bottom: 0; font-size: 22px; }
+      .section-head p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+      .bots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .bot-card { min-width: 0; padding: 19px; border-radius: 14px; }
+      .bot-card.wide { grid-column: 1 / -1; }
+      .bot-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+      .bot-title { display: flex; gap: 12px; min-width: 0; }
+      .bot-icon { display: grid; place-items: center; flex: 0 0 auto; width: 38px; height: 38px; color: #12151b; background: var(--gold); border-radius: 10px; font-weight: 900; }
+      .bot-card h3 { margin: 1px 0 4px; font-size: 18px; line-height: 1.2; }
+      .bot-role { margin: 0; color: var(--muted); font-size: 13px; }
+      .status { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; padding: 6px 9px; border-radius: 999px; font-size: 12px; font-weight: 850; white-space: nowrap; }
+      .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+      .status.success { color: var(--green); background: rgba(40, 114, 82, .25); }
+      .status.running { color: var(--blue); background: rgba(64, 108, 170, .28); }
+      .status.error { color: var(--red); background: rgba(144, 53, 67, .28); }
+      .status.waiting { color: var(--orange); background: rgba(145, 91, 29, .25); }
+      .details { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 18px 0 0; padding-top: 15px; border-top: 1px solid rgba(39, 52, 73, .8); }
+      .detail-label { display: block; margin-bottom: 3px; color: var(--muted); font-size: 12px; }
+      .detail-value { display: block; overflow: hidden; color: #e2e8f0; font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+      .step { margin: 14px 0 0; padding: 11px 12px; color: #cbd5e4; background: rgba(8, 11, 18, .55); border-radius: 8px; font-size: 13px; }
+      .step strong { color: var(--gold); }
+      .bot-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 15px; }
+      .run-link { color: var(--blue); font-size: 13px; font-weight: 750; text-decoration: none; }
+      .run-link:hover { text-decoration: underline; }
+      .run-link.disabled { color: var(--muted); pointer-events: none; }
+      .last-updated { color: var(--muted); font-size: 13px; }
+      .empty { grid-column: 1 / -1; padding: 28px; color: var(--muted); text-align: center; border: 1px dashed var(--border); border-radius: 12px; }
+      footer { padding: 22px 0 34px; color: var(--muted); border-top: 1px solid rgba(39, 52, 73, .75); font-size: 13px; }
+      footer a { color: var(--blue); }
+      @media (max-width: 850px) { .header-row { align-items: flex-start; flex-direction: column; } .header-actions { justify-content: flex-start; } .summary { grid-template-columns: repeat(2, 1fr); } .bots { grid-template-columns: 1fr; } .bot-card.wide { grid-column: auto; } }
+      @media (max-width: 520px) { .shell { width: min(100% - 24px, 1400px); } header { padding-top: 22px; } .summary { grid-template-columns: 1fr 1fr; gap: 8px; } .summary-card { min-height: 88px; padding: 13px; } .summary-value { font-size: 26px; } .details { grid-template-columns: 1fr; } .bot-footer { align-items: flex-start; flex-direction: column; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell header-row">
+        <div>
+          <p class="eyebrow">PLATINUM CORE 777 / CONTROL</p>
+          <h1>Centralni panel automatizacija</h1>
+          <p class="lead">Jedan pregled za cetiri bota i peti portable monitoring build. Ovde vidis ko radi, kada je poslednji put radio i da li je zavrsio bez greske.</p>
+        </div>
+        <div class="header-actions">
+          <span class="live"><span class="dot"></span>Read-only LIVE</span>
+          <button id="refresh" class="button" type="button">Osvezi</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell">
+      <div class="notice" role="status" aria-live="polite">
+        <span aria-hidden="true">◈</span>
+        <div><strong id="message">Ucitavam stanje svih automatizacija...</strong><br /><span id="updated">Podaci se citaju direktno iz javnih GitHub Actions statusa. Kljucevi i lozinke nisu ovde.</span></div>
+      </div>
+
+      <section class="summary" aria-label="Ukupni status">
+        <article class="summary-card"><span class="summary-label">Ukupno</span><div id="total" class="summary-value">5</div></article>
+        <article class="summary-card"><span class="summary-label">Trenutno radi</span><div id="running" class="summary-value">—</div></article>
+        <article class="summary-card"><span class="summary-label">Poslednje uspesno</span><div id="success" class="summary-value">—</div></article>
+        <article class="summary-card"><span class="summary-label">Paznja potrebna</span><div id="attention" class="summary-value">—</div></article>
+      </section>
+
+      <div class="section-head">
+        <div><h2>Sta svaki sistem radi</h2><p>Detalji se osvezavaju na 60 sekundi.</p></div>
+        <span id="rate-limit" class="last-updated">GitHub API: —</span>
+      </div>
+      <section id="bots" class="bots" aria-live="polite">
+        <div class="empty">Ucitavam workflow-e...</div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell">Ovaj panel ne dira Support Inbox, Supabase ni same botove. Izvor statusa: <a href="https://github.com/platinumcarwash30-del/PLATINUM-CORE-777/actions" target="_blank" rel="noopener noreferrer">GitHub Actions</a>.</div>
+    </footer>
+
+    <script>
+      (() => {
+        const owner = "platinumcarwash30-del";
+        const repo = "PLATINUM-CORE-777";
+        const api = `https://api.github.com/repos/${owner}/${repo}`;
+        const workflows = [
+          {
+            id: "social-autopilot.yml",
+            title: "Social Autopilot",
+            role: "Priprema i vodi odobrene objave za Facebook i LinkedIn.",
+            schedule: "svaka 2 sata",
+            icon: "S",
+          },
+          {
+            id: "search-console-monitor.yml",
+            title: "Search Console Monitor",
+            role: "Cita Search Console podatke i salje izvestaj.",
+            schedule: "jednom na sat",
+            icon: "Q",
+          },
+          {
+            id: "identity-monitor.yml",
+            title: "Public Identity Monitor",
+            role: "Proverava javne rezultate i nove spoljne pojave identiteta projekta.",
+            schedule: "jednom dnevno",
+            icon: "I",
+          },
+          {
+            id: "analytics-monitor.yml",
+            title: "Analytics Monitor",
+            role: "Spaja Google Analytics i Search Console u izvestaj.",
+            schedule: "08:00 · 15:00 · 21:00",
+            icon: "A",
+          },
+          {
+            id: "build-analytics-monitor-portable.yml",
+            title: "Portable Analytics Build",
+            role: "Testira i sklapa portable Analytics Monitor ZIP paket.",
+            schedule: "na push ili rucno",
+            icon: "B",
+            wide: true,
+          },
+        ];
+
+        const $ = (id) => document.getElementById(id);
+        const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+        })[character]);
+
+        function stateFor(run) {
+          if (!run) return { key: "waiting", label: "Nema izvrsavanja" };
+          if (run.status === "queued" || run.status === "in_progress") return { key: "running", label: run.status === "queued" ? "Ceka" : "Radi" };
+          if (run.conclusion === "success") return { key: "success", label: "Uspesno" };
+          if (run.conclusion === "cancelled" || run.conclusion === "skipped") return { key: "waiting", label: run.conclusion === "cancelled" ? "Prekinuto" : "Preskoceno" };
+          return { key: "error", label: "Greska" };
+        }
+
+        function formatDate(value) {
+          if (!value) return "—";
+          const date = new Date(value);
+          return Number.isNaN(date.valueOf()) ? "—" : date.toLocaleString("sr-Latn-RS", { dateStyle: "short", timeStyle: "short" });
+        }
+
+        function duration(run) {
+          if (!run?.run_started_at) return "—";
+          const end = run.status === "completed" && run.updated_at ? new Date(run.updated_at) : new Date();
+          const seconds = Math.max(0, Math.round((end - new Date(run.run_started_at)) / 1000));
+          if (seconds < 60) return `${seconds}s`;
+          return `${Math.floor(seconds / 60)}m ${seconds % 60}s`;
+        }
+
+        function currentStep(jobs, run) {
+          if (!jobs?.length) return run?.status === "completed" ? "Job detalji nisu dostupni" : "Ceka job detalje...";
+          const active = jobs.find((job) => job.status === "in_progress" || job.status === "queued");
+          const job = active || jobs[0];
+          const steps = job.steps || [];
+          const step = steps.find((item) => item.status === "in_progress" || item.status === "queued") || [...steps].reverse().find((item) => item.conclusion !== "skipped");
+          return step?.name || job.name || "Job zavrsen";
+        }
+
+        async function json(url) {
+          const response = await fetch(url, { headers: { accept: "application/vnd.github+json" }, cache: "no-store" });
+          if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+          return { data: await response.json(), remaining: response.headers.get("x-ratelimit-remaining") };
+        }
+
+        async function loadWorkflow(workflow) {
+          const latest = await json(`${api}/actions/workflows/${workflow.id}/runs?per_page=1`);
+          const run = latest.data.workflow_runs?.[0];
+          let jobs = [];
+          let remaining = latest.remaining;
+          if (run) {
+            try {
+              const jobResult = await json(`${api}/actions/runs/${run.id}/jobs?per_page=20`);
+              jobs = jobResult.data.jobs || [];
+              remaining = jobResult.remaining ?? remaining;
+            } catch {
+              jobs = [];
+            }
+          }
+          return { workflow, run, jobs, remaining };
+        }
+
+        function card(result) {
+          const { workflow, run, jobs } = result;
+          const state = stateFor(run);
+          const conclusion = run?.conclusion || (run?.status === "in_progress" ? "u toku" : "—");
+          const runUrl = run?.html_url || `https://github.com/${owner}/${repo}/actions/workflows/${workflow.id}`;
+          return `<article class="bot-card${workflow.wide ? " wide" : ""}">
+            <div class="bot-top"><div class="bot-title"><span class="bot-icon" aria-hidden="true">${workflow.icon}</span><div><h3>${escapeHtml(workflow.title)}</h3><p class="bot-role">${escapeHtml(workflow.role)}</p></div></div><span class="status ${state.key}">${escapeHtml(state.label)}</span></div>
+            <div class="details"><div><span class="detail-label">Raspored</span><span class="detail-value">${escapeHtml(workflow.schedule)}</span></div><div><span class="detail-label">Poslednje pokretanje</span><span class="detail-value">${escapeHtml(formatDate(run?.created_at))}</span></div><div><span class="detail-label">Trajanje / rezultat</span><span class="detail-value">${escapeHtml(duration(run))} · ${escapeHtml(conclusion)}</span></div></div>
+            <div class="step"><strong>Trenutno / poslednji korak:</strong> ${escapeHtml(currentStep(jobs, run))}</div>
+            <div class="bot-footer"><span class="last-updated">Run #${escapeHtml(run?.run_number ?? "—")} · ${escapeHtml(run?.event ?? "nema podataka")}</span><a class="run-link${run ? "" : " disabled"}" href="${escapeHtml(runUrl)}" target="_blank" rel="noopener noreferrer">Otvori detalje ↗</a></div>
+          </article>`;
+        }
+
+        async function load() {
+          $("refresh").disabled = true;
+          $("message").textContent = "Citam stanje svih 5 automatizacija...";
+          try {
+            const results = await Promise.all(workflows.map(async (workflow) => {
+              try { return await loadWorkflow(workflow); }
+              catch (error) { return { workflow, run: null, jobs: [], error: error instanceof Error ? error.message : "Nepoznata greska" }; }
+            }));
+            const runs = results.map((item) => item.run).filter(Boolean);
+            const running = runs.filter((run) => run.status === "queued" || run.status === "in_progress").length;
+            const success = runs.filter((run) => run.conclusion === "success").length;
+            const attention = results.filter((item) => item.error || ["failure", "cancelled"].includes(item.run?.conclusion)).length;
+            $("total").textContent = String(workflows.length);
+            $("running").textContent = String(running);
+            $("success").textContent = String(success);
+            $("attention").textContent = String(attention);
+            $("bots").innerHTML = results.map(card).join("");
+            const remaining = results.map((item) => Number(item.remaining)).filter((value) => Number.isFinite(value));
+            $("rate-limit").textContent = remaining.length ? `GitHub API: ${Math.min(...remaining)} poziva pre osvezenja` : "GitHub API: dostupno";
+            $("message").textContent = attention ? `Panel ucitan — ${attention} stavka zahteva proveru.` : "Panel ucitan — svi poslednji rezultati su pregledani.";
+            $("updated").textContent = `Poslednja provera: ${new Date().toLocaleString("sr-Latn-RS", { dateStyle: "short", timeStyle: "medium" })}. Automatsko osvezenje je ukljuceno.`;
+          } catch (error) {
+            $("message").textContent = "Panel trenutno ne moze da ucita GitHub stanje.";
+            $("updated").textContent = error instanceof Error ? error.message : "Pokusaj ponovo za trenutak.";
+          } finally {
+            $("refresh").disabled = false;
+          }
+        }
+
+        $("refresh").addEventListener("click", load);
+        load();
+        window.setInterval(load, 60000);
+      })();
+    </script>
+  </body>
+</html>
