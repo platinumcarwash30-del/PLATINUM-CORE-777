@@ -1,10 +1,10 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import cookie from "@fastify/cookie";
 import formbody from "@fastify/formbody";
 import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest } from "fastify";
 import type { AppConfig } from "./config";
-import { createAuthManager, type AuthManager } from "./auth";
+import { createAuthManager, hashPassword, type AuthManager } from "./auth";
 import type { AnalyticsMonitorReport } from "./analytics-monitor";
 import type { DatabaseStore } from "./db";
 import type { RunSummary } from "./types";
@@ -25,8 +25,8 @@ function sessionFrom(request: FastifyRequest, auth: AuthManager) {
   return signed.valid && signed.value ? auth.getSession(signed.value) : undefined;
 }
 
-function unauthorized(reply: FastifyReply): void {
-  reply.code(302).header("location", "/login").send();
+function unauthorized(reply: FastifyReply, auth: AuthManager): void {
+  reply.code(302).header("location", auth.hasPassword() ? "/login" : "/setup").send();
 }
 
 function csrfBody(request: FastifyRequest): string {
@@ -35,7 +35,32 @@ function csrfBody(request: FastifyRequest): string {
 }
 
 function loginPage(message = ""): string {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Autopilot login</title></head><body><main><h1>PLATINUM CORE 777 Autopilot</h1>${message ? `<p>${escapeHtml(message)}</p>` : ""}<form method="post" action="/login"><label>Username <input name="username" autocomplete="username"></label><label>Password <input name="password" type="password" autocomplete="current-password"></label><button type="submit">Log in</button></form></main></body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Analytics Monitor login</title></head><body><main><h1>PLATINUM CORE 777 Analytics Monitor</h1>${message ? `<p>${escapeHtml(message)}</p>` : ""}<form method="post" action="/login"><label>Username <input name="username" autocomplete="username"></label><label>Password <input name="password" type="password" autocomplete="current-password"></label><button type="submit">Open monitor</button></form></main></body></html>`;
+}
+
+function setupPage(message = ""): string {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Set private password</title></head><body><main><h1>PLATINUM CORE 777 Analytics Monitor</h1><p>First start: set your private password twice. It is stored as a password hash on this computer.</p>${message ? `<p>${escapeHtml(message)}</p>` : ""}<form method="post" action="/setup"><label>New password <input name="password" type="password" autocomplete="new-password" minlength="8" required></label><label>Repeat password <input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label><button type="submit">Save password</button></form></main></body></html>`;
+}
+
+function passwordStorePath(): string {
+  return process.env.ADMIN_PASSWORD_STORE_PATH ?? join(process.cwd(), "data", ".pc777-admin.json");
+}
+
+function loadStoredPasswordHash(): string | undefined {
+  const path = passwordStorePath();
+  if (!existsSync(path)) return undefined;
+  try {
+    const parsed = JSON.parse(readFileSync(path, "utf8")) as { passwordHash?: unknown };
+    return typeof parsed.passwordHash === "string" ? parsed.passwordHash : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function savePasswordHash(passwordHash: string): void {
+  const path = passwordStorePath();
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, `${JSON.stringify({ version: 1, passwordHash }, null, 2)}\n`, { encoding: "utf8", mode: 0o600 });
 }
 
 function renderRuns(runs: ReturnType<DatabaseStore["listRuns"]>): string {
@@ -84,7 +109,8 @@ export async function buildServer(deps: ServerDependencies): Promise<FastifyInst
     throw new Error("ADMIN_SESSION_SECRET must be configured with at least 32 characters");
   }
   const app = Fastify({ logger: false });
-  const auth = createAuthManager({ adminUsername: deps.config.adminUsername ?? "marko", adminPasswordHash: deps.config.adminPasswordHash });
+  const initialPasswordHash = deps.config.adminPasswordHash ?? loadStoredPasswordHash();
+  const auth = createAuthManager({ adminUsername: deps.config.adminUsername ?? "marko", adminPasswordHash: initialPasswordHash });
   await app.register(cookie, { secret: sessionSecret });
   await app.register(formbody);
 
@@ -105,9 +131,31 @@ export async function buildServer(deps: ServerDependencies): Promise<FastifyInst
     return reply.type("application/manifest+json").send(manifest);
   });
 
-  app.get("/login", async (_request, reply) => reply.type("text/html").send(loginPage()));
+  app.get("/setup", async (_request, reply) => {
+    if (auth.hasPassword()) return reply.redirect("/login");
+    return reply.type("text/html").send(setupPage());
+  });
+
+  app.post("/setup", async (request, reply) => {
+    if (auth.hasPassword()) return reply.redirect("/login");
+    const body = (request.body ?? {}) as { password?: string; confirmPassword?: string };
+    const password = body.password ?? "";
+    const confirmPassword = body.confirmPassword ?? "";
+    if (password.length < 8) return reply.code(400).type("text/html").send(setupPage("Password must contain at least 8 characters."));
+    if (password !== confirmPassword) return reply.code(400).type("text/html").send(setupPage("The two passwords do not match."));
+    const passwordHash = hashPassword(password);
+    savePasswordHash(passwordHash);
+    auth.setPasswordHash(passwordHash);
+    return reply.redirect("/login");
+  });
+
+  app.get("/login", async (_request, reply) => {
+    if (!auth.hasPassword()) return reply.redirect("/setup");
+    return reply.type("text/html").send(loginPage());
+  });
 
   app.post("/login", async (request, reply) => {
+    if (!auth.hasPassword()) return reply.redirect("/setup");
     const body = (request.body ?? {}) as { username?: string; password?: string };
     if (!auth.authenticate(body.username ?? "", body.password ?? "")) return reply.code(401).type("text/html").send(loginPage("Invalid login."));
     const session = auth.createSession();
@@ -116,7 +164,7 @@ export async function buildServer(deps: ServerDependencies): Promise<FastifyInst
 
   app.get("/dashboard", async (request, reply) => {
     const session = sessionFrom(request, auth);
-    if (!session) return unauthorized(reply);
+    if (!session) return unauthorized(reply, auth);
     const template = readFileSync(join(__dirname, "views", "dashboard.html"), "utf8");
     const html = template.replace("{{csrf}}", escapeHtml(session.csrfToken)).replace("{{runs}}", renderRuns(deps.db.listRuns(25)));
     return reply.type("text/html").send(html);
@@ -124,14 +172,14 @@ export async function buildServer(deps: ServerDependencies): Promise<FastifyInst
 
   app.get("/analytics-monitor", async (request, reply) => {
     const session = sessionFrom(request, auth);
-    if (!session) return unauthorized(reply);
+    if (!session) return unauthorized(reply, auth);
     const html = readFileSync(join(__dirname, "views", "analytics-monitor.html"), "utf8");
     return reply.type("text/html").send(html);
   });
 
   app.get("/api/analytics-monitor", async (request, reply) => {
     const session = sessionFrom(request, auth);
-    if (!session) return unauthorized(reply);
+    if (!session) return unauthorized(reply, auth);
     if (!deps.analyticsMonitor) return reply.code(503).send({ error: "Analytics monitor is not configured" });
     const report = await deps.analyticsMonitor();
     return reply.send(publicAnalyticsMonitorReport(report));
