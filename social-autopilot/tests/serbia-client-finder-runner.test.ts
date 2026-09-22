@@ -102,6 +102,7 @@ describe("Serbia client finder runner", () => {
       fetchImpl,
       readState: async () => ({ "https://example.rs/": "2026-09-15T12:00:00.000Z" }),
       notify: async () => undefined,
+      writeState: async () => undefined,
     });
     const expired = await runSerbiaClientFinderOnce({
       ...baseEnv,
@@ -111,6 +112,7 @@ describe("Serbia client finder runner", () => {
       fetchImpl,
       readState: async () => ({ "https://example.rs/": "2026-09-13T12:00:00.000Z" }),
       notify: async () => undefined,
+      writeState: async () => undefined,
     });
 
     expect(withinWindow).toEqual({ status: "quiet", leads: [] });
