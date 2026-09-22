@@ -251,11 +251,10 @@
           return { data: await response.json(), remaining: response.headers.get("x-ratelimit-remaining") };
         }
 
-        async function loadWorkflow(workflow) {
-          const latest = await json(`${api}/actions/workflows/${workflow.id}/runs?per_page=1`);
-          const run = latest.data.workflow_runs?.[0];
+        async function loadWorkflow(workflow, allRuns, rateRemaining) {
+          const run = allRuns.find((candidate) => candidate.path === `.github/workflows/${workflow.id}`);
           let jobs = [];
-          let remaining = latest.remaining;
+          let remaining = rateRemaining;
           if (run) {
             try {
               const jobResult = await json(`${api}/actions/runs/${run.id}/jobs?per_page=20`);
@@ -285,8 +284,10 @@
           $("refresh").disabled = true;
           $("message").textContent = "Citam stanje svih 5 automatizacija...";
           try {
+            const allRunsResult = await json(`${api}/actions/runs?per_page=100`);
+            const allRuns = allRunsResult.data.workflow_runs || [];
             const results = await Promise.all(workflows.map(async (workflow) => {
-              try { return await loadWorkflow(workflow); }
+              try { return await loadWorkflow(workflow, allRuns, allRunsResult.remaining); }
               catch (error) { return { workflow, run: null, jobs: [], error: error instanceof Error ? error.message : "Nepoznata greska" }; }
             }));
             const runs = results.map((item) => item.run).filter(Boolean);
