@@ -113,6 +113,12 @@ describe("private dashboard", () => {
 
     expect(page.statusCode).toBe(200);
     expect(page.body).toContain("PLATINUM CORE 777 Analytics Monitor");
+    expect(page.body).toContain('data-view="overview"');
+    expect(page.body).toContain('data-view="search-console"');
+    expect(page.body).toContain('data-view="analytics"');
+    expect(page.body).toContain('data-view="queries"');
+    expect(page.body).toContain('data-view="pages"');
+    expect(page.body).toContain('data-view="schedule"');
     expect(api.statusCode).toBe(200);
     expect(api.body).toContain("Core Review");
     expect(api.body).not.toContain("must-not-leak");
