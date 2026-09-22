@@ -19,6 +19,7 @@ describe("Google Analytics Data API", () => {
         { name: "sessions" },
         { name: "screenPageViews" },
       ],
+      metricAggregations: ["TOTAL"],
       limit: 25,
     });
   });

@@ -30,6 +30,7 @@ export interface AnalyticsReportRequest {
       { name: "sessions" },
       { name: "screenPageViews" },
     ];
+    metricAggregations: ["TOTAL"];
     limit: 25;
     orderBys: [{ metric: { metricName: "screenPageViews" }; desc: true }];
   };
@@ -68,6 +69,7 @@ export function buildAnalyticsReportRequest(
         { name: "sessions" },
         { name: "screenPageViews" },
       ],
+      metricAggregations: ["TOTAL"],
       limit: 25,
       orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
     },
