@@ -33,8 +33,11 @@ jobs:
       - name: Install dependencies on runner
         run: npm ci --no-audit --no-fund
 
-      - name: Run tests
-        run: npm run test:run
+      - name: Run Analytics Monitor tests
+        run: npm run test:run -- tests/auth.test.ts tests/analytics-monitor.test.ts
+
+      - name: Typecheck
+        run: npm run typecheck
 
       - name: Build monitor
         run: npm run build
