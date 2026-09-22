@@ -9,35 +9,97 @@
     <title>PLATINUM CORE 777 Analytics Monitor</title>
   </head>
   <body>
-    <main class="shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">PLATINUM CORE 777</p>
-          <h1>Analytics Monitor</h1>
-          <p class="subtitle">Search Console and Google Analytics in one private panel.</p>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Panel navigation">
+        <div class="brand">
+          <div class="brand-mark">777</div>
+          <div>
+            <p class="eyebrow">PLATINUM CORE</p>
+            <strong>Analytics Monitor</strong>
+          </div>
         </div>
-        <button id="refresh" class="button" type="button">Refresh data</button>
-      </header>
 
-      <section class="statusbar" aria-live="polite">
-        <span id="status">Loading...</span>
-        <span id="period"></span>
-        <span id="checked"></span>
-      </section>
+        <nav class="nav-list" aria-label="Analytics sections">
+          <button class="nav-item active" type="button" data-view="overview"><span class="nav-icon">◈</span>Pregled</button>
+          <button class="nav-item" type="button" data-view="search-console"><span class="nav-icon">⌕</span>Search Console</button>
+          <button class="nav-item" type="button" data-view="analytics"><span class="nav-icon">◒</span>Google Analytics</button>
+          <button class="nav-item" type="button" data-view="queries"><span class="nav-icon">≡</span>Upiti</button>
+          <button class="nav-item" type="button" data-view="pages"><span class="nav-icon">□</span>Stranice</button>
+          <button class="nav-item" type="button" data-view="schedule"><span class="nav-icon">◷</span>Raspored</button>
+        </nav>
 
-      <section class="cards" id="summary-cards"></section>
+        <div class="sidebar-footer">
+          <span class="live-dot"></span>
+          <div><strong>LIVE data</strong><small>Private panel</small></div>
+        </div>
+      </aside>
 
-      <section class="grid">
-        <article class="panel">
-          <div class="panel-heading"><h2>Search Console queries</h2><span id="search-status" class="badge">Waiting</span></div>
-          <div id="search-content" class="table-wrap">No data loaded.</div>
-        </article>
-        <article class="panel">
-          <div class="panel-heading"><h2>Top pages</h2><span id="analytics-status" class="badge">Waiting</span></div>
-          <div id="pages-content" class="table-wrap">No data loaded.</div>
-        </article>
-      </section>
-    </main>
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">PLATINUM CORE 777</p>
+            <h1 id="view-title">Pregled</h1>
+            <p class="subtitle">Search Console and Google Analytics in one private panel.</p>
+          </div>
+          <div class="topbar-actions">
+            <span class="live-pill"><span class="live-dot"></span>LIVE</span>
+            <button id="refresh" class="button" type="button">Osvezi podatke</button>
+          </div>
+        </header>
+
+        <section class="statusbar" aria-live="polite">
+          <span id="status">Ucitavanje...</span>
+          <span id="period"></span>
+          <span id="checked"></span>
+        </section>
+
+        <section class="view active" id="view-overview" data-panel-view="overview">
+          <section class="cards" id="summary-cards"></section>
+          <section class="grid overview-grid">
+            <article class="panel">
+              <div class="panel-heading"><h2>Search Console</h2><span id="search-status" class="badge">Waiting</span></div>
+              <div id="search-overview" class="overview-copy">No data loaded.</div>
+            </article>
+            <article class="panel">
+              <div class="panel-heading"><h2>Google Analytics</h2><span id="analytics-status" class="badge">Waiting</span></div>
+              <div id="analytics-overview" class="overview-copy">No data loaded.</div>
+            </article>
+          </section>
+        </section>
+
+        <section class="view" id="view-search-console" data-panel-view="search-console">
+          <div class="section-heading"><div><p class="eyebrow">SEARCH CONSOLE</p><h2>Search performance</h2></div><span id="search-status-detail" class="badge">Waiting</span></div>
+          <article class="panel"><div id="search-content" class="table-wrap">No data loaded.</div></article>
+        </section>
+
+        <section class="view" id="view-analytics" data-panel-view="analytics">
+          <div class="section-heading"><div><p class="eyebrow">GA4 PROPERTY 554126635</p><h2>Google Analytics performance</h2></div><span id="analytics-status-detail" class="badge">Waiting</span></div>
+          <section class="cards analytics-cards" id="analytics-summary-cards"></section>
+          <article class="panel"><div id="analytics-content" class="table-wrap">No data loaded.</div></article>
+        </section>
+
+        <section class="view" id="view-queries" data-panel-view="queries">
+          <div class="section-heading"><div><p class="eyebrow">WATCHED QUERIES</p><h2>Queries monitored for PC777</h2></div><span class="badge">Read-only</span></div>
+          <article class="panel"><div id="queries-content" class="table-wrap">No data loaded.</div></article>
+        </section>
+
+        <section class="view" id="view-pages" data-panel-view="pages">
+          <div class="section-heading"><div><p class="eyebrow">TOP PAGES</p><h2>Pages receiving traffic</h2></div><span class="badge">Read-only</span></div>
+          <article class="panel"><div id="pages-content" class="table-wrap">No data loaded.</div></article>
+        </section>
+
+        <section class="view" id="view-schedule" data-panel-view="schedule">
+          <div class="section-heading"><div><p class="eyebrow">AUTOMATION</p><h2>Monitor status and schedule</h2></div><span class="badge ok">Active</span></div>
+          <div class="schedule-grid">
+            <article class="panel info-card"><span class="info-label">Automatic reports</span><strong>08:00 · 15:00 · 21:00</strong><small>Europe/Belgrade time</small></article>
+            <article class="panel info-card"><span class="info-label">Search Console</span><strong>sc-domain:platinumcore777.com</strong><small>Read-only access</small></article>
+            <article class="panel info-card"><span class="info-label">Google Analytics</span><strong>Property 554126635</strong><small>Read-only access</small></article>
+            <article class="panel info-card"><span class="info-label">Report recipient</span><strong>platinum303030@gmail.com</strong><small>Email delivery is separate from this panel</small></article>
+          </div>
+          <article class="panel safety-note"><h3>Private and read-only</h3><p>This panel only reads verified Google reports. Service-account keys, SMTP passwords, and access tokens never go to the browser.</p></article>
+        </section>
+      </main>
+    </div>
     <script src="/analytics-monitor.js" defer></script>
   </body>
 </html>
