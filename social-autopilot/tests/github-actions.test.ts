@@ -10,6 +10,7 @@ const analyticsMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workf
 const identityMonitorWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "identity-monitor.yml");
 const serbiaClientFinderWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "serbia-client-finder.yml");
 const wikipediaDraftWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "wikipedia-draft-monitor.yml");
+const renderConfigPath = join(process.cwd(), "..", "render.yaml");
 
 describe("native GitHub Actions runner", () => {
   it("keeps the daily 06:00 Belgrade dry-run and SQLite cache contract", () => {
@@ -35,6 +36,12 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain("github.event.workflow_run.conclusion == 'failure'");
     expect(workflow).toContain("platinum303030@gmail.com");
     expect(workflow).toContain("[HITNO]");
+  });
+
+  it("keeps the hosted Render autopilot interval daily", () => {
+    const renderConfig = readFileSync(renderConfigPath, "utf8");
+    expect(renderConfig).toContain("key: RUN_INTERVAL_MINUTES");
+    expect(renderConfig).toContain('value: "1440"');
   });
 
   it("deduplicates campaigns after a cached SQLite database is reopened", async () => {
