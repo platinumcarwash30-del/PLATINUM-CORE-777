@@ -2,7 +2,7 @@ name: PLATINUM CORE 777 Social Autopilot
 
 on:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 4,5 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -13,7 +13,24 @@ permissions:
   contents: read
 
 jobs:
+  belgrade-time-gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        shell: bash
+        run: |
+          local_hour="$(TZ=Europe/Belgrade date +%H)"
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$local_hour" == "06" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Scheduled check skipped outside 06:00 Europe/Belgrade."
+          fi
   run-once:
+    needs: belgrade-time-gate
+    if: needs.belgrade-time-gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -41,7 +58,7 @@ jobs:
           NODE_ENV: production
           DATABASE_PATH: ./autopilot.sqlite
           SITE_SITEMAP_URL: https://platinumcore777.com/sitemap.xml
-          RUN_INTERVAL_MINUTES: "120"
+          RUN_INTERVAL_MINUTES: "1440"
           RUN_ON_START: "false"
           ADMIN_USERNAME: marko
           ADMIN_SESSION_SECRET: ${{ secrets.SOCIAL_AUTOPILOT_SESSION_SECRET }}
