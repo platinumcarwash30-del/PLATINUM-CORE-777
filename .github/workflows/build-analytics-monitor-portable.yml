@@ -34,7 +34,7 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Run Analytics Monitor and Wikipedia draft tests
-        run: npm run test:run -- tests/auth.test.ts tests/analytics-monitor.test.ts tests/wikipedia-draft-monitor.test.ts tests/wikipedia-draft-monitor-runner.test.ts tests/wikipedia-draft-workflow.test.ts
+        run: npm run test:run -- tests/auth.test.ts tests/analytics-monitor.test.ts tests/wikipedia-draft-monitor.test.ts tests/wikipedia-draft-monitor-runner.test.ts tests/wikipedia-draft-workflow.test.ts tests/github-actions.test.ts tests/analytics-monitor-runner.test.ts
 
       - name: Typecheck
         run: npm run typecheck
