@@ -16,5 +16,13 @@
     "supportType": "Financial support",
     "approved": true,
     "priority": 2
+  },
+  {
+    "id": "nevena-financial-supporter",
+    "name": "Nevena",
+    "category": "financial",
+    "supportType": "Financial support",
+    "approved": true,
+    "priority": 3
   }
 ]
