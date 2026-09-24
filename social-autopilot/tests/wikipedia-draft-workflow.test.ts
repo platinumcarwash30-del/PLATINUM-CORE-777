@@ -12,6 +12,7 @@ describe("Wikipedia draft workflow", () => {
     expect(workflow).toContain('cron: "0 8 * * *"');
     expect(workflow).toContain("permissions:");
     expect(workflow).toContain("contents: read");
+    expect(workflow).toContain("mkdir -p ../docs/wikipedia");
     expect(workflow).toContain("npm run wikipedia-draft:once");
     expect(workflow).toContain("actions/upload-artifact@v4");
     expect(workflow).toContain("retention-days: 14");
