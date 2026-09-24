@@ -79,29 +79,35 @@ jobs:
           const draft = fs.readFileSync("../docs/wikipedia/PLATINUM-CORE-777-draft.md", "utf8").trim();
           const sources = fs.readFileSync("../docs/wikipedia/PLATINUM-CORE-777-sources.md", "utf8").trim();
           if (!draft || !sources) throw new Error("Wikipedia draft or source list is empty");
-          const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: Number(process.env.SMTP_PORT || 587),
-            secure: process.env.SMTP_SECURE === "true",
-            auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD },
+          (async () => {
+            const transporter = nodemailer.createTransport({
+              host: process.env.SMTP_HOST,
+              port: Number(process.env.SMTP_PORT || 587),
+              secure: process.env.SMTP_SECURE === "true",
+              auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD },
+            });
+            await transporter.sendMail({
+              from: process.env.SMTP_FROM,
+              to: "platinum303030@gmail.com",
+              subject: "[PLATINUM CORE 777] Wikipedia tekst za kopiranje",
+              text: [
+                "Wikipedia nacrt za ručni pregled i kopiranje:",
+                "",
+                draft,
+                "",
+                "IZVORI:",
+                "",
+                sources,
+                "",
+                "Ovo je nacrt za tvoj pregled; nije objavljen na Wikipediji.",
+                "Akcija: https://github.com/" + process.env.GITHUB_REPOSITORY + "/actions/runs/" + process.env.GITHUB_RUN_ID
+              ].join("\n"),
+            });
+            console.log("Copy-ready Wikipedia draft emailed to the owner.");
+          })().catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
           });
-          transporter.sendMail({
-            from: process.env.SMTP_FROM,
-            to: "platinum303030@gmail.com",
-            subject: "[PLATINUM CORE 777] Wikipedia tekst za kopiranje",
-            text: [
-              "Wikipedia nacrt za ručni pregled i kopiranje:",
-              "",
-              draft,
-              "",
-              "IZVORI:",
-              "",
-              sources,
-              "",
-              "Ovo je nacrt za tvoj pregled; nije objavljen na Wikipediji.",
-              "Akcija: https://github.com/" + process.env.GITHUB_REPOSITORY + "/actions/runs/" + process.env.GITHUB_RUN_ID
-            ].join("\n"),
-          }).then(() => console.log("Copy-ready Wikipedia draft emailed to the owner."));
           NODE
 
       - name: Save draft progress
