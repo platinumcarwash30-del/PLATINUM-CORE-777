@@ -10,7 +10,7 @@ import { createNotificationService } from "./notifications";
 
 export { formatAnalyticsMonitorReport } from "./analytics-monitor";
 
-export const ANALYTICS_MONITOR_CRON = "0 8,15,21 * * *";
+export const ANALYTICS_MONITOR_CRON = "0 6 * * *";
 export const ANALYTICS_MONITOR_TIMEZONE = "Europe/Belgrade";
 
 export interface AnalyticsMonitorRunnerDependencies extends AnalyticsMonitorDependencies {
