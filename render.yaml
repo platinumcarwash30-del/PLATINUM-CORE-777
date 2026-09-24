@@ -18,7 +18,7 @@ services:
       - key: SITE_SITEMAP_URL
         value: https://platinumcore777.com/sitemap.xml
       - key: RUN_INTERVAL_MINUTES
-        value: "120"
+        value: "1440"
       - key: NOTIFICATION_TO
         value: platinum303030@gmail.com
       - key: ADMIN_USERNAME
