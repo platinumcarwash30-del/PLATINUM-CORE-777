@@ -25,7 +25,7 @@ const baseEnv = {
 
 describe("Analytics monitor runner", () => {
   it("keeps the Belgrade schedule and approved query set explicit", () => {
-    expect(ANALYTICS_MONITOR_CRON).toBe("0 8,15,21 * * *");
+    expect(ANALYTICS_MONITOR_CRON).toBe("0 6 * * *");
     expect(ANALYTICS_MONITOR_TIMEZONE).toBe("Europe/Belgrade");
     expect(ANALYTICS_MONITOR_QUERIES).toEqual(expect.arrayContaining([
       ...SEARCH_CONSOLE_QUERIES,
