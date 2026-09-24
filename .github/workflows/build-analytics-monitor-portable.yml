@@ -33,8 +33,8 @@ jobs:
       - name: Install dependencies on runner
         run: npm ci --no-audit --no-fund
 
-      - name: Run Analytics Monitor tests
-        run: npm run test:run -- tests/auth.test.ts tests/analytics-monitor.test.ts
+      - name: Run Analytics Monitor and Wikipedia draft tests
+        run: npm run test:run -- tests/auth.test.ts tests/analytics-monitor.test.ts tests/wikipedia-draft-monitor.test.ts tests/wikipedia-draft-monitor-runner.test.ts tests/wikipedia-draft-workflow.test.ts
 
       - name: Typecheck
         run: npm run typecheck
