@@ -48,25 +48,31 @@ jobs:
           if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
             throw new Error("SMTP secrets are not configured; urgent email cannot be delivered.");
           }
-          const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: Number(process.env.SMTP_PORT || 587),
-            secure: false,
-            auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD },
+          (async () => {
+            const transporter = nodemailer.createTransport({
+              host: process.env.SMTP_HOST,
+              port: Number(process.env.SMTP_PORT || 587),
+              secure: false,
+              auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD },
+            });
+            await transporter.sendMail({
+              from: process.env.SMTP_FROM,
+              to: "platinum303030@gmail.com",
+              subject: "[HITNO] PLATINUM CORE 777 bot nije završio",
+              text: [
+                "Hitno obaveštenje: automatizovani bot nije uspešno završio.",
+                "",
+                "Bot: " + process.env.FAILED_WORKFLOW,
+                "Status: " + process.env.CONCLUSION,
+                "Pokretanje: " + process.env.RUN_NUMBER,
+                "Otvori log i proveri razlog: " + process.env.RUN_URL,
+                "",
+                "Ovo obaveštenje se šalje odmah nakon neuspešnog završetka workflow-a."
+              ].join("\n"),
+            });
+            console.log("Urgent failure alert sent.");
+          })().catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
           });
-          transporter.sendMail({
-            from: process.env.SMTP_FROM,
-            to: "platinum303030@gmail.com",
-            subject: "[HITNO] PLATINUM CORE 777 bot nije završio",
-            text: [
-              "Hitno obaveštenje: automatizovani bot nije uspešno završio.",
-              "",
-              "Bot: " + process.env.FAILED_WORKFLOW,
-              "Status: " + process.env.CONCLUSION,
-              "Pokretanje: " + process.env.RUN_NUMBER,
-              "Otvori log i proveri razlog: " + process.env.RUN_URL,
-              "",
-              "Ovo obaveštenje se šalje odmah nakon neuspešnog završetka workflow-a."
-            ].join("\n"),
-          }).then(() => console.log("Urgent failure alert sent."));
           NODE
