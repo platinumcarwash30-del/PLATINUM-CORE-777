@@ -1,0 +1,81 @@
+name: PLATINUM CORE 777 Serbia Client Finder
+
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: serbia-client-finder
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  find-public-business-leads:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: social-autopilot
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: social-autopilot/package-lock.json
+
+      - name: Restore seven-day lead deduplication state
+        uses: actions/cache/restore@v4
+        with:
+          path: social-autopilot/serbia-client-finder-state.json
+          key: serbia-client-finder-${{ github.run_id }}
+          restore-keys: |
+            serbia-client-finder-
+
+      - name: Require search and email credentials
+        env:
+          BRAVE_SEARCH_API_KEY: ${{ secrets.SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY }}
+          SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
+          SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}
+        run: |
+          test -n "$BRAVE_SEARCH_API_KEY" || { echo "Missing SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY"; exit 1; }
+          test -n "$SMTP_HOST" || { echo "Missing SOCIAL_AUTOPILOT_SMTP_HOST"; exit 1; }
+          test -n "$SMTP_USER" || { echo "Missing SOCIAL_AUTOPILOT_SMTP_USER"; exit 1; }
+          test -n "$SMTP_PASSWORD" || { echo "Missing SOCIAL_AUTOPILOT_SMTP_PASSWORD"; exit 1; }
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build and typecheck
+        run: npm run build
+
+      - name: Prepare state file
+        run: test -f ./serbia-client-finder-state.json || printf '{}\n' > ./serbia-client-finder-state.json
+
+      - name: Search public business pages and email new leads
+        run: npm run serbia-client-finder:once
+        env:
+          NODE_ENV: production
+          NOTIFICATION_TO: platinum303030@gmail.com
+          BRAVE_SEARCH_API_KEY: ${{ secrets.SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY }}
+          SERBIA_CLIENT_FINDER_STATE_PATH: ./serbia-client-finder-state.json
+          SERBIA_CLIENT_FINDER_MAX_LEADS: "10"
+          SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
+          SMTP_PORT: "587"
+          SMTP_SECURE: "false"
+          SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}
+          SMTP_FROM: "PLATINUM CORE 777 <contact@platinumcore777.com>"
+
+      - name: Save seven-day lead deduplication state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: social-autopilot/serbia-client-finder-state.json
+          key: serbia-client-finder-${{ github.run_id }}
