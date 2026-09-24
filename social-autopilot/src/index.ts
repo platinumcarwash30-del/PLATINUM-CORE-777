@@ -11,7 +11,7 @@ async function main(): Promise<void> {
   const analyticsMonitor = () => fetchAnalyticsMonitorReport(loadAnalyticsMonitorConfig(process.env));
   const app = await buildServer({ config, db, runNow: executeRun, analyticsMonitor });
   await app.listen({ port: config.port, host: "0.0.0.0" });
-  cron.schedule("0 */2 * * *", () => { void executeRun(); });
+  cron.schedule("0 6 * * *", () => { void executeRun(); }, { timezone: "Europe/Belgrade" });
   if (config.runOnStart) void executeRun();
 
   const close = () => runtime.close();
