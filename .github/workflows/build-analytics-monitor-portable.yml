@@ -9,6 +9,7 @@ on:
       - "social-autopilot/**"
       - "packaging/Start-Analytics-Monitor.cmd"
       - ".github/workflows/**"
+      - "render.yaml"
 
 permissions:
   contents: read
