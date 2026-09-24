@@ -28,6 +28,15 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain("npm run run:once");
   });
 
+  it("sends an urgent email immediately when a bot workflow fails", () => {
+    const workflow = readFileSync(join(process.cwd(), "..", ".github", "workflows", "urgent-bot-failure-alert.yml"), "utf8");
+
+    expect(workflow).toContain("workflow_run:");
+    expect(workflow).toContain("github.event.workflow_run.conclusion == 'failure'");
+    expect(workflow).toContain("platinum303030@gmail.com");
+    expect(workflow).toContain("[HITNO]");
+  });
+
   it("deduplicates campaigns after a cached SQLite database is reopened", async () => {
     const directory = mkdtempSync(join(tmpdir(), "social-autopilot-actions-"));
     const databasePath = join(directory, "autopilot.sqlite");
