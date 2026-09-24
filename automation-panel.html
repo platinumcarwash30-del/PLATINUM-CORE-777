@@ -129,7 +129,7 @@
         <div>
           <p class="eyebrow">PLATINUM CORE 777 / CONTROL</p>
           <h1>Centralni panel automatizacija</h1>
-          <p class="lead">Jedan pregled za cetiri bota i peti portable monitoring build. Ovde vidis ko radi, kada je poslednji put radio i da li je zavrsio bez greske.</p>
+          <p class="lead">Jedan pregled za sve redovne botove, hitna upozorenja i Instagram pripremu. Ovde vidis ko radi, kada je poslednji put radio i da li je zavrsio bez greske.</p>
         </div>
         <div class="header-actions">
           <span class="live"><span class="dot"></span>Read-only LIVE</span>
@@ -146,7 +146,7 @@
       </div>
 
       <section class="summary" aria-label="Ukupni status">
-        <article class="summary-card"><span class="summary-label">Ukupno</span><div id="total" class="summary-value">5</div></article>
+        <article class="summary-card"><span class="summary-label">Ukupno</span><div id="total" class="summary-value">9</div></article>
         <article class="summary-card"><span class="summary-label">Trenutno radi</span><div id="running" class="summary-value">—</div></article>
         <article class="summary-card"><span class="summary-label">Poslednje uspesno</span><div id="success" class="summary-value">—</div></article>
         <article class="summary-card"><span class="summary-label">Paznja potrebna</span><div id="attention" class="summary-value">—</div></article>
@@ -174,38 +174,69 @@
           {
             id: "social-autopilot.yml",
             title: "Social Autopilot",
-            role: "Priprema i vodi odobrene objave za Facebook i LinkedIn.",
-            schedule: "svaka 2 sata",
+            role: "Priprema odobrene objave za Facebook i LinkedIn.",
+            schedule: "svakog dana u 06:00 · Europe/Belgrade",
             icon: "S",
           },
           {
             id: "search-console-monitor.yml",
             title: "Search Console Monitor",
-            role: "Cita Search Console podatke i salje izvestaj.",
-            schedule: "jednom na sat",
+            role: "Cita Search Console podatke i salje jutarnji izvestaj.",
+            schedule: "svakog dana u 06:00 · Europe/Belgrade",
             icon: "Q",
-          },
-          {
-            id: "identity-monitor.yml",
-            title: "Public Identity Monitor",
-            role: "Proverava javne rezultate i nove spoljne pojave identiteta projekta.",
-            schedule: "jednom dnevno",
-            icon: "I",
           },
           {
             id: "analytics-monitor.yml",
             title: "Analytics Monitor",
             role: "Spaja Google Analytics i Search Console u izvestaj.",
-            schedule: "08:00 · 15:00 · 21:00",
+            schedule: "svakog dana u 06:00 · Europe/Belgrade",
             icon: "A",
+          },
+          {
+            id: "identity-monitor.yml",
+            title: "Public Identity Monitor",
+            role: "Proverava javne rezultate i nove spoljne pojave identiteta projekta.",
+            schedule: "svakog dana u 06:00 · Europe/Belgrade",
+            icon: "I",
+          },
+          {
+            id: "serbia-client-finder.yml",
+            title: "Serbia Client Finder",
+            role: "Pronalazi javno dostupne poslovne prilike u Srbiji.",
+            schedule: "svakog dana u 06:00 · Europe/Belgrade",
+            icon: "C",
+          },
+          {
+            id: "wikipedia-draft-monitor.yml",
+            title: "Wikipedia Draft Monitor",
+            role: "Priprema neutralan nacrt i izvore za ručno kopiranje.",
+            schedule: "svakog dana u 06:00 · Europe/Belgrade",
+            icon: "W",
+          },
+          {
+            id: "urgent-bot-failure-alert.yml",
+            title: "Urgent Bot Alert",
+            role: "Salje hitan mejl kada nadzirani bot padne.",
+            schedule: "odmah kada bot padne",
+            icon: "!",
           },
           {
             id: "build-analytics-monitor-portable.yml",
             title: "Portable Analytics Build",
             role: "Testira i sklapa portable Analytics Monitor ZIP paket.",
-            schedule: "na push ili rucno",
+            schedule: "na izmenu ili rucno",
             icon: "B",
             wide: true,
+          },
+          {
+            id: "chatgpt-instagram-images",
+            title: "Instagram Image Prep",
+            role: "U ChatGPT-u priprema 4 slike za preuzimanje i kratak opis na srpskom i engleskom.",
+            schedule: "svakog dana u 06:00 · ChatGPT",
+            icon: "G",
+            wide: true,
+            external: true,
+            url: "https://chatgpt.com/c/6ab4ea96-3a28-83eb-b532-6a0d075582b2",
           },
         ];
 
@@ -257,12 +288,22 @@
         }
 
         async function loadWorkflow(workflow, allRuns, rateRemaining) {
+          if (workflow.external) return { workflow, run: null, jobs: [], remaining: rateRemaining, external: true };
           const run = allRuns.find((candidate) => candidate.path === `.github/workflows/${workflow.id}`);
           return { workflow, run, jobs: [], remaining: rateRemaining };
         }
 
         function card(result) {
           const { workflow, run, jobs } = result;
+          if (workflow.external) {
+            const taskUrl = workflow.url || "https://chatgpt.com";
+            return "<article class=\"bot-card wide\">"
+              + "<div class=\"bot-top\"><div class=\"bot-title\"><span class=\"bot-icon\" aria-hidden=\"true\">" + escapeHtml(workflow.icon || "G") + "</span><div><h3>" + escapeHtml(workflow.title) + "</h3><p class=\"bot-role\">" + escapeHtml(workflow.role) + "</p></div></div><span class=\"status waiting\">Zakazano</span></div>"
+              + "<div class=\"details\"><div><span class=\"detail-label\">Raspored</span><span class=\"detail-value\">" + escapeHtml(workflow.schedule) + "</span></div><div><span class=\"detail-label\">Rezultat</span><span class=\"detail-value\">4 slike za preuzimanje</span></div><div><span class=\"detail-label\">Jezici opisa</span><span class=\"detail-value\">Srpski + English</span></div></div>"
+              + "<div class=\"step\"><strong>Napomena:</strong> slike se pripremaju u zakazanom ChatGPT četu i čekaju tvoje ručno preuzimanje i objavu.</div>"
+              + "<div class=\"bot-footer\"><span class=\"last-updated\">Isti zaposleni · novi posetilac u svakoj slici</span><a class=\"run-link\" href=\"" + escapeHtml(taskUrl) + "\" target=\"_blank\" rel=\"noopener noreferrer\">Otvori ChatGPT zadatak ↗</a></div>"
+              + "</article>";
+          }
           const state = stateFor(run);
           const conclusion = run?.conclusion || (run?.status === "in_progress" ? "u toku" : "—");
           const runUrl = run?.html_url || `https://github.com/${owner}/${repo}/actions/workflows/${workflow.id}`;
@@ -276,7 +317,7 @@
 
         async function load() {
           $("refresh").disabled = true;
-          $("message").textContent = "Citam stanje svih 5 automatizacija...";
+          $("message").textContent = "Citam stanje svih 9 sistema...";
           try {
             const allRunsResult = await json(`${api}/actions/runs?per_page=100`);
             const allRuns = allRunsResult.data.workflow_runs || [];
