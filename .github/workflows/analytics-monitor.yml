@@ -2,7 +2,7 @@ name: PLATINUM CORE 777 Analytics Monitor
 
 on:
   # GitHub Actions cron is UTC; the job gates execution using Europe/Belgrade
-  # so the three report hours remain correct across daylight-saving changes.
+  # so the daily report stays at 06:00 across daylight-saving changes.
   schedule:
     - cron: "0 4,5 * * *"
   workflow_dispatch:
