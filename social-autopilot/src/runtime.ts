@@ -58,7 +58,7 @@ export async function createWorkerRuntime(env: NodeJS.ProcessEnv): Promise<Worke
             : publishToConnectedPlatforms(adapters, post, { platforms }),
         },
         notifications: createNotificationService(config),
-        intervalMinutes: config.runIntervalMinutes,
+        intervalMinutes: 1440,
         manualTargets: { whydonate: config.whyDonateUrl, buyMeACoffee: config.buyMeACoffeeUrl },
       });
     } finally {
