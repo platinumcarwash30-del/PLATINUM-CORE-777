@@ -1,0 +1,63 @@
+name: PLATINUM CORE 777 Wikipedia Draft Monitor
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: social-autopilot-wikipedia-draft
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  run-once:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: social-autopilot
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: social-autopilot/package-lock.json
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: social-autopilot/wikipedia-draft-state.json
+          key: wikipedia-draft-${{ github.run_id }}
+          restore-keys: |
+            wikipedia-draft-
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run wikipedia-draft:once
+        env:
+          NODE_ENV: production
+          WIKIPEDIA_DRAFT_SITE_URL: https://platinumcore777.com/
+          WIKIPEDIA_DRAFT_SITEMAP_URL: https://platinumcore777.com/sitemap.xml
+          WIKIPEDIA_DRAFT_STATE_PATH: ./wikipedia-draft-state.json
+          WIKIPEDIA_DRAFT_PATH: ../docs/wikipedia/PLATINUM-CORE-777-draft.md
+          WIKIPEDIA_DRAFT_SOURCES_PATH: ../docs/wikipedia/PLATINUM-CORE-777-sources.md
+
+      - name: Save draft progress
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: social-autopilot/wikipedia-draft-state.json
+          key: wikipedia-draft-${{ github.run_id }}
+
+      - name: Upload review-only research packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: platinum-core-777-wikipedia-research-${{ github.run_number }}
+          path: |
+            docs/wikipedia/PLATINUM-CORE-777-draft.md
+            docs/wikipedia/PLATINUM-CORE-777-sources.md
+          if-no-files-found: error
+          retention-days: 14
