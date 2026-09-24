@@ -12,10 +12,12 @@ const serbiaClientFinderWorkflowPath = join(process.cwd(), "..", ".github", "wor
 const wikipediaDraftWorkflowPath = join(process.cwd(), "..", ".github", "workflows", "wikipedia-draft-monitor.yml");
 
 describe("native GitHub Actions runner", () => {
-  it("keeps the two-hour dry-run and SQLite cache contract", () => {
+  it("keeps the daily 06:00 Belgrade dry-run and SQLite cache contract", () => {
     const workflow = readFileSync(workflowPath, "utf8");
 
-    expect(workflow).toContain('cron: "0 */2 * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
+    expect(workflow).toContain('RUN_INTERVAL_MINUTES: "1440"');
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("cancel-in-progress: false");
     expect(workflow).toContain("DATABASE_PATH: ./autopilot.sqlite");
@@ -58,10 +60,11 @@ describe("native GitHub Actions runner", () => {
     }
   });
 
-  it("keeps Search Console monitoring hourly and read-only", () => {
+  it("schedules Search Console daily and keeps it read-only", () => {
     const workflow = readFileSync(searchConsoleWorkflowPath, "utf8");
 
-    expect(workflow).toContain('cron: "0 * * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("GOOGLE_SERVICE_ACCOUNT_JSON");
     expect(workflow).toContain("SEARCH_CONSOLE_PROPERTY: sc-domain:platinumcore777.com");
@@ -70,13 +73,14 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).not.toContain("google.com/search?q=");
   });
 
-  it("runs the combined analytics monitor only at Belgrade report hours", () => {
+  it("runs the combined analytics monitor at 06:00 Belgrade time", () => {
     const workflow = readFileSync(analyticsMonitorWorkflowPath, "utf8");
 
-    expect(workflow).toContain('cron: "0 * * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("TZ=Europe/Belgrade date +%H");
-    expect(workflow).toContain("08|15|21");
+    expect(workflow).toContain("06");
     expect(workflow).toContain('if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then');
     expect(workflow).toContain("npm run analytics-monitor:once");
     expect(workflow).toContain("GOOGLE_ANALYTICS_PROPERTY_ID: \"554126635\"");
@@ -88,7 +92,8 @@ describe("native GitHub Actions runner", () => {
   it("keeps public identity monitoring separate and non-posting", () => {
     const workflow = readFileSync(identityMonitorWorkflowPath, "utf8");
 
-    expect(workflow).toContain('cron: "30 7 * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("BRAVE_SEARCH_API_KEY");
     expect(workflow).not.toContain("GOOGLE_WEB_SEARCH");
@@ -101,7 +106,8 @@ describe("native GitHub Actions runner", () => {
   it("configures a separate daily Serbia client finder workflow", () => {
     const workflow = readFileSync(serbiaClientFinderWorkflowPath, "utf8");
 
-    expect(workflow).toContain('cron: "0 7 * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("npm run serbia-client-finder:once");
     expect(workflow).toContain("BRAVE_SEARCH_API_KEY: ${{ secrets.SOCIAL_AUTOPILOT_BRAVE_SEARCH_API_KEY }}");
@@ -115,11 +121,12 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).not.toContain("key: identity-monitor-");
   });
 
-  it("configures a read-only site Wikipedia pending-draft workflow", () => {
+  it("emails the copy-ready Wikipedia draft while keeping publishing disabled", () => {
     const workflow = readFileSync(wikipediaDraftWorkflowPath, "utf8");
 
     expect(workflow).toContain('name: PLATINUM CORE 777 Wikipedia Draft Monitor');
-    expect(workflow).toContain('cron: "0 8 * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
     expect(workflow).toContain("workflow_dispatch:");
     expect(workflow).toContain("group: social-autopilot-wikipedia-draft");
     expect(workflow).toContain("contents: read");
@@ -130,6 +137,8 @@ describe("native GitHub Actions runner", () => {
     expect(workflow).toContain("actions/upload-artifact@v4");
     expect(workflow).toContain("docs/wikipedia/PLATINUM-CORE-777-draft.md");
     expect(workflow).toContain("docs/wikipedia/PLATINUM-CORE-777-sources.md");
+    expect(workflow).toContain("Email copy-ready Wikipedia draft and sources");
+    expect(workflow).toContain("platinum303030@gmail.com");
     expect(workflow).not.toContain("git add");
     expect(workflow).not.toContain("git push");
     expect(workflow).not.toContain("git commit");
