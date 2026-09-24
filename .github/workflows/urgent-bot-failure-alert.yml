@@ -1,0 +1,72 @@
+name: PLATINUM CORE 777 Urgent Bot Failure Alert
+
+on:
+  workflow_run:
+    workflows:
+      - PLATINUM CORE 777 Social Autopilot
+      - PLATINUM CORE 777 Search Console Monitor
+      - PLATINUM CORE 777 Analytics Monitor
+      - PLATINUM CORE 777 Public Identity Monitor
+      - PLATINUM CORE 777 Serbia Client Finder
+      - PLATINUM CORE 777 Wikipedia Draft Monitor
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  notify-owner:
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: social-autopilot/package-lock.json
+
+      - name: Install mail dependency
+        run: npm ci --prefix social-autopilot --no-audit --no-fund
+
+      - name: Send immediate urgent failure email
+        env:
+          SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
+          SMTP_PORT: "587"
+          SMTP_USER: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_PASSWORD }}
+          SMTP_FROM: "PLATINUM CORE 777 <contact@platinumcore777.com>"
+          FAILED_WORKFLOW: ${{ github.event.workflow_run.name }}
+          RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          node <<'NODE'
+          const nodemailer = require("./social-autopilot/node_modules/nodemailer");
+          if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+            throw new Error("SMTP secrets are not configured; urgent email cannot be delivered.");
+          }
+          const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT || 587),
+            secure: false,
+            auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD },
+          });
+          transporter.sendMail({
+            from: process.env.SMTP_FROM,
+            to: "platinum303030@gmail.com",
+            subject: "[HITNO] PLATINUM CORE 777 bot nije završio",
+            text: [
+              "Hitno obaveštenje: automatizovani bot nije uspešno završio.",
+              "",
+              "Bot: " + process.env.FAILED_WORKFLOW,
+              "Status: " + process.env.CONCLUSION,
+              "Pokretanje: " + process.env.RUN_NUMBER,
+              "Otvori log i proveri razlog: " + process.env.RUN_URL,
+              "",
+              "Ovo obaveštenje se šalje odmah nakon neuspešnog završetka workflow-a."
+            ].join("\n"),
+          }).then(() => console.log("Urgent failure alert sent."));
+          NODE
