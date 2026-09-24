@@ -57,6 +57,13 @@ jobs:
         run: mkdir -p ../docs/wikipedia
 
       - run: npm run wikipedia-draft:once
+        env:
+          NODE_ENV: production
+          WIKIPEDIA_DRAFT_SITE_URL: https://platinumcore777.com/
+          WIKIPEDIA_DRAFT_SITEMAP_URL: https://platinumcore777.com/sitemap.xml
+          WIKIPEDIA_DRAFT_STATE_PATH: ./wikipedia-draft-state.json
+          WIKIPEDIA_DRAFT_PATH: ../docs/wikipedia/PLATINUM-CORE-777-draft.md
+          WIKIPEDIA_DRAFT_SOURCES_PATH: ../docs/wikipedia/PLATINUM-CORE-777-sources.md
       - name: Email copy-ready Wikipedia draft and sources
         env:
           SMTP_HOST: ${{ secrets.SOCIAL_AUTOPILOT_SMTP_HOST }}
@@ -96,13 +103,6 @@ jobs:
             ].join("\n"),
           }).then(() => console.log("Copy-ready Wikipedia draft emailed to the owner."));
           NODE
-        env:
-          NODE_ENV: production
-          WIKIPEDIA_DRAFT_SITE_URL: https://platinumcore777.com/
-          WIKIPEDIA_DRAFT_SITEMAP_URL: https://platinumcore777.com/sitemap.xml
-          WIKIPEDIA_DRAFT_STATE_PATH: ./wikipedia-draft-state.json
-          WIKIPEDIA_DRAFT_PATH: ../docs/wikipedia/PLATINUM-CORE-777-draft.md
-          WIKIPEDIA_DRAFT_SOURCES_PATH: ../docs/wikipedia/PLATINUM-CORE-777-sources.md
 
       - name: Save draft progress
         if: always()
