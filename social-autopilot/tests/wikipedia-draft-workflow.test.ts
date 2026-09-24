@@ -9,7 +9,10 @@ describe("Wikipedia draft workflow", () => {
     const workflow = readFileSync(workflowPath, "utf8");
 
     expect(workflow).toContain("name: PLATINUM CORE 777 Wikipedia Draft Monitor");
-    expect(workflow).toContain('cron: "0 8 * * *"');
+    expect(workflow).toContain('cron: "0 4,5 * * *"');
+    expect(workflow).toContain("belgrade-time-gate:");
+    expect(workflow).toContain("Email copy-ready Wikipedia draft and sources");
+    expect(workflow).toContain("platinum303030@gmail.com");
     expect(workflow).toContain("permissions:");
     expect(workflow).toContain("contents: read");
     expect(workflow).toContain("mkdir -p ../docs/wikipedia");
