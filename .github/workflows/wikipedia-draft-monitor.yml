@@ -36,6 +36,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      - name: Create draft output directory
+        run: mkdir -p ../docs/wikipedia
+
       - run: npm run wikipedia-draft:once
         env:
           NODE_ENV: production
