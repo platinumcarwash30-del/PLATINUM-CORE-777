@@ -4,7 +4,7 @@ on:
   # GitHub Actions cron is UTC; the job gates execution using Europe/Belgrade
   # so the three report hours remain correct across daylight-saving changes.
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 4,5 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -15,7 +15,24 @@ permissions:
   contents: read
 
 jobs:
+  belgrade-time-gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        shell: bash
+        run: |
+          local_hour="$(TZ=Europe/Belgrade date +%H)"
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$local_hour" == "06" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Scheduled check skipped outside 06:00 Europe/Belgrade."
+          fi
   monitor:
+    needs: belgrade-time-gate
+    if: needs.belgrade-time-gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -31,7 +48,7 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-      - name: Run only at 08:00, 15:00, or 21:00 Belgrade time
+      - name: Run only at 06:00 Belgrade time
         shell: bash
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
@@ -40,7 +57,7 @@ jobs:
           fi
           local_hour="$(TZ=Europe/Belgrade date +%H)"
           case "$local_hour" in
-            08|15|21)
+            06)
               npm run analytics-monitor:once
               ;;
             *)
