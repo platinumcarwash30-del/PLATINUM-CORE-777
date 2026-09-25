@@ -24,5 +24,13 @@
     "supportType": "Financial support",
     "approved": true,
     "priority": 3
+  },
+  {
+    "id": "branislav-bane-colak",
+    "name": "Branislav Bane Čolak",
+    "category": "promotion",
+    "supportType": "Promotion",
+    "approved": true,
+    "priority": 1
   }
 ]
