@@ -115,7 +115,7 @@ const supporterCategoryDefinitions = [
   { key: "promotion", label: "PROMOTION PARTNERS", className: "" },
   { key: "community", label: "COMMUNITY SUPPORTERS", className: "" }
 ];
-fetch("supporters.json?v=2")
+fetch("supporters.json?v=3", { cache: "no-store" })
   .then(function(response) { return response.json(); })
   .then(function(items) {
     items = Array.isArray(items) ? items : [];
