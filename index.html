@@ -75,7 +75,7 @@ document.getElementById('license-form').addEventListener('submit',function(e){
  e.preventDefault();
  const offer=this.querySelector('input[name="offer"]:checked').value;
  const subject=encodeURIComponent('PLATINUM CORE 777 — '+offer);
- const body=encodeURIComponent('Hello Marko,\\n\\nI am interested in: '+offer+'\\n\\nMy business and requirements:\\n');
+ const body=encodeURIComponent('Hello Marko,\n\nI am interested in: '+offer+'\n\nMy business and requirements:\n');
  window.location.href='mailto:contact@platinumcore777.com?subject='+subject+'&body='+body;
 });
 </script>
