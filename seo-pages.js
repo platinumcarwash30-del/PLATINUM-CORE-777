@@ -104,11 +104,8 @@ const seoPageText = {
 };
 
 const content = seoPageText[seoPage];
-let currentLanguage = 'en';
-try {
-  const stored = window.localStorage.getItem('pc777-language');
-  if (stored === 'en' || stored === 'sr') currentLanguage = stored;
-} catch { /* no-op */ }
+const pageLanguage = document.documentElement.lang === 'sr' ? 'sr' : 'en';
+let currentLanguage = pageLanguage;
 
 function applySeoLanguage(language) {
   currentLanguage = language === 'sr' ? 'sr' : 'en';
@@ -120,7 +117,11 @@ function applySeoLanguage(language) {
   const footer = document.querySelector('.site-footer p');
   if (footer) footer.textContent = content.footer[currentLanguage];
   const main = document.querySelector('main');
-  if (main) main.innerHTML = currentLanguage === 'sr' ? content.sr : englishMain;
+  // Each URL has a canonical language. Preserve its authored content on first load;
+  // the opposite language is reached through the paired /en/ or Serbian URL.
+  if (main && !(pageLanguage === 'sr' && currentLanguage === 'sr')) {
+    main.innerHTML = currentLanguage === 'sr' ? content.sr : englishMain;
+  }
   document.querySelectorAll('[data-seo-language]').forEach((button) => {
     const active = button.dataset.seoLanguage === currentLanguage;
     button.classList.toggle('is-active', active);
@@ -130,7 +131,15 @@ function applySeoLanguage(language) {
 }
 
 document.querySelectorAll('[data-seo-language]').forEach((button) => {
-  button.addEventListener('click', () => applySeoLanguage(button.dataset.seoLanguage));
+  button.addEventListener('click', () => {
+    const targetLanguage = button.dataset.seoLanguage;
+    if (targetLanguage !== pageLanguage) {
+      const fileName = window.location.pathname.split('/').filter(Boolean).pop() || 'index.html';
+      window.location.href = targetLanguage === 'en' ? `/en/${fileName}` : `/${fileName}`;
+      return;
+    }
+    applySeoLanguage(targetLanguage);
+  });
 });
 
 applySeoLanguage(currentLanguage);
