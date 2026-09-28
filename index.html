@@ -1,315 +1,83 @@
 <!doctype html>
-<html lang="sr">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#071019">
-  <meta name="description" content="PLATINUM CORE 777 — modularni poslovni sistem za licencirane veb-sajtove, aplikacije, digitalnu dokumentaciju i interne poslovne procese.">
-  <link rel="canonical" href="https://platinumcore777.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="PLATINUM CORE 777 | Poslovni sistem">
-  <meta property="og:description" content="Jedna poslovna osnova za veb-sajt, aplikaciju, dokumentaciju i kontrolu procesa.">
-  <meta property="og:url" content="https://platinumcore777.com/">
-  <meta property="og:image" content="https://platinumcore777.com/assets/platinum-core-777-journey-hero-v2.jpg">
-  <meta name="author" content="Marko Ćuća, Founder & CEO">
-  <title>PLATINUM CORE 777 | Modularni poslovni sistem</title>
-  <link rel="icon" type="image/png" href="assets/logo-platinum-core-777.png">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DZRK2NRM8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3DZRK2NRM8');
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"PLATINUM CORE 777",
-    "url":"https://platinumcore777.com/",
-    "founder":{"@type":"Person","name":"Marko Ćuća","jobTitle":"Founder & CEO","sameAs":[
-      "https://www.linkedin.com/in/marko-%C4%87u%C4%87a-9649b2268/",
-      "https://www.instagram.com/platinum_core_777/"
-    ]}
-  }
-  </script>
-  <style>
-    :root{
-      --bg:#071019;--bg2:#0b1722;--panel:#0e1d2a;--panel2:#122638;
-      --line:rgba(150,190,215,.22);--text:#f3f8fb;--muted:#a9bdc9;
-      --cyan:#21d8f2;--cyan2:#0da5c1;--gold:#edbd54;--shadow:0 24px 70px rgba(0,0,0,.35);
-      --radius:22px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at 80% -10%,#12314a 0,transparent 40%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .wrap{width:min(1180px,calc(100% - 40px));margin:auto}
-    .site-header{position:sticky;top:0;z-index:20;background:rgba(7,16,25,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-    .nav{min-height:82px;display:flex;align-items:center;gap:28px}
-    .brand{display:flex;align-items:center;gap:12px;margin-right:auto}
-    .brand img{width:164px;height:72px;object-fit:contain;object-position:left center}
-    .brand span{font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;max-width:130px;line-height:1.2}
-    .nav-links{display:flex;align-items:center;gap:20px;color:#dbe9ef;font-size:13px}
-    .nav-links a{opacity:.85;transition:.2s}
-    .nav-links a:hover{color:var(--cyan);opacity:1}
-    .nav-cta{border:1px solid var(--cyan);border-radius:999px;padding:10px 16px;color:var(--cyan);font-weight:700;font-size:12px;letter-spacing:.03em}
-    .hero{min-height:700px;display:grid;grid-template-columns:1.08fr .92fr;gap:44px;align-items:center;padding:76px 0 70px;position:relative}
-    .hero:before{content:"";position:absolute;inset:0 -50vw;background:linear-gradient(90deg,rgba(7,16,25,.98) 20%,rgba(7,16,25,.72) 55%,rgba(7,16,25,.3)),url("assets/platinum-core-777-journey-hero-v2.jpg") right center/cover no-repeat;z-index:-1;opacity:.9}
-    .eyebrow{color:var(--cyan);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;margin:0 0 20px}
-    h1,h2,h3,p{margin-top:0}
-    h1{font-size:clamp(42px,6vw,76px);line-height:.98;letter-spacing:-.055em;max-width:720px;margin-bottom:25px}
-    h1 em{font-style:normal;color:var(--cyan)}
-    .hero-lead{font-size:20px;line-height:1.45;color:#d6e5eb;max-width:650px;margin-bottom:31px}
-    .hero-note{font-size:13px;color:var(--muted);max-width:590px;margin-top:18px}
-    .actions{display:flex;flex-wrap:wrap;gap:13px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:14px 21px;font-weight:800;font-size:13px;transition:transform .2s,background .2s}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:var(--cyan);color:#04151d;box-shadow:0 14px 36px rgba(33,216,242,.18)}
-    .btn-secondary{border:1px solid var(--line);color:#e6f4f8;background:rgba(11,23,34,.5)}
-    .hero-card{justify-self:end;width:min(410px,100%);border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:linear-gradient(150deg,rgba(18,38,56,.93),rgba(7,16,25,.8));box-shadow:var(--shadow)}
-    .hero-card__top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;letter-spacing:.13em;text-transform:uppercase}
-    .dot{width:9px;height:9px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
-    .hero-card h2{font-size:31px;line-height:1.05;letter-spacing:-.04em;margin:36px 0 18px}
-    .hero-card p{color:var(--muted);font-size:14px}
-    .mini-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
-    .mini-list li{display:flex;gap:12px;align-items:flex-start;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:#dbe9ef}
-    .mini-list b{color:var(--gold);font-size:11px;letter-spacing:.12em}
-    .section{padding:104px 0}
-    .section-dark{background:linear-gradient(180deg,rgba(11,23,34,.55),rgba(7,16,25,.2))}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:36px}
-    .kicker{font-size:11px;color:var(--cyan);font-weight:800;letter-spacing:.19em;text-transform:uppercase;margin-bottom:12px}
-    h2{font-size:clamp(32px,4.2vw,54px);line-height:1.03;letter-spacing:-.05em;margin-bottom:0}
-    h2 span{color:var(--cyan)}
-    .section-head p{max-width:465px;color:var(--muted);font-size:15px;margin:0}
-    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-    .card{border:1px solid var(--line);border-radius:18px;background:rgba(14,29,42,.72);padding:23px;min-height:220px;transition:transform .2s,border-color .2s,background .2s}
-    .card:hover{transform:translateY(-4px);border-color:rgba(33,216,242,.6);background:rgba(18,38,56,.92)}
-    .card-num{font-size:11px;color:var(--gold);letter-spacing:.18em;font-weight:800}
-    .card h3{font-size:21px;line-height:1.1;margin:30px 0 12px;letter-spacing:-.025em}
-    .card p{font-size:13px;color:var(--muted);margin:0}
-    .license{display:grid;grid-template-columns:1.12fr .88fr;gap:24px;align-items:stretch}
-    .license-main{border:1px solid rgba(33,216,242,.42);border-radius:var(--radius);padding:32px;background:linear-gradient(140deg,rgba(13,72,91,.44),rgba(14,29,42,.8));box-shadow:var(--shadow)}
-    .license-main h3{font-size:34px;line-height:1.05;margin:17px 0 12px;letter-spacing:-.04em}
-    .license-price{font-size:29px;color:var(--gold);font-weight:900;letter-spacing:-.03em;margin:20px 0}
-    .license-main p{color:#d0e1e8;max-width:650px}
-    .feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0 0;padding:0;list-style:none}
-    .feature-list li{font-size:13px;color:#dceaf0;border-top:1px solid var(--line);padding-top:10px}
-    .feature-list li:before{content:"✓";color:var(--cyan);font-weight:900;margin-right:8px}
-    .packages{display:grid;gap:12px}
-    .package{border:1px solid var(--line);border-radius:18px;background:rgba(14,29,42,.75);padding:21px;display:flex;align-items:center;gap:18px}
-    .package strong{font-size:18px}
-    .package p{font-size:12px;color:var(--muted);margin:4px 0 0}
-    .package-badge{margin-left:auto;color:var(--cyan);font-size:11px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
-    .project-card{display:flex;flex-direction:column;min-height:270px}
-    .project-card .tag{font-size:11px;color:var(--cyan);letter-spacing:.15em;font-weight:800}
-    .project-card h3{margin-top:28px}
-    .project-card a{margin-top:auto;color:var(--cyan);font-weight:800;font-size:13px}
-    .process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    .step{padding:26px 20px 30px;border-right:1px solid var(--line)}
-    .step:last-child{border-right:0}
-    .step strong{display:block;color:var(--gold);font-size:12px;letter-spacing:.16em;margin-bottom:22px}
-    .step h3{font-size:20px;margin-bottom:8px}
-    .step p{font-size:13px;color:var(--muted);margin:0}
-    .founder{display:grid;grid-template-columns:.82fr 1.18fr;gap:40px;align-items:center}
-    .founder-visual{min-height:300px;border-radius:var(--radius);border:1px solid var(--line);background:linear-gradient(145deg,rgba(16,53,73,.85),rgba(7,16,25,.9)),url("assets/platinum-core-777-journey-hero-v2.jpg") center/cover;position:relative;overflow:hidden}
-    .founder-visual:after{content:"PLATINUM CORE 777";position:absolute;bottom:22px;left:24px;color:rgba(255,255,255,.8);font-size:12px;letter-spacing:.2em;font-weight:900}
-    .founder h2{margin-bottom:17px}
-    .founder p{color:var(--muted);max-width:650px}
-    .founder-signature{color:var(--gold);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin:22px 0}
-    .socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-    .socials a{border:1px solid var(--line);border-radius:999px;padding:10px 15px;font-size:12px;color:#dceaf0}
-    .socials a:hover{border-color:var(--cyan);color:var(--cyan)}
-    .contact{border:1px solid rgba(33,216,242,.36);border-radius:var(--radius);padding:35px;background:linear-gradient(130deg,rgba(13,72,91,.35),rgba(14,29,42,.75));display:flex;justify-content:space-between;align-items:center;gap:30px}
-    .contact h2{font-size:36px}
-    .contact p{color:var(--muted);margin:12px 0 0}
-    footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);font-size:12px}
-    .footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}
-    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
-    .footer-links a:hover{color:var(--cyan)}
-    @media (max-width:900px){
-      .nav-links{display:none}
-      .hero,.license,.founder{grid-template-columns:1fr}
-      .hero{padding-top:55px;min-height:auto}
-      .hero-card{justify-self:start}
-      .grid-4{grid-template-columns:repeat(2,1fr)}
-      .grid-3{grid-template-columns:1fr}
-      .process{grid-template-columns:repeat(2,1fr)}
-      .step:nth-child(2){border-right:0}
-      .step:nth-child(-n+2){border-bottom:1px solid var(--line)}
-      .contact{align-items:flex-start;flex-direction:column}
-    }
-    @media (max-width:560px){
-      .wrap{width:min(100% - 28px,1180px)}
-      .nav{min-height:70px}
-      .brand img{width:138px;height:60px}
-      .brand span{display:none}
-      h1{font-size:45px}
-      .hero-lead{font-size:17px}
-      .section{padding:72px 0}
-      .section-head{display:block}
-      .section-head p{margin-top:15px}
-      .grid-4{grid-template-columns:1fr}
-      .feature-list{grid-template-columns:1fr}
-      .process{grid-template-columns:1fr}
-      .step{border-right:0!important;border-bottom:1px solid var(--line)}
-      .step:last-child{border-bottom:0}
-      .contact h2{font-size:29px}
-      .footer-row{display:block}
-      .footer-links{margin-top:13px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050a12">
+<meta name="description" content="PLATINUM CORE 777 delivers licensed business websites, custom applications, digital documents, internal tools and connected workflows.">
+<link rel="canonical" href="https://platinumcore777.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PLATINUM CORE 777 | One connected core. Every business.">
+<meta property="og:description" content="Licensed business technology built around the way your business works.">
+<meta property="og:url" content="https://platinumcore777.com/">
+<meta property="og:image" content="https://platinumcore777.com/assets/logo-platinum-core-777.png">
+<meta name="author" content="Marko Ćuća, Founder & CEO">
+<title>PLATINUM CORE 777 | Business system</title>
+<link rel="icon" type="image/png" href="assets/logo-platinum-core-777.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3DZRK2NRM8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3DZRK2NRM8');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"PLATINUM CORE 777","url":"https://platinumcore777.com/","founder":{"@type":"Person","name":"Marko Ćuća","jobTitle":"Founder & CEO","sameAs":["https://www.linkedin.com/in/marko-%C4%87u%C4%87a-9649b2268/","https://www.instagram.com/platinum_core_777/"]}}
+</script>
+<style>
+:root{--bg:#050a12;--bg2:#081522;--panel:#0b1b2a;--panel2:#10283a;--line:#16415a;--cyan:#12d9f4;--blue:#078bb7;--gold:#f4c74f;--text:#f7fbff;--muted:#9fb4c2;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(70% 60% at 70% -10%,#123c59 0,transparent 60%),var(--bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.wrap{width:min(1280px,calc(100% - 64px));margin:auto}.header{position:sticky;top:0;z-index:30;background:rgba(5,10,18,.92);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}.nav{min-height:90px;display:flex;align-items:center;gap:32px}.logo{width:260px;height:78px;object-fit:contain;object-position:left center}.navlinks{display:flex;align-items:center;gap:34px;margin-left:auto;font-size:14px;font-weight:700;color:#d8e7ef}.navlinks a{opacity:.88}.navlinks a:hover,.navlinks a.active{color:var(--cyan);opacity:1}.navlinks a.active{border-bottom:2px solid var(--cyan);padding-bottom:12px;margin-bottom:-14px}.search{font-size:25px;line-height:1;color:#d8e7ef}.hero{min-height:520px;display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:center;padding:54px 0 46px;border-bottom:1px solid var(--line)}.eyebrow{letter-spacing:.25em;color:var(--cyan);font-size:12px;font-weight:900;margin:0 0 18px}.hero h1{font-size:clamp(45px,5.2vw,78px);line-height:.98;letter-spacing:-.055em;margin:0 0 22px;max-width:720px}.hero h1 span{color:var(--cyan)}.hero p{font-size:20px;max-width:720px;color:#d3e3ea;margin:0}.visual{height:390px;position:relative;display:flex;align-items:center;justify-content:center}.laptop{width:min(560px,100%);height:315px;border:3px solid #b6deeb;border-radius:20px 20px 9px 9px;background:#07121d;box-shadow:0 20px 70px rgba(0,211,255,.23),0 0 0 8px rgba(20,107,142,.22);padding:14px;position:relative}.laptop:after{content:"";position:absolute;left:-12%;bottom:-29px;width:124%;height:24px;border-radius:50%;background:linear-gradient(#7aa4b0,#1c516c);box-shadow:0 12px 23px rgba(0,0,0,.45)}.screen{height:100%;display:grid;grid-template-columns:135px 1fr;gap:12px;background:#071d2d;border:1px solid #0d5273;border-radius:11px;padding:12px}.side{border-right:1px solid #164d68;padding-right:10px}.side b{display:block;color:var(--cyan);font-size:12px;margin:8px 0 20px}.side i{display:block;color:#aacbd7;font-style:normal;font-size:10px;padding:7px 4px;border-radius:5px}.side i:first-of-type{background:#0c4f70;color:#fff}.dash{display:grid;gap:10px;grid-template-rows:auto auto 1fr}.dash-head{display:flex;justify-content:space-between;color:#b7d5e1;font-size:11px}.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.stat{border:1px solid #165575;background:#092a40;padding:9px;border-radius:6px}.stat small{display:block;color:#75a5b6;font-size:8px}.stat strong{display:block;color:#fff;font-size:17px;margin-top:4px}.graph{border:1px solid #164b67;background:linear-gradient(160deg,#0b2a3d,#071521);border-radius:6px;position:relative;overflow:hidden}.graph:before{content:"";position:absolute;inset:28px 20px 22px;background:linear-gradient(154deg,transparent 0 23%,#18d5f4 24% 25%,transparent 26% 38%,#18d5f4 39% 40%,transparent 41% 56%,#f5c43f 57% 58%,transparent 59% 74%,#18d5f4 75% 76%,transparent 77%);opacity:.95}.graph span{position:absolute;top:8px;left:9px;font-size:9px;color:#82b5c6}.phone{position:absolute;right:-4px;bottom:-10px;width:135px;height:255px;border:3px solid #a6d3df;border-radius:24px;background:#07131e;padding:9px;box-shadow:0 14px 40px rgba(0,0,0,.55)}.phone-screen{border-radius:15px;background:#08253a;height:100%;padding:10px}.phone-screen b{display:block;color:var(--cyan);font-size:12px;margin:6px 0 17px}.phone-card{border:1px solid #195676;border-radius:7px;padding:10px;margin:7px 0;font-size:10px;color:#d6e8ee}.phone-card em{display:block;color:var(--gold);font-style:normal;font-size:9px;margin-bottom:4px}.features{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;padding:30px 0 25px;border-bottom:1px solid var(--line)}.feature{text-align:left}.feature-icon{width:55px;height:55px;border:1px solid var(--cyan);border-radius:14px;display:grid;place-items:center;font-size:26px;color:var(--cyan);box-shadow:inset 0 0 20px rgba(18,217,244,.1);margin-bottom:12px}.feature h3{font-size:17px;line-height:1.06;margin:0 0 9px}.feature p{font-size:12px;color:var(--muted);margin:0}.section{padding:58px 0}.section-title{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:25px}.section-title h2{margin:0;font-size:32px;line-height:1.05;letter-spacing:-.035em}.section-title h2 span{color:var(--cyan)}.section-title p{color:var(--muted);font-size:14px;max-width:580px;margin:0}.gold-btn{border:1px solid var(--gold);border-radius:8px;padding:12px 19px;color:var(--gold);font-size:12px;font-weight:900;white-space:nowrap;letter-spacing:.04em}.gold-btn:hover{background:var(--gold);color:#0b1117}.solutions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.solution{border:1px solid #15506d;border-radius:11px;overflow:hidden;background:linear-gradient(145deg,#0b2739,#07131e);min-height:215px;display:grid;grid-template-columns:1.08fr .92fr}.solution-preview{padding:14px;background:linear-gradient(140deg,#103e55,#05101a);display:flex;align-items:center}.mock{border:1px solid #20718e;border-radius:6px;background:#071b2a;width:100%;padding:10px;color:#b9dce8;font-size:9px}.mock-head{height:17px;background:#0b5472;border-radius:3px;margin-bottom:10px}.mock-row{display:flex;gap:5px;margin:5px 0}.mock-box{height:23px;border-radius:3px;background:#10384e;flex:1}.solution-copy{padding:17px;display:flex;flex-direction:column}.solution-tag{font-size:10px;color:var(--cyan);letter-spacing:.17em;font-weight:900}.solution h3{font-size:20px;line-height:1.05;margin:24px 0 9px}.solution p{font-size:12px;color:#acc4cf;margin:0}.solution a{color:var(--gold);font-weight:900;font-size:11px;margin-top:auto;padding-top:15px}.license-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}.license-card,.chooser{border:1px solid #176181;border-radius:14px;background:linear-gradient(145deg,#0b2739,#07131e);padding:26px}.license-card h3{font-size:30px;line-height:1.05;margin:13px 0}.kicker{font-size:10px;letter-spacing:.2em;color:var(--cyan);font-weight:900}.price{font-size:30px;color:var(--gold);font-weight:900;margin:18px 0}.license-card p,.chooser p{color:#acc4cf;font-size:13px}.includes{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:20px 0 0}.includes li{font-size:12px;color:#d6e8ee;border-top:1px solid #16445b;padding-top:8px}.includes li:before{content:"✓";color:var(--cyan);font-weight:900;margin-right:7px}.chooser h3{font-size:25px;margin:10px 0 16px}.choice{display:flex;gap:10px;align-items:flex-start;padding:13px;border:1px solid #1b5069;border-radius:9px;margin:9px 0;cursor:pointer}.choice:has(input:checked){border-color:var(--cyan);background:#0a3146}.choice input{accent-color:var(--cyan);margin-top:4px}.choice strong{display:block;font-size:14px}.choice small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.chooser button{border:0;width:100%;cursor:pointer;margin-top:10px;background:var(--cyan);color:#03151b;border-radius:8px;padding:13px;font-weight:900;font-size:12px}.chooser button:hover{background:#8af0fa}.process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.step{padding:23px 18px;border-right:1px solid var(--line)}.step:last-child{border-right:0}.step b{color:var(--gold);font-size:11px;letter-spacing:.14em}.step h3{font-size:18px;margin:20px 0 7px}.step p{font-size:12px;color:var(--muted);margin:0}.contact{border:1px solid var(--gold);border-radius:12px;padding:22px 25px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg,#071924,#112b3a)}.contact h2{font-size:22px;margin:0 0 5px}.contact p{color:#acc4cf;font-size:13px;margin:0}.contact .gold-btn{background:var(--gold);color:#0b1117}.contact .gold-btn:hover{background:#ffe08a}.footer{border-top:1px solid var(--line);padding:22px 0 32px;color:var(--muted);font-size:12px}.footer-row{display:flex;justify-content:space-between;gap:18px;align-items:center}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a:hover{color:var(--cyan)}
+@media(max-width:1000px){.navlinks{gap:15px}.logo{width:210px}.hero{grid-template-columns:1fr}.visual{max-width:650px}.features{grid-template-columns:repeat(3,1fr)}.license-wrap{grid-template-columns:1fr}.solutions{grid-template-columns:1fr}}
+@media(max-width:650px){.wrap{width:calc(100% - 28px)}.nav{min-height:72px}.logo{width:174px;height:62px}.navlinks{display:none}.search{margin-left:auto}.hero{padding:38px 0 34px}.hero h1{font-size:45px}.hero p{font-size:17px}.visual{height:300px}.laptop{height:220px;padding:8px}.screen{grid-template-columns:75px 1fr;padding:7px;gap:6px}.side i{font-size:7px;padding:5px 2px}.side b{font-size:8px;margin:4px 0 10px}.stat strong{font-size:10px}.stat small{font-size:6px}.graph{min-height:90px}.phone{width:95px;height:185px;right:-4px}.phone-screen{padding:6px}.phone-screen b{font-size:8px;margin:4px 0 9px}.phone-card{font-size:7px;padding:6px}.features{grid-template-columns:repeat(2,1fr);gap:22px 12px}.section{padding:42px 0}.section-title{display:block}.section-title p{margin-top:12px}.gold-btn{display:inline-block;margin-top:16px}.solution{grid-template-columns:1fr}.solution-preview{min-height:150px}.includes{grid-template-columns:1fr}.process{grid-template-columns:1fr}.step{border-right:0!important;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.contact{display:block}.contact .gold-btn{margin-top:16px;display:inline-block}.footer-row{display:block}.footer-links{margin-top:12px}}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="PLATINUM CORE 777 početna">
-        <img src="assets/logo-platinum-core-777.png" alt="PLATINUM CORE 777">
-        <span>Modular business system</span>
-      </a>
-      <nav class="nav-links" aria-label="Glavna navigacija">
-        <a href="#ponuda">Ponuda</a>
-        <a href="#licenca">Licenca</a>
-        <a href="#projekti">Projekti</a>
-        <a href="#proces">Proces</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <a class="nav-cta" href="#kontakt">Zatražite razgovor</a>
-    </div>
-  </header>
-
-  <main id="top">
-    <section class="wrap hero">
-      <div>
-        <p class="eyebrow">PLATINUM CORE 777 / BELGRADE</p>
-        <h1>Poslovna osnova koja raste sa <em>vašom firmom.</em></h1>
-        <p class="hero-lead">Jedna modularna platforma za veb-sajt, aplikaciju, dokumentaciju i interne poslovne procese — povezano, jasno i prilagođeno načinu na koji stvarno radite.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#licenca">Pogledajte licencu ↗</a>
-          <a class="btn btn-secondary" href="#projekti">Pogledajte rešenja</a>
-        </div>
-        <p class="hero-note">Ne nudimo gotov šablon. Platinum Core 777 se postavlja kao digitalna osnova prema potrebama konkretnog poslovanja.</p>
-      </div>
-      <aside class="hero-card">
-        <div class="hero-card__top"><span>Business operating system</span><span class="dot" aria-label="Aktivno"></span></div>
-        <h2>Jedan core.<br>Više poslovnih rešenja.</h2>
-        <p>Od prve ideje do svakodnevnog rada, svaki deo sistema ostaje organizovan i povezan.</p>
-        <ul class="mini-list">
-          <li><b>01</b><span>Licencirani veb-sajt i domen</span></li>
-          <li><b>02</b><span>Aplikacija po meri poslovanja</span></li>
-          <li><b>03</b><span>Digitalna dokumentacija i interni paneli</span></li>
-        </ul>
-      </aside>
-    </section>
-
-    <section id="ponuda" class="section section-dark">
-      <div class="wrap">
-        <div class="section-head">
-          <div><p class="kicker">01 / ŠTA NUDIMO</p><h2>Digitalni sistem,<br><span>bez rasutih delova.</span></h2></div>
-          <p>Platinum Core 777 povezuje ključne tačke poslovanja u jednu preglednu i kontrolisanu osnovu.</p>
-        </div>
-        <div class="grid-4">
-          <article class="card"><span class="card-num">01 / WEB</span><h3>Veb-sajt po meri</h3><p>Profesionalan sajt sa jasnom strukturom, domenom, hostingom i osnovom za dalji rast.</p></article>
-          <article class="card"><span class="card-num">02 / APP</span><h3>Mobilna aplikacija</h3><p>Aplikacija se razvija prema konkretnim potrebama firme, klijenata i unutrašnjih procesa.</p></article>
-          <article class="card"><span class="card-num">03 / DOCS</span><h3>Dokumentacija</h3><p>Organizovan digitalni prostor za dokumente, komunikaciju, arhivu i pristup po ulogama.</p></article>
-          <article class="card"><span class="card-num">04 / CONTROL</span><h3>Kontrolni panel</h3><p>Interni pregled zahteva, korisnika, statusa i zadataka na jednom mestu.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="licenca" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div><p class="kicker">02 / MASTER LICENCA</p><h2>Početak je jednostavan.<br><span>Struktura ostaje ozbiljna.</span></h2></div>
-          <p>Master licenca se izdaje jednom poslovanju i predstavlja osnovu za povezivanje svih dogovorenih digitalnih elemenata.</p>
-        </div>
-        <div class="license">
-          <article class="license-main">
-            <p class="kicker">PLATINUM CORE 777 / MASTER</p>
-            <h3>Jedna licenca za celokupnu digitalnu osnovu.</h3>
-            <div class="license-price">57.777 RSD <small style="font-size:13px;color:var(--muted);font-weight:600">/ jednokratno</small></div>
-            <p>Licenca obuhvata izradu i povezivanje rešenja prema potrebama klijenta. Ako se firma ugasi, licenca se može preneti na drugo poslovanje u skladu sa uslovima projekta.</p>
-            <ul class="feature-list">
-              <li>Veb-sajt i domen</li><li>Hosting i osnovna optimizacija</li><li>Aplikacija po meri</li><li>Digitalno arhiviranje</li><li>Interni poslovni panel</li><li>Povezivanje komunikacije i procesa</li>
-            </ul>
-          </article>
-          <div class="packages" aria-label="Paketi održavanja">
-            <article class="package"><div><strong>Basic</strong><p>Osnovno mesečno održavanje i tehnička podrška.</p></div><span class="package-badge">po dogovoru</span></article>
-            <article class="package"><div><strong>Standard</strong><p>Redovno unapređivanje, sadržaj i šira podrška.</p></div><span class="package-badge">po dogovoru</span></article>
-            <article class="package"><div><strong>Premium</strong><p>Prioritetni rad, razvoj funkcija i napredna podrška.</p></div><span class="package-badge">po dogovoru</span></article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projekti" class="section section-dark">
-      <div class="wrap">
-        <div class="section-head">
-          <div><p class="kicker">03 / LICENCIRANA REŠENJA</p><h2>Primeri koji su već<br><span>povezani sa jezgrom.</span></h2></div>
-          <p>Svaka licenca ima svoju namenu i sopstvenu strukturu, dok Platinum Core 777 obezbeđuje zajedničku poslovnu osnovu.</p>
-        </div>
-        <div class="grid-3">
-          <article class="card project-card"><span class="tag">LK-021 / PLATINUM CAR WASH</span><h3>Organizacija auto-perionice</h3><p>Poslovni sajt, aplikacija i interni pregled rada za efikasnije upravljanje uslugama i klijentima.</p><a href="https://www.platinumcarwash.rs/" target="_blank" rel="noopener">Otvori projekat ↗</a></article>
-          <article class="card project-card"><span class="tag">LK-023 / POBEDI IZVRŠITELJA</span><h3>Digitalni tok zahteva</h3><p>Veb-sajt, formular, komunikacija i interna obrada zahteva u kontrolisanom procesu.</p><a href="https://www.pobediizvrsitelja.rs/" target="_blank" rel="noopener">Otvori projekat ↗</a></article>
-          <article class="card project-card"><span class="tag">CORE REVIEW / VERIFIED</span><h3>Verifikovane poslovne recenzije</h3><p>Aplikacija za povezivanje korisnika i licenciranih poslovanja kroz odgovornije informacije.</p><a href="core-review.html">Saznaj više ↗</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="proces" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div><p class="kicker">04 / KAKO RADIMO</p><h2>Od razgovora<br><span>do sistema.</span></h2></div>
-          <p>Svaki projekat počinje razumevanjem načina rada, a završava se jasnim digitalnim tokom koji klijent može da koristi.</p>
-        </div>
-        <div class="process">
-          <div class="step"><strong>01 / RAZGOVOR</strong><h3>Razumemo posao</h3><p>Definišemo ciljeve, korisnike, dokumente i probleme koje sistem treba da reši.</p></div>
-          <div class="step"><strong>02 / STRUKTURA</strong><h3>Postavljamo plan</h3><p>Biramo module, prava pristupa, sadržaj i način povezivanja sa poslovanjem.</p></div>
-          <div class="step"><strong>03 / IZGRADNJA</strong><h3>Razvijamo rešenje</h3><p>Izrađujemo sajt, aplikaciju i interne alate prema dogovorenoj licenci.</p></div>
-          <div class="step"><strong>04 / POKRETANJE</strong><h3>Podrška i rast</h3><p>Posle pokretanja birate paket održavanja i nastavljate razvoj prema potrebama.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-dark">
-      <div class="wrap founder">
-        <div class="founder-visual" role="img" aria-label="PLATINUM CORE 777 od Beograda ka svetu"></div>
-        <div>
-          <p class="kicker">05 / AUTOR PROJEKTA</p>
-          <h2>Nezavisna ideja.<br><span>Stvarna odgovornost.</span></h2>
-          <p>PLATINUM CORE 777 razvija Marko Ćuća, autor, osnivač i CEO projekta. Sistem se gradi nezavisno, iz Beograda, sa fokusom na korisna poslovna rešenja i dugoročnu strukturu.</p>
-          <p class="founder-signature">Marko Ćuća / Founder & CEO</p>
-          <div class="socials">
-            <a href="https://www.linkedin.com/in/marko-%C4%87u%C4%87a-9649b2268/" target="_blank" rel="noopener">LinkedIn ↗</a>
-            <a href="https://www.instagram.com/platinum_core_777/" target="_blank" rel="noopener">Instagram ↗</a>
-            <a href="https://story.platinumcore777.com/">Priča projekta ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="kontakt" class="section">
-      <div class="wrap">
-        <div class="contact">
-          <div><p class="kicker">06 / KONTAKT</p><h2>Imate poslovni izazov?<br><span>Razgovarajmo.</span></h2><p>Pošaljite osnovne informacije i objasnite šta želite da povežete ili unapredite.</p></div>
-          <a class="btn btn-primary" href="mailto:contact@platinumcore777.com?subject=Upit%20za%20PLATINUM%20CORE%20777">Pošaljite upit ↗</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footer-row">
-      <span>© 2026 PLATINUM CORE 777 · Marko Ćuća, Founder & CEO</span>
-      <div class="footer-links">
-        <a href="mailto:contact@platinumcore777.com">contact@platinumcore777.com</a>
-        <a href="https://www.linkedin.com/in/marko-%C4%87u%C4%87a-9649b2268/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.instagram.com/platinum_core_777/" target="_blank" rel="noopener">Instagram</a>
-        <a href="story.html">Project story</a>
-      </div>
-    </div>
-  </footer>
+<header class="header"><div class="wrap nav">
+<a href="#top" aria-label="PLATINUM CORE 777"><img class="logo" src="assets/logo-platinum-core-777.png" alt="PLATINUM CORE 777"></a>
+<nav class="navlinks" aria-label="Main navigation">
+<a class="active" href="#top">Business system</a><a href="#licensing">Licensing</a><a href="core-review.html">Core Review</a><a href="#solutions">Client solutions</a><a href="story.html">Our beginning</a><a href="#contact">Contact</a>
+</nav><a class="search" href="#contact" aria-label="Contact">⌕</a>
+</div></header>
+<main id="top">
+<section class="wrap hero">
+<div><p class="eyebrow">UNITED BUSINESS TECHNOLOGY</p><h1>One connected core.<br><span>Every business.</span></h1><p>PLATINUM CORE 777 delivers licensed business websites, custom applications, digital documents, internal tools and connected workflows — all built on one integrated core for complete control and long-term scalability.</p></div>
+<div class="visual" aria-label="PLATINUM CORE 777 business dashboard illustration"><div class="laptop"><div class="screen"><div class="side"><b>PLATINUM<br>CORE 777</b><i>⌂ Dashboard</i><i>▣ Websites</i><i>◇ Applications</i><i>▤ Documents</i><i>⌘ Workflows</i><i>♙ Clients</i><i>▥ Reports</i><i>⚙ Settings</i></div><div class="dash"><div class="dash-head"><span>Business Overview</span><span>All systems operational ●</span></div><div class="statrow"><div class="stat"><small>Websites</small><strong>Active</strong></div><div class="stat"><small>Applications</small><strong>Running</strong></div><div class="stat"><small>Documents</small><strong>Managed</strong></div><div class="stat"><small>Workflows</small><strong>Connected</strong></div></div><div class="graph"><span>System activity</span></div></div></div></div><div class="phone"><div class="phone-screen"><b>PLATINUM CORE 777</b><div class="phone-card"><em>⚡ Automate</em>Business processes</div><div class="phone-card"><em>⌘ Integrate</em>All systems</div><div class="phone-card"><em>▥ Control</em>From one core</div><div class="phone-card"><em>⚙ Scale</em>Long-term growth</div></div></div></div>
+</section>
+<section class="wrap features" aria-label="Core capabilities">
+<article class="feature"><div class="feature-icon">▣</div><h3>Licensed<br>business websites</h3><p>Professional, secure and fully integrated web platforms.</p></article>
+<article class="feature"><div class="feature-icon">◇</div><h3>Custom<br>applications</h3><p>Tailored tools for your exact business workflow.</p></article>
+<article class="feature"><div class="feature-icon">▤</div><h3>Digital<br>documents</h3><p>Structured, trackable and centralized document management.</p></article>
+<article class="feature"><div class="feature-icon">⚙</div><h3>Internal<br>tools</h3><p>Powerful tools for teams, operations and administration.</p></article>
+<article class="feature"><div class="feature-icon">⌘</div><h3>Connected<br>workflows</h3><p>All systems working together through one central core.</p></article>
+</section>
+<section id="solutions" class="wrap section">
+<div class="section-title"><div><p class="kicker">CLIENT SOLUTIONS</p><h2>Proven solutions.<br><span>Real business needs.</span></h2></div><a class="gold-btn" href="#contact">VIEW ALL CLIENT SOLUTIONS →</a></div>
+<div class="solutions">
+<article class="solution"><div class="solution-preview"><div class="mock"><div class="mock-head"></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div><div class="mock-box"></div></div><div class="mock-row"><div class="mock-box"></div></div></div></div><div class="solution-copy"><span class="solution-tag">CLIENT SOLUTION</span><h3>LK-021<br>Platinum Car Wash</h3><p>Licensed business website with custom tools for operations, membership management and connected workflows.</p><a href="https://www.platinumcarwash.rs/" target="_blank" rel="noopener">VIEW SOLUTION →</a></div></article>
+<article class="solution"><div class="solution-preview"><div class="mock"><div class="mock-head"></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div></div><div class="mock-row"><div class="mock-box"></div></div></div></div><div class="solution-copy"><span class="solution-tag">CLIENT SOLUTION</span><h3>LK-023<br>Pobedi izvršitelja</h3><p>Licensed client application and website workflow for requests, documents and controlled case management.</p><a href="https://www.pobediizvrsitelja.rs/" target="_blank" rel="noopener">VIEW SOLUTION →</a></div></article>
+<article class="solution"><div class="solution-preview"><div class="mock"><div class="mock-head"></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div></div><div class="mock-row"><div class="mock-box"></div><div class="mock-box"></div><div class="mock-box"></div></div><div class="mock-row"><div class="mock-box"></div></div></div></div><div class="solution-copy"><span class="solution-tag">PLATFORM MODULE</span><h3>Core Review</h3><p>Verified business reviews and a trusted directory connected to licensed businesses.</p><a href="core-review.html">VIEW SOLUTION →</a></div></article>
+</div></section>
+<section id="licensing" class="wrap section">
+<div class="section-title"><div><p class="kicker">LICENSING</p><h2>Choose the right<br><span>business foundation.</span></h2></div><p>Start with the master licence, then choose the level of monthly maintenance and support your business needs.</p></div>
+<div class="license-wrap">
+<article class="license-card"><p class="kicker">PLATINUM CORE 777 / MASTER LICENCE</p><h3>One licence for your complete digital base.</h3><div class="price">57,777 RSD <small style="font-size:12px;color:var(--muted);font-weight:600">one-time</small></div><p>The master licence includes a professional website, domain and hosting setup, a custom application, digital document organization and internal business tools connected around your workflow.</p><ul class="includes"><li>Licensed business website</li><li>Domain and hosting setup</li><li>Custom mobile application</li><li>Digital document structure</li><li>Internal control panel</li><li>Connected communication</li></ul></article>
+<form class="chooser" id="license-form"><p class="kicker">SELECT YOUR OPTION</p><h3>Request a licence or support package.</h3><p>Choose the service you want to discuss. Prices marked “on request” are defined after a short business consultation.</p>
+<label class="choice"><input type="radio" name="offer" value="Master licence — 57,777 RSD one-time" checked><span><strong>Master licence</strong><small>57,777 RSD · one-time licence</small></span></label>
+<label class="choice"><input type="radio" name="offer" value="Basic maintenance — on request"><span><strong>Basic maintenance</strong><small>Monthly support · price on request</small></span></label>
+<label class="choice"><input type="radio" name="offer" value="Standard maintenance — on request"><span><strong>Standard maintenance</strong><small>Monthly development and support · price on request</small></span></label>
+<label class="choice"><input type="radio" name="offer" value="Premium maintenance — on request"><span><strong>Premium maintenance</strong><small>Priority development and support · price on request</small></span></label>
+<button type="submit">SEND A BUSINESS REQUEST →</button></form>
+</div></section>
+<section class="wrap section">
+<div class="section-title"><div><p class="kicker">HOW IT WORKS</p><h2>From business need<br><span>to connected system.</span></h2></div><p>A clear path from the first conversation to the launch and continued support.</p></div>
+<div class="process"><div class="step"><b>01 / DISCOVER</b><h3>Understand the business</h3><p>We map the goals, users, documents and processes that matter.</p></div><div class="step"><b>02 / DESIGN</b><h3>Plan the structure</h3><p>We select modules, permissions, content and integrations.</p></div><div class="step"><b>03 / BUILD</b><h3>Develop the solution</h3><p>We build the website, application and internal tools.</p></div><div class="step"><b>04 / GROW</b><h3>Support and improve</h3><p>Choose the maintenance package and keep moving forward.</p></div></div></section>
+<section class="wrap section">
+<div class="contact" id="contact"><div><p class="kicker">BUSINESS CONTACT</p><h2>Let’s build your solution.</h2><p>Get in touch to discuss your business needs, licensing options or a custom solution built on PLATINUM CORE 777.</p></div><a class="gold-btn" href="mailto:contact@platinumcore777.com?subject=PLATINUM%20CORE%20777%20business%20request">BUSINESS CONTACT →</a></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><span>© 2026 PLATINUM CORE 777 · Marko Ćuća, Founder & CEO</span><div class="footer-links"><a href="mailto:contact@platinumcore777.com">contact@platinumcore777.com</a><a href="https://www.linkedin.com/in/marko-%C4%87u%C4%87a-9649b2268/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/platinum_core_777/" target="_blank" rel="noopener">Instagram</a><a href="story.html">Our beginning</a></div></div></footer>
+<script>
+document.getElementById('license-form').addEventListener('submit',function(e){
+ e.preventDefault();
+ const offer=this.querySelector('input[name="offer"]:checked').value;
+ const subject=encodeURIComponent('PLATINUM CORE 777 — '+offer);
+ const body=encodeURIComponent('Hello Marko,\\n\\nI am interested in: '+offer+'\\n\\nMy business and requirements:\\n');
+ window.location.href='mailto:contact@platinumcore777.com?subject='+subject+'&body='+body;
+});
+</script>
 </body>
 </html>
