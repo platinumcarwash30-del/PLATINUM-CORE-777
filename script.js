@@ -71,12 +71,7 @@ const languageButtons = document.querySelectorAll('[data-language]');
 const foundationTrigger = document.querySelector('#foundation-support-trigger');
 const foundationModal = document.querySelector('#foundation-contact-modal');
 const foundationClose = foundationModal?.querySelector('[data-foundation-close]');
-let currentLanguage = 'en';
-
-try {
-  const storedLanguage = window.localStorage.getItem('pc777-language');
-  if (storedLanguage === 'en' || storedLanguage === 'sr') currentLanguage = storedLanguage;
-} catch { currentLanguage = 'en'; }
+let currentLanguage = document.documentElement.lang === 'sr' ? 'sr' : 'en';
 
 function applyTranslations(language) {
   currentLanguage = language === 'sr' ? 'sr' : 'en';
