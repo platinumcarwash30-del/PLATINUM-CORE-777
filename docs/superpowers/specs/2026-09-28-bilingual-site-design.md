@@ -30,7 +30,7 @@ Do not alter or expose automation-panel.html or social-autopilot/src/views/* as 
 
 ## Architecture
 
-Keep the current Serbian-first URLs at the root. Create a complete English mirror under /en/ with the same filenames. Root Serbian pages link to https://platinumcore777.com/en/<page>; English pages link back to the matching Serbian root URL.
+Keep the current Serbian-first URLs at the root. Create a complete English mirror under /en/ with the same filenames. Root Serbian pages link to https://platinumcore777.com/en/{same-filename}; English pages link back to the matching Serbian root URL.
 
 Preserve the current English root source as the basis for the English mirror before translating the Serbian root. The expanded Master Licence and process copy stays in both locales, translated naturally.
 
