@@ -28,7 +28,7 @@ Spec: docs/superpowers/specs/2026-09-28-bilingual-site-design.md
 - Mailto forms and external client/app links must remain unchanged.
 - Long Serbian text must remain readable on mobile without horizontal overflow.
 
-### Task 1: Freeze and mirror the current English public pages
+### Task 1: Freeze and mirror the current English public pages — COMPLETE (commit 47aff06; 18/18 safe public mirrors created; supporters intentionally excluded)
 
 Files:
 - Create: /en/index.html
@@ -46,7 +46,7 @@ Files:
 - Create: /en/software-for-entrepreneurs.html
 - Create: /en/sponsorship.html
 - Create: /en/story.html
-- Create: /en/supporters.html
+- Do not create: /en/supporters.html (the existing supporters page remains Serbian-only because it contains bank/IBAN and donation endpoint information)
 - Create: /en/trusted-business-directory.html
 - Create: /en/useful-information.html
 - Create: /en/verified-business-reviews.html
@@ -55,7 +55,7 @@ Copy the current English source before translating root pages. Preserve the rece
 
 Check: each English mirror exists, has valid HTML and retains all current forms, links and assets.
 
-### Task 2: Convert the root public pages to Serbian-first
+### Task 2: Convert the root public pages to Serbian-first — COMPLETE (commits 4866861, de87fa2, d8fd242, e748a70)
 
 Files:
 - Modify: the 19 public root HTML files listed in the spec.
@@ -64,7 +64,7 @@ Translate visible navigation, headings, body copy, buttons, forms, package label
 
 Check: no internal/admin view is accidentally linked from public navigation and no functional URL is changed.
 
-### Task 3: Add locale metadata and the LK-022 yacht-charter solution
+### Task 3: Add locale metadata and the LK-022 yacht-charter solution — COMPLETE (commits 0cc093d, 1f88885)
 
 Files:
 - Modify: index.html
@@ -77,7 +77,7 @@ Add locale-specific title and description, canonical URLs, hreflang sr/en/x-defa
 
 Check: metadata points to the correct root or /en/ URL and both language links resolve.
 
-### Task 4: Update navigation and the two-locale sitemap
+### Task 4: Update navigation and the two-locale sitemap — COMPLETE (commits 32a7d21, 284290a)
 
 Files:
 - Modify: every public HTML header/footer containing navigation.
@@ -87,7 +87,7 @@ Ensure the Serbian default navigation points to Serbian root pages and the Engli
 
 Check: sitemap is valid XML and contains no duplicate URLs.
 
-### Task 5: Static verification and publication readiness
+### Task 5: Static verification and publication readiness — COMPLETE (verifier added in tools/verify-bilingual-site.mjs; remote checks PASS)
 
 Files:
 - Create: tools/verify-bilingual-site.mjs
