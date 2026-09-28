@@ -9,3 +9,5 @@ Task 3: complete (commits 0cc093d and 1f88885; Serbian-first root homepage, EN/S
 Task 4: complete (commit 32a7d21; SR switches and hreflang metadata added to all 18 English mirrors; no en/supporters.html created).
 Task 5: complete (commit 284290a; sitemap includes Serbian public URLs and English mirrors, while the existing supporters URL remains only on the former main/support page).
 Verification: remote fetch checks PASS — 18/18 Serbian pages have lang="sr", EN switch and valid closing HTML; 18/18 English mirrors have lang="en", SR switch and valid closing HTML; LK-022 present in both homepages; supporters.html retains bank-related content and no English mirror exists.
+
+Final polish: commits 969998d, 8c5c640 and 3288fa9 add x-default metadata and polish remaining Serbian copy. Final remote verification after these commits: PASS (18/18 Serbian pages, 18/18 English mirrors, reciprocal switches, sr/en/x-default metadata, LK-022 ordered with LK-021 and LK-023, no en/supporters mirror).
