@@ -3,8 +3,8 @@
     "id": "platinum-car-wash",
     "name": "Marko Ćuća",
     "company": "Platinum Car Wash",
-    "category": "financial",
-    "supportType": "Financial support",
+    "category": "direct",
+    "supportType": "Direct support",
     "approved": true,
     "priority": 1
   },
@@ -12,24 +12,24 @@
     "id": "diamond-sailing-service-yacht-tour",
     "name": "dragan",
     "company": "Diamond Sailing Service Yacht tour",
-    "category": "financial",
-    "supportType": "Financial support",
+    "category": "direct",
+    "supportType": "Direct support",
     "approved": true,
     "priority": 2
   },
   {
     "id": "nevena-financial-supporter",
     "name": "Nevena",
-    "category": "financial",
-    "supportType": "Financial support",
+    "category": "direct",
+    "supportType": "Direct support",
     "approved": true,
     "priority": 3
   },
   {
     "id": "branislav-bane-colak",
     "name": "Branislav Bane Čolak",
-    "category": "promotion",
-    "supportType": "Promotion",
+    "category": "direct",
+    "supportType": "Direct support",
     "approved": true,
     "priority": 1
   }
