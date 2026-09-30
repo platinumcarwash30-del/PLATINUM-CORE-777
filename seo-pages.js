@@ -29,8 +29,8 @@ const seoPageText = {
     footer: { en: '© 2026 PLATINUM CORE 777 · Return to the main site', sr: '© 2026 PLATINUM CORE 777 · Nazad na glavni sajt' }
   },
   'core-review': {
-    title: { en: 'Core Review — Verified Feedback & Business Communities', sr: 'Core Review — Proverene recenzije i poslovne zajednice' },
-    description: { en: 'Core Review is a controlled review, trust and community app being developed as part of the PLATINUM CORE 777 system.', sr: 'Core Review je kontrolisana aplikacija za recenzije, poverenje i zajednice koja se razvija u okviru sistema PLATINUM CORE 777.' },
+    title: { en: 'Core Review — Verified Business Reviews & Communities', sr: 'Core Review — verifikovane poslovne recenzije i zajednice' },
+    description: { en: 'Core Review is a controlled app for verified business reviews, trust and communities within the PLATINUM CORE 777 system.', sr: 'Core Review je kontrolisana aplikacija za verifikovane poslovne recenzije, poverenje i zajednice u okviru PLATINUM CORE 777 sistema.' },
     sr: `<p class="section-kicker"><span>CORE REVIEW</span><span class="section-kicker__rule"></span><span>KORISNICI · FIRME · ZAJEDNICE</span></p>
       <h1>Aplikacija za recenzije i povezivanje zasnovana na stvarnim iskustvima.</h1>
       <p class="seo-page__lead">Core Review je korisnicka aplikacija u okviru PLATINUM CORE 777 sistema, koja se razvija da poveze korisnike, licencirane firme, pouzdane informacije i znacajne zajednice u jednom kontrolisanom digitalnom okruzenju.</p>
