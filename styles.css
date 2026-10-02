@@ -667,3 +667,276 @@ body:not(:has(.hero)):not(.locked) .legal-page h3 span {
     line-height:1.65;
   }
 }
+
+/* PC777-START30-FORM-V1 */
+
+.start30-application {
+  margin: 4rem 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 1px solid rgba(8, 201, 255, .24);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(145deg, rgba(8, 201, 255, .10), rgba(5, 10, 17, .94) 55%, rgba(228, 182, 91, .08));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .22);
+}
+
+.start30-application__intro {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+
+.start30-application__intro h2 {
+  margin-bottom: .9rem;
+}
+
+.start30-application__intro p:last-child,
+.start30-application__note {
+  color: #b8ccd5;
+  line-height: 1.7;
+}
+
+.start30-application__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.start30-field {
+  display: grid;
+  gap: .45rem;
+}
+
+.start30-field--full {
+  grid-column: 1 / -1;
+}
+
+.start30-field > span {
+  color: #e9f5f8;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+.start30-field input,
+.start30-field select,
+.start30-field textarea {
+  width: 100%;
+  border: 1px solid rgba(8, 201, 255, .24);
+  border-radius: .7rem;
+  padding: .8rem .9rem;
+  background: rgba(2, 4, 7, .78);
+  color: #f3f5f7;
+  font: inherit;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.start30-field input:focus,
+.start30-field select:focus,
+.start30-field textarea:focus {
+  outline: 2px solid rgba(8, 201, 255, .55);
+  outline-offset: 2px;
+  border-color: #08c9ff;
+}
+
+.start30-field textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.start30-application__consents {
+  display: grid;
+  gap: .75rem;
+  margin-top: 1.5rem;
+}
+
+.start30-check {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  color: #c5d6dc;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.start30-check input {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-top: .2rem;
+  accent-color: #08c9ff;
+}
+
+.start30-check a {
+  color: #08c9ff;
+}
+
+.start30-application__honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.start30-application__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.7rem;
+}
+
+.start30-application__submit:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.start30-application__status {
+  min-height: 1.4rem;
+  margin: 0;
+  color: #b8ccd5;
+  line-height: 1.45;
+}
+
+.start30-application__status.is-loading {
+  color: #08c9ff;
+}
+
+.start30-application__status.is-success {
+  color: #78e08f;
+}
+
+.start30-application__status.is-error {
+  color: #ff9e9e;
+}
+
+.start30-application__note {
+  margin: 1.2rem 0 0;
+  font-size: .88rem;
+}
+
+@media (max-width: 720px) {
+  .start30-application {
+    margin: 2.5rem 0;
+    padding: 1.1rem;
+    border-radius: .95rem;
+  }
+
+  .start30-application__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .start30-field--full {
+    grid-column: auto;
+  }
+
+  .start30-application__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .start30-application__submit {
+    width: 100%;
+  }
+}
+
+/* PC777-START30-SIDE-CARD-V1 */
+
+/* Kartice na START30 stranici ne razvlače se prema visini formulara */
+body:has(.start30-application) .seo-page__grid {
+  align-items: start;
+}
+
+body:has(.start30-application) .seo-page__grid > section {
+  align-self: start;
+  height: fit-content;
+}
+
+/* PC777-START30-SIDE-CARD-V2 */
+
+/* Gornje START30 kartice prate samo svoju visinu */
+body:has(.start30-application) .seo-page__grid {
+  align-items: start !important;
+  grid-auto-rows: max-content !important;
+}
+
+body:has(.start30-application) .seo-page__grid > section {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+/* PC777-START30-CARD-GAPS-V3 */
+
+/* Jasni mali razmaci između START30 kartica */
+body:has(.start30-application) .seo-page__grid {
+  column-gap: 14px !important;
+  row-gap: 14px !important;
+  align-items: start !important;
+  grid-auto-rows: max-content !important;
+}
+
+body:has(.start30-application) .seo-page__grid > section {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+}
+
+/* Formular je posebna kartica preko cele širine */
+body:has(.start30-application) .start30-application {
+  width: 100% !important;
+  max-width: none !important;
+  grid-column: 1 / -1 !important;
+  margin: 2rem 0 3rem !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 720px) {
+  body:has(.start30-application) .seo-page__grid {
+    gap: 10px !important;
+  }
+
+  body:has(.start30-application) .start30-application {
+    width: 100% !important;
+    margin: 1.5rem 0 2rem !important;
+  }
+}
+
+/* PC777-START30-FORM-ROW-V4 */
+
+/* Formular je odvojen od gornjih kartica i zauzima celu sirinu */
+body:has(.start30-application) .start30-application {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  grid-column: 1 / -1 !important;
+  margin: 2rem 0 3rem !important;
+  box-sizing: border-box;
+}
+
+/* Gornje kartice ostaju odvojene i prirodne visine */
+body:has(.start30-application) .seo-page__grid {
+  column-gap: 14px !important;
+  row-gap: 14px !important;
+  align-items: start !important;
+}
+
+body:has(.start30-application) .seo-page__grid > section {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+@media (max-width: 720px) {
+  body:has(.start30-application) .start30-application {
+    width: 100% !important;
+    margin: 1.5rem 0 2rem !important;
+  }
+
+  body:has(.start30-application) .seo-page__grid {
+    gap: 10px !important;
+  }
+}
