@@ -169,10 +169,121 @@
   }
 }
 </style>
+
+<style id="pc777-start30-promo-v1">
+/* PC777-START30-PROMO-V1 */
+.header .nav {
+  display:flex;
+  align-items:center;
+}
+
+.pc777-promo-badge {
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  width:64px;
+  height:64px;
+  margin:0 12px;
+  border:1px solid #ff6970;
+  border-radius:50%;
+  color:#fff!important;
+  background:radial-gradient(circle at 35% 30%,#e52b35 0%,#a80712 72%,#650008 100%);
+  box-shadow:0 0 18px rgba(220,20,35,.55),inset 0 0 12px rgba(255,255,255,.14);
+  text-decoration:none!important;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.pc777-promo-badge::before {
+  content:"";
+  position:absolute;
+  inset:5px;
+  border:1px dashed rgba(255,220,220,.82);
+  border-radius:50%;
+  animation:pc777Start30Ring 8s linear infinite;
+}
+
+.pc777-promo-badge::after {
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-top:2px solid #ff9da1;
+  border-radius:50%;
+  animation:pc777Start30RingReverse 5s linear infinite;
+}
+
+.pc777-promo-badge__text {
+  position:relative;
+  z-index:2;
+  color:#fff;
+  font-size:8.5px;
+  font-weight:800;
+  line-height:1.2;
+  letter-spacing:.05em;
+  text-align:center;
+  text-shadow:0 1px 4px rgba(0,0,0,.6);
+}
+
+.pc777-promo-badge__text strong {
+  display:block;
+  margin-top:2px;
+  color:#fff;
+  font-size:10px;
+}
+
+.pc777-promo-badge:hover {
+  transform:scale(1.06);
+  filter:brightness(1.12);
+}
+
+@keyframes pc777Start30Ring {
+  to { transform:rotate(360deg); }
+}
+
+@keyframes pc777Start30RingReverse {
+  to { transform:rotate(-360deg); }
+}
+
+@media (max-width:1100px) {
+  .pc777-promo-badge {
+    width:56px;
+    height:56px;
+    margin:0 7px;
+  }
+
+  .pc777-promo-badge__text {
+    font-size:7px;
+  }
+
+  .pc777-promo-badge__text strong {
+    font-size:8px;
+  }
+}
+
+@media (max-width:650px) {
+  .pc777-promo-badge {
+    width:50px;
+    height:50px;
+    margin:0 5px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .pc777-promo-badge::before,
+  .pc777-promo-badge::after {
+    animation:none;
+  }
+}
+</style>
 </head>
 <body>
 <header class="header"><div class="wrap nav">
 <a href="#top" aria-label="PLATINUM CORE 777"><img class="logo" src="assets/logo-platinum-core-777.png" alt="PLATINUM CORE 777"></a>
+<a class="pc777-promo-badge" href="start-30-za-novootvorene-firme.html" title="START 30 promo - do 47% popusta" aria-label="START 30 promo - do 47% popusta">
+  <span class="pc777-promo-badge__text">PROMO<br /><strong>DO 47%</strong></span>
+</a>
 <nav class="navlinks" aria-label="Glavna navigacija">
 <div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-entrepreneurs">ZA PREDUZETNIKE <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-entrepreneurs" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">ZA PREDUZETNIKE I MALE FIRME</span><strong class="pc777-menu-heading">Praktična rešenja za početak i rast</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="business-license-website-app.html"><strong>Veb-sajt za početak poslovanja</strong><small>Profesionalna osnova za novi posao.</small></a><a class="pc777-menu-link" href="website-app-business-system.html"><strong>Veb i mobilna aplikacija</strong><small>Jedan povezan sistem za klijente i posao.</small></a><a class="pc777-menu-link" href="business-software.html"><strong>Softver po meri</strong><small>Alati prilagođeni vašem načinu rada.</small></a><a class="pc777-menu-link" href="software-for-entrepreneurs.html"><strong>Vidljivost na Google-u</strong><small>SEO osnova i jasna online prezentacija.</small></a><a class="pc777-menu-link" href="digital-document-archiving.html"><strong>Digitalna dokumenta</strong><small>Uređena dokumenta i manje administracije.</small></a><a class="pc777-menu-link" href="secure-business-software.html"><strong>Održavanje i podrška</strong><small>Stabilan sistem uz plan daljeg razvoja.</small></a></div></div></div>
 
