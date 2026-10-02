@@ -28,13 +28,85 @@
 @media(max-width:1000px){.navlinks{gap:15px}.logo{width:210px}.hero{grid-template-columns:1fr}.visual{max-width:650px}.features{grid-template-columns:repeat(3,1fr)}.license-wrap{grid-template-columns:1fr}.solutions{grid-template-columns:1fr}}
 @media(max-width:650px){.wrap{width:calc(100% - 28px)}.nav{min-height:72px}.logo{width:174px;height:62px}.navlinks{display:none}.search{margin-left:auto}.hero{padding:38px 0 34px}.hero h1{font-size:45px}.hero p{font-size:17px}.visual{height:300px}.laptop{height:220px;padding:8px}.screen{grid-template-columns:75px 1fr;padding:7px;gap:6px}.side i{font-size:7px;padding:5px 2px}.side b{font-size:8px;margin:4px 0 10px}.stat strong{font-size:10px}.stat small{font-size:6px}.graph{min-height:90px}.phone{width:95px;height:185px;right:-4px}.phone-screen{padding:6px}.phone-screen b{font-size:8px;margin:4px 0 9px}.phone-card{font-size:7px;padding:6px}.features{grid-template-columns:repeat(2,1fr);gap:22px 12px}.section{padding:42px 0}.section-title{display:block}.section-title p{margin-top:12px}.gold-btn{display:inline-block;margin-top:16px}.solution{grid-template-columns:1fr}.solution-preview{min-height:150px}.includes{grid-template-columns:1fr}.process{grid-template-columns:1fr}.step{border-right:0!important;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.contact{display:block}.contact .gold-btn{margin-top:16px;display:inline-block}.footer-row{display:block}.footer-links{margin-top:12px}}
 .lang-group{display:inline-flex;align-items:center;gap:6px;margin-left:4px}.lang-switch{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--cyan);border-radius:999px;padding:7px 11px;color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.08em}.lang-switch:hover,.lang-switch.is-active{background:var(--cyan);color:#03151b}.solution-preview{position:relative;overflow:hidden;padding:0;min-height:215px;background:#07131e}.solution-preview .solution-image{display:block;width:100%;height:100%;min-height:215px;object-fit:cover;object-position:center;filter:saturate(.92) contrast(1.04);opacity:.92;transition:transform .35s ease,opacity .35s ease}.solution:hover .solution-image{transform:scale(1.035);opacity:1}.solution-preview:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,9,15,.04),rgba(2,9,15,.42));pointer-events:none}@media(max-width:650px){.solution-preview{min-height:150px}.solution-preview .solution-image{min-height:150px}}</style>
+<style id="pc777-menu-cards-v1">
+.pc777-menu-card{position:relative;flex:0 0 auto}
+.pc777-menu-toggle{appearance:none;border:0;background:transparent;color:#d8e7ef;cursor:pointer;padding:11px 6px;font-size:12px;font-weight:900;letter-spacing:.035em;line-height:1;white-space:nowrap}
+.pc777-menu-toggle:hover,.pc777-menu-toggle[aria-expanded="true"]{color:var(--cyan)}
+.pc777-menu-toggle span{display:inline-block;margin-left:4px;color:var(--gold);font-size:14px;line-height:.7;transition:transform .2s ease}
+.pc777-menu-toggle[aria-expanded="true"] span{transform:rotate(180deg)}
+.pc777-menu-panel[hidden]{display:none!important}
+.pc777-menu-panel{position:absolute;z-index:40;top:calc(100% + 13px);left:0;width:min(580px,calc(100vw - 32px));padding:20px;border:1px solid #1b5d79;border-radius:14px;background:rgba(8,21,34,.98);box-shadow:0 20px 55px rgba(0,0,0,.48)}
+.pc777-menu-card:nth-child(n+4) .pc777-menu-panel{left:auto;right:0}
+.pc777-menu-panel-heading{display:grid;gap:4px;padding:0 2px 12px;border-bottom:1px solid #174760}
+.pc777-menu-kicker{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.16em}
+.pc777-menu-heading{color:#fff;font-size:18px;line-height:1.15}
+.pc777-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.pc777-menu-link{display:block!important;min-height:68px;padding:11px!important;border:1px solid #1a4f68;border-radius:9px;background:linear-gradient(145deg,#0c293d,#071520);opacity:1!important}
+.pc777-menu-link:hover{border-color:var(--cyan);background:#0d3449}
+.pc777-menu-link strong{display:block;color:#fff;font-size:13px;line-height:1.2}
+.pc777-menu-link small{display:block;margin-top:5px;color:#a9c3ce;font-size:12px;line-height:1.28}
+.pc777-menu-contact{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:1px solid var(--gold);border-radius:999px;color:var(--gold)!important;font-size:12px;font-weight:900;letter-spacing:.09em;white-space:nowrap;opacity:1!important}
+.pc777-menu-contact:hover{background:var(--gold);color:#0b1117!important}
+.pc777-menu-toggle:focus-visible,.pc777-menu-link:focus-visible,.pc777-menu-contact:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.navlinks{gap:9px;margin-left:auto;align-items:center}
+.navlinks>.lang-group{margin-left:5px}
+@media(max-width:1100px){.nav{gap:16px}.logo{width:225px}.navlinks{gap:3px}.pc777-menu-toggle{font-size:11px;padding:10px 4px}}
+@media(max-width:650px){.nav{min-height:72px;flex-wrap:wrap;gap:0 12px}.logo{width:174px;height:62px}.navlinks{order:3;flex-basis:100%;width:100%;margin-left:0;padding:4px 0 8px;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;scrollbar-width:thin}.navlinks>.lang-group{margin-left:0}.pc777-menu-panel{position:fixed;top:126px;left:14px!important;right:14px;width:auto;max-height:calc(100vh - 142px);overflow-y:auto}.pc777-menu-grid{grid-template-columns:1fr}.pc777-menu-link{min-height:0}}
+
+/* PC777-MENU-DESKTOP-POSITION-V4 */
+@media(min-width:1101px){
+ .nav{gap:20px}
+ .navlinks{margin-left:0;gap:15px}
+ .pc777-menu-toggle{font-size:14px;padding:13px 8px}
+ .pc777-menu-contact{font-size:13px;padding:10px 14px}
+ .lang-switch{font-size:12px;padding:8px 12px}
+}
+@media(max-width:1100px) and (min-width:651px){
+ .navlinks{margin-left:auto;gap:8px}
+ .pc777-menu-toggle{font-size:11.5px;padding:10px 5px}
+}
+</style>
+<style id="pc777-menu-logo-final-v1">
+/* PC777-MENU-LOGO-FINAL-V1 */
+@media (min-width:651px) {
+  .header .nav .logo {
+    width:126px;
+    height:auto;
+    max-width:126px;
+    object-fit:contain;
+    object-position:left center;
+    display:block;
+  }
+}
+</style>
+
+<style id="pc777-menu-align-right-v2">
+/* PC777-MENU-ALIGN-RIGHT-V2 */
+@media (min-width:651px) {
+  .header .nav .navlinks {
+    margin-left:auto;
+  }
+}
+</style>
 </head>
 <body>
 <header class="header"><div class="wrap nav">
 <a href="#top" aria-label="PLATINUM CORE 777"><img class="logo" src="assets/logo-platinum-core-777.png" alt="PLATINUM CORE 777"></a>
 <nav class="navlinks" aria-label="Glavna navigacija">
-<a class="active" href="#top">Poslovni sistem</a><a href="#licensing">Licenciranje</a><a href="business-software.html">Poslovni softver</a><a href="core-review.html">Core Review</a><a href="#solutions">Klijentska rešenja</a><a href="story.html">Odakle smo krenuli</a><a href="#contact">Kontakt</a>
-<span class="lang-group" aria-label="Izbor jezika"><span class="lang-switch is-active" aria-current="page">SR</span><a class="lang-switch" href="en/index.html" aria-label="English version">EN</a></span></nav><a class="search" href="#contact" aria-label="Kontakt">⌕</a>
+<div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-entrepreneurs">ZA PREDUZETNIKE <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-entrepreneurs" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">ZA PREDUZETNIKE I MALE FIRME</span><strong class="pc777-menu-heading">Praktična rešenja za početak i rast</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="business-license-website-app.html"><strong>Veb-sajt za početak poslovanja</strong><small>Profesionalna osnova za novi posao.</small></a><a class="pc777-menu-link" href="website-app-business-system.html"><strong>Veb i mobilna aplikacija</strong><small>Jedan povezan sistem za klijente i posao.</small></a><a class="pc777-menu-link" href="business-software.html"><strong>Softver po meri</strong><small>Alati prilagođeni vašem načinu rada.</small></a><a class="pc777-menu-link" href="software-for-entrepreneurs.html"><strong>Vidljivost na Google-u</strong><small>SEO osnova i jasna online prezentacija.</small></a><a class="pc777-menu-link" href="digital-document-archiving.html"><strong>Digitalna dokumenta</strong><small>Uređena dokumenta i manje administracije.</small></a><a class="pc777-menu-link" href="secure-business-software.html"><strong>Održavanje i podrška</strong><small>Stabilan sistem uz plan daljeg razvoja.</small></a></div></div></div>
+
+<div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-about">O NAMA <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-about" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">PLATINUM CORE 777</span><strong class="pc777-menu-heading">Ko smo i šta gradimo</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="story.html"><strong>Naša priča</strong><small>Odakle smo krenuli i zašto postoji sistem.</small></a><a class="pc777-menu-link" href="intellectual-property.html"><strong>Tehnologija i intelektualna svojina</strong><small>Jezgro, razvoj i vlasništvo nad rešenjima.</small></a><a class="pc777-menu-link" href="sponsorship.html"><strong>Osnivač i autor</strong><small>Ideja, rad i odgovornost iza platforme.</small></a><a class="pc777-menu-link" href="supporters.html"><strong>Podrška i partnerstva</strong><small>Ljudi i organizacije koji doprinose razvoju.</small></a></div></div></div>
+
+<div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-solutions">REŠENJA <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-solutions" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">POSLOVNA REŠENJA</span><strong class="pc777-menu-heading">Moduli koji rade zajedno</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="business-license-website-app.html"><strong>Poslovni veb-sajtovi</strong><small>Licencirana prezentacija spremna za posao.</small></a><a class="pc777-menu-link" href="website-app-business-system.html"><strong>Veb i mobilne aplikacije</strong><small>Digitalni tokovi za korisnike i timove.</small></a><a class="pc777-menu-link" href="business-software.html"><strong>Prilagođeni softver</strong><small>Funkcije razvijene prema stvarnim potrebama.</small></a><a class="pc777-menu-link" href="digital-document-archiving.html"><strong>Digitalna dokumenta</strong><small>Bezbedno čuvanje i lakše upravljanje.</small></a><a class="pc777-menu-link" href="secure-business-software.html"><strong>Interni alati i automatizacija</strong><small>Manje ručnog rada i jasniji procesi.</small></a><a class="pc777-menu-link" href="#solutions"><strong>Klijentska rešenja</strong><small>Primeri sistema izrađenih za konkretne poslove.</small></a></div></div></div>
+
+<div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-licensing">LICENCIRANJE <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-licensing" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">LICENCIRANJE</span><strong class="pc777-menu-heading">Jasna osnova za korišćenje i razvoj</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="#licensing"><strong>Master licenca</strong><small>Pregled glavnog licenciranog sistema.</small></a><a class="pc777-menu-link" href="business-license-website-app.html"><strong>Šta licenca uključuje</strong><small>Veb-sajt, moduli i povezani tokovi rada.</small></a><a class="pc777-menu-link" href="secure-business-software.html"><strong>Paketi održavanja</strong><small>Podrška, ažuriranja i dalja unapređenja.</small></a><a class="pc777-menu-link" href="#contact"><strong>Pošaljite zahtev</strong><small>Razgovor o potrebama i najboljoj konfiguraciji.</small></a></div></div></div>
+
+<div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-projects">PROJEKTI <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-projects" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">PROJEKTI I PRIMENE</span><strong class="pc777-menu-heading">Primeri rada na platformi</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="core-review.html"><strong>Core Review</strong><small>Pregled jezgra i poslovne logike sistema.</small></a><a class="pc777-menu-link" href="#solutions"><strong>LK-021 · Platinum Car Wash</strong><small>Licencirani poslovni veb-sajt i alati.</small></a><a class="pc777-menu-link" href="#solutions"><strong>LK-022 · Čarter jahti</strong><small>Rezervacije, aplikacija i e-pošta povezani u tok.</small></a><a class="pc777-menu-link" href="#solutions"><strong>LK-023 · Pobedi izvršitelja</strong><small>Dokumenta, zahtevi i upravljanje predmetima.</small></a></div></div></div>
+
+<div class="pc777-menu-card"><button class="pc777-menu-toggle" type="button" aria-expanded="false" aria-controls="pc777-menu-blog">BLOG <span aria-hidden="true">⌄</span></button><div class="pc777-menu-panel" id="pc777-menu-blog" hidden><div class="pc777-menu-panel-heading"><span class="pc777-menu-kicker">KORISNE INFORMACIJE</span><strong class="pc777-menu-heading">Vodiči za digitalno poslovanje</strong></div><div class="pc777-menu-grid"><a class="pc777-menu-link" href="useful-information.html"><strong>Sve korisne informacije</strong><small>Pregled tema i novih tekstova.</small></a><a class="pc777-menu-link" href="small-business-software-guide.html"><strong>Softver za male firme</strong><small>Kako da izaberete sistem koji vam treba.</small></a><a class="pc777-menu-link" href="secure-business-software.html"><strong>Bezbedan poslovni softver</strong><small>Zaštita podataka i stabilan rad.</small></a><a class="pc777-menu-link" href="digital-document-archiving.html"><strong>Digitalizacija dokumenata</strong><small>Brži pristup i manje ručnog posla.</small></a><a class="pc777-menu-link" href="verified-business-reviews.html"><strong>Google i poslovne recenzije</strong><small>Poverenje, prisustvo i vidljivost.</small></a><a class="pc777-menu-link" href="independent-technology-project-innovation.html"><strong>Razvoj i inovacije</strong><small>Kako nastaju nezavisni tehnološki projekti.</small></a></div></div></div>
+
+<span class="lang-group" aria-label="Izbor jezika"><span class="lang-switch is-active" aria-current="page">SR</span><a class="lang-switch" href="en/index.html" aria-label="English version">EN</a></span><a class="pc777-menu-contact" href="#contact">KONTAKT</a>
+</nav>
 </div></header>
 <main id="top">
 <section class="wrap hero">
@@ -83,5 +155,53 @@ document.getElementById('license-form').addEventListener('submit',function(e){
  window.location.href='mailto:contact@platinumcore777.com?subject='+subject+'&body='+body;
 });
 </script>
-</body>
+<script id="pc777-menu-cards-v1-script">
+(function(){
+ const cards=Array.from(document.querySelectorAll('.pc777-menu-card'));
+ if(!cards.length)return;
+ const closeAll=function(){
+  cards.forEach(function(card){
+   const button=card.querySelector('.pc777-menu-toggle');
+   const panel=card.querySelector('.pc777-menu-panel');
+   button.setAttribute('aria-expanded','false');
+   panel.hidden=true;
+  });
+ };
+ cards.forEach(function(card){
+  const button=card.querySelector('.pc777-menu-toggle');
+  const panel=card.querySelector('.pc777-menu-panel');
+  button.addEventListener('click',function(){
+   const isOpen=button.getAttribute('aria-expanded')==='true';
+   closeAll();
+   if(!isOpen){
+    button.setAttribute('aria-expanded','true');
+    panel.hidden=false;
+   }
+  });
+  button.addEventListener('keydown',function(event){
+   if(event.key==='ArrowDown'){
+    event.preventDefault();
+    button.click();
+    const first=panel.querySelector('a');
+    if(first)first.focus();
+   }
+  });
+ });
+ document.addEventListener('click',function(event){
+  if(!event.target.closest('.pc777-menu-card'))closeAll();
+ });
+ document.addEventListener('keydown',function(event){
+  if(event.key==='Escape'){
+   const open=cards.find(function(card){
+    return card.querySelector('.pc777-menu-toggle').getAttribute('aria-expanded')==='true';
+   });
+   closeAll();
+   if(open)open.querySelector('.pc777-menu-toggle').focus();
+  }
+ });
+ document.querySelectorAll('.pc777-menu-panel a,.pc777-menu-contact').forEach(function(link){
+  link.addEventListener('click',closeAll);
+ });
+})();
+</script></body>
 </html>
